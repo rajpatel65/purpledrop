@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+<rect width="1600" height="900" fill="#FAF6EF"/>
+<g stroke="#E7E0D2" stroke-width="1">
+<line x1="0" y1="0" x2="0" y2="900"/>
+<line x1="100" y1="0" x2="100" y2="900"/>
+<line x1="200" y1="0" x2="200" y2="900"/>
+<line x1="300" y1="0" x2="300" y2="900"/>
+<line x1="400" y1="0" x2="400" y2="900"/>
+<line x1="500" y1="0" x2="500" y2="900"/>
+<line x1="600" y1="0" x2="600" y2="900"/>
+<line x1="700" y1="0" x2="700" y2="900"/>
+<line x1="800" y1="0" x2="800" y2="900"/>
+<line x1="900" y1="0" x2="900" y2="900"/>
+<line x1="1000" y1="0" x2="1000" y2="900"/>
+<line x1="1100" y1="0" x2="1100" y2="900"/>
+<line x1="1200" y1="0" x2="1200" y2="900"/>
+<line x1="1300" y1="0" x2="1300" y2="900"/>
+<line x1="1400" y1="0" x2="1400" y2="900"/>
+<line x1="1500" y1="0" x2="1500" y2="900"/>
+<line x1="1600" y1="0" x2="1600" y2="900"/>
+<line x1="0" y1="0" x2="1600" y2="0"/>
+<line x1="0" y1="100" x2="1600" y2="100"/>
+<line x1="0" y1="200" x2="1600" y2="200"/>
+<line x1="0" y1="300" x2="1600" y2="300"/>
+<line x1="0" y1="400" x2="1600" y2="400"/>
+<line x1="0" y1="500" x2="1600" y2="500"/>
+<line x1="0" y1="600" x2="1600" y2="600"/>
+<line x1="0" y1="700" x2="1600" y2="700"/>
+<line x1="0" y1="800" x2="1600" y2="800"/>
+<line x1="0" y1="900" x2="1600" y2="900"/>
+</g>
+<text x="309" y="271" transform="rotate(0.0 560 287)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="118" font-weight="600" fill="#6D28D9" letter-spacing="-0.01em">ChatGPT</text>
+<text x="353" y="432" transform="rotate(0.0 560 447)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="112" font-weight="600" fill="#1A1815" letter-spacing="-0.01em">Claude</text>
+<text x="365" y="593" transform="rotate(0.0 560 607)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="105" font-weight="600" fill="#1A1815" letter-spacing="-0.01em">Gemini</text>
+<text x="769" y="594" transform="rotate(0.0 980 608)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="99" font-weight="600" fill="#5C564B" letter-spacing="-0.01em">Copilot</text>
+<text x="811" y="435" transform="rotate(0.0 1086 448)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="93" font-weight="600" fill="#1A1815" letter-spacing="-0.01em">Perplexity</text>
+<text x="869" y="284" transform="rotate(0.0 1025 296)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="84" font-weight="600" fill="#5C564B" letter-spacing="-0.01em">OpenAI</text>
+<text x="390" y="704" transform="rotate(0.0 603 716)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="80" font-weight="600" fill="#1A1815" letter-spacing="-0.01em">Anthropic</text>
+<text x="855" y="710" transform="rotate(0.0 994 721)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="75" font-weight="600" fill="#5C564B" letter-spacing="-0.01em">Google</text>
+<text x="356" y="166" transform="rotate(0.0 546 176)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="71" font-weight="600" fill="#1A1815" letter-spacing="-0.01em">Microsoft</text>
+<text x="788" y="166" transform="rotate(-2.8 874 176)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="67" font-weight="600" fill="#5C564B" letter-spacing="-0.01em">Siri</text>
+<text x="984" y="172" transform="rotate(0.0 1083 181)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="63" font-weight="600" fill="#1A1815" letter-spacing="-0.01em">Alexa</text>
+<text x="1193" y="280" transform="rotate(0.3 1270 289)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="59" font-weight="600" fill="#8A8375" letter-spacing="-0.01em">Grok</text>
+<text x="1154" y="712" transform="rotate(0.0 1226 719)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="55" font-weight="600" fill="#5C564B" letter-spacing="-0.01em">Bing</text>
+<text x="517" y="789" transform="rotate(0.1 584 796)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="52" font-weight="600" fill="#8A8375" letter-spacing="-0.01em">Meta</text>
+<text x="665" y="789" transform="rotate(-0.5 716 796)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="50" font-weight="600" fill="#8A8375" letter-spacing="-0.01em">xAI</text>
+<text x="447" y="95" transform="rotate(-3.3 536 101)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="48" font-weight="600" fill="#5C564B" letter-spacing="-0.01em">Amazon</text>
+<text x="691" y="95" transform="rotate(0.0 764 101)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="46" font-weight="600" fill="#8A8375" letter-spacing="-0.01em">Apple</text>
+<text x="1028" y="103" transform="rotate(0.0 1111 110)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="45" font-weight="600" fill="#8A8375" letter-spacing="-0.01em">NVIDIA</text>
+<text x="1225" y="563" transform="rotate(-2.2 1316 569)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="43" font-weight="600" fill="#5C564B" letter-spacing="-0.01em">Mistral</text>
+<text x="1245" y="650" transform="rotate(0.0 1310 656)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="41" font-weight="600" fill="#8A8375" letter-spacing="-0.01em">Llama</text>
+<text x="782" y="799" transform="rotate(0.0 878 805)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="40" font-weight="600" fill="#8A8375" letter-spacing="-0.01em">DeepSeek</text>
+<text x="1012" y="819" transform="rotate(0.0 1125 824)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="38" font-weight="600" fill="#5C564B" letter-spacing="-0.01em">Midjourney</text>
+<text x="356" y="800" transform="rotate(0.0 422 805)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="36" font-weight="600" fill="#8A8375" letter-spacing="-0.01em">Gemini</text>
+<text x="244" y="696" transform="rotate(0.0 308 701)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="34" font-weight="600" fill="#8A8375" letter-spacing="-0.01em">Mosaic</text>
+<text x="859" y="89" transform="rotate(2.9 938 93)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="33" font-weight="600" fill="#5C564B" letter-spacing="-0.01em">Together</text>
+<text x="1203" y="192" transform="rotate(-2.8 1263 196)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="32" font-weight="600" fill="#8A8375" letter-spacing="-0.01em">Cohere</text>
+<text x="1198" y="353" transform="rotate(-1.5 1292 357)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="32" font-weight="600" fill="#8A8375" letter-spacing="-0.01em">NotebookLM</text>
+<text x="833" y="365" transform="rotate(0.0 882 369)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="31" font-weight="600" fill="#5C564B" letter-spacing="-0.01em">Glean</text>
+<text x="798" y="520" transform="rotate(0.7 881 524)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="31" font-weight="600" fill="#8A8375" letter-spacing="-0.01em">Fireworks</text>
+<text x="1020" y="521" transform="rotate(0.0 1075 525)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="30" font-weight="600" fill="#8A8375" letter-spacing="-0.01em">Ollama</text>
+<text x="178" y="553" transform="rotate(0.0 266 557)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="30" font-weight="600" fill="#5C564B" letter-spacing="-0.01em">Perplexity</text>
+<text x="167" y="380" transform="rotate(0.0 245 384)" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="29" font-weight="600" fill="#8A8375" letter-spacing="-0.01em">Claude.ai</text>
+</svg>

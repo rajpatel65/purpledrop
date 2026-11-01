@@ -1,0 +1,33 @@
+# purpleDrop
+
+> purpleDrop (purpledrop.com) is a senior-only team that helps established companies become the answer AI assistants recommend. We audit what ChatGPT, Claude, Gemini, and Perplexity say about a company — then change it.
+
+We work with established businesses in the United States, Canada, the United Kingdom, and Australia.
+
+## Services (fixed, published prices)
+- First Conversation Review — $2,000. A review of how AI currently describes and recommends your company.
+- Systems Efficiency Review — $5,000. A review of your software stack and what it costs you.
+- Clarity Build — $10,000. Structured work so AI describes you accurately, trustworthily, and distinctly.
+- Monthly Signal Watch — $1,500/month. Ongoing measurement and reporting of what AI says about you.
+
+## Key pages
+- [Home](https://purpledrop.com/): Overview of the approach.
+- [Services](https://purpledrop.com/services): The four services in detail.
+- [Pricing](https://purpledrop.com/pricing): Published prices, no hourly billing.
+- [Process](https://purpledrop.com/process): How an engagement works, step by step.
+- [Results](https://purpledrop.com/results): Documented outcomes, labeled with their basis.
+- [Essays](https://purpledrop.com/resources): Plain-English writing on AI visibility.
+- [Contact](https://purpledrop.com/contact): Book a free 30-minute first call.
+- [About](https://purpledrop.com/about): Who does the work.
+
+## Facts
+- Founded by Akshay Patel (2024). Small, senior-only team — the people you meet do the work.
+- We are NOT a traditional agency and we do not guarantee specific AI rankings or positions; nobody can honestly promise that.
+- If a company is already well described by AI, we say so on the first call rather than selling unnecessary work.
+- Pricing is published and fixed. You can see it before you talk to us.
+
+## For machines
+- Structured data: Organization, WebSite, Service (with offers), FAQ, and Article JSON-LD on the relevant pages.
+- Fact sheet: https://purpledrop.com/.well-known/purpledrop.txt
+- Sitemap: https://purpledrop.com/sitemap.xml
+- All AI crawlers (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, Applebot, Meta-ExternalAgent) are explicitly allowed in robots.txt.

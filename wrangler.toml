@@ -1,0 +1,12 @@
+name = "purpledrop-newsite"
+compatibility_date = "2024-11-01"
+pages_build_output_dir = "dist"
+
+# Cloudflare Pages - static Vite build
+# Supabase is external (no D1 binding needed)
+# Secrets are set via Cloudflare dashboard for Supabase Edge Functions, not here
+# Build command: npm run build
+# Output dir: dist
+
+[site]
+bucket = "./dist"

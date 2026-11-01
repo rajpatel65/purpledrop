@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+  }
+  body {
+    @apply bg-paper text-ink antialiased font-sans;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    @apply bg-violet text-paper;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-violet;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-page px-6 sm:px-8;
+  }
+  .eyebrow {
+    @apply font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-violet;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold transition-all duration-300;
+  }
+  .btn-primary {
+    @apply btn bg-ink text-paper hover:bg-violet;
+  }
+  .btn-outline {
+    @apply btn border border-line text-ink hover:border-ink;
+  }
+  .card {
+    @apply rounded-2xl border border-line bg-paper shadow-soft;
+  }
+}
+
+@keyframes section-highlight {
+  0% { box-shadow: 0 0 0 0 rgba(109, 40, 217, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(109, 40, 217, 0.1); }
+  100% { box-shadow: 0 0 0 0 rgba(109, 40, 217, 0); }
+}
+
+.section-highlight {
+  animation: section-highlight 2.5s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
