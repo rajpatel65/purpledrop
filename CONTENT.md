@@ -21,7 +21,7 @@ Edit text here to decide the changes — then they can be applied to the site.
 - Pricing → /pricing
 - About → /about
 - Reads → /resources
-- CTA button: **Book a call**
+- CTA button: **Request a free call**
 
 ### Footer
 
@@ -100,7 +100,7 @@ Legal: © 2026 purpleDrop. All rights reserved. | Privacy | Terms | info@purpled
 
 - Title: You can shape what the first answer says.
 - Body: We run a confidential review of the first conversation buyers have about your company — the one you never see. We show you what's missing, what's misunderstood, and what's working. Then we help you shape the answer so you're chosen more often. You stay in the loop. You keep the findings. You see the movement.
-- CTA: **Book a 30-minute call** → /contact
+- CTA: **Request a free 30-minute call** → /contact
 
 ### Education band (dark violet)
 
@@ -162,7 +162,7 @@ Legal: © 2026 purpleDrop. All rights reserved. | Privacy | Terms | info@purpled
 
 - Title: Find out what the answer says about your company.
 - Body: Thirty minutes. Clear findings. No pressure. You keep the insight either way.
-- Button: **Book a 30-minute call**
+- Button: **Request a free 30-minute call**
 
 ---
 
@@ -178,7 +178,7 @@ Legal: © 2026 purpleDrop. All rights reserved. | Privacy | Terms | info@purpled
 - Eyebrow: Services
 - Heading: We bring clarity to AI chaos.
 - Body: When a buyer asks an AI system about your market, the first answer decides who gets the call. We review that conversation — then shape it so it describes you clearly, accurately, and first.
-- Buttons: **Book a 30-minute call** → /contact | **Start free: the SOC2 gap check** → /soc2
+- Buttons: **Request a free 30-minute call** → /contact | **Start free: the SOC2 gap check** → /soc2
 
 ### Who we work with
 
@@ -312,7 +312,7 @@ Legal: © 2026 purpleDrop. All rights reserved. | Privacy | Terms | info@purpled
 
 - Title: Not sure where to start?
 - Body: Thirty minutes. We show you what the first conversation says about you. You leave with a straight answer either way.
-- Buttons: **Book a 30-minute call** (embedded calendar, cal.com/akshaypatel) | **Try the free SOC2 gap check** → /soc2
+- Buttons: **Book a free 30-minute call** (embedded calendar, cal.com/akshaypatel) | **Try the free SOC2 gap check** → /soc2
 
 ---
 
@@ -358,7 +358,7 @@ Legal: © 2026 purpleDrop. All rights reserved. | Privacy | Terms | info@purpled
 ### Callout band
 
 - Clarity wins the shortlist. Every day, buyers ask an AI assistant who to call. That answer becomes their shortlist. We help you shape it — and keep it strong as the systems change. You get the enquiries. We handle the mechanics.
-- Book a call
+- Request a free call
 
 ### CTA band
 
@@ -422,7 +422,7 @@ Legal: © 2026 purpleDrop. All rights reserved. | Privacy | Terms | info@purpled
 
 - Title: See where you stand — in three weeks.
 - Body: The First Conversation Review shows you the answer buyers see first. You keep the findings either way.
-- Buttons: **Book a call** → /contact | **Read the services** → /services
+- Buttons: **Request a free call** → /contact | **Read the services** → /services
 
 ---
 
@@ -460,7 +460,7 @@ You get straight answers — not jargon, not theatrics.
 
 - Title: Every engagement starts the same way.
 - Body: A twenty-minute conversation. You leave knowing where you stand — whether we work together or not.
-- Button: **Book a 30-minute call**
+- Button: **Request a free 30-minute call**
 
 ---
 
@@ -515,7 +515,7 @@ You get straight answers — not jargon, not theatrics.
 - Title: We're not an agency. We're a senior team that does one thing.
 - Heading: Thirty minutes will tell you whether we're right for each other.
 - Body: No pitch. No pressure. Just clarity.
-- Buttons: **Book a 30-minute call** → /contact | **Read the essays** → /reads
+- Buttons: **Request a free 30-minute call** → /contact | **Read the essays** → /reads
 
 ---
 
@@ -538,7 +538,7 @@ You get straight answers — not jargon, not theatrics.
 1. **We read it**: A senior strategist — not a bot — reads what you send and replies within one business day.
 2. **We reveal the first conversation**: We surface the first answer buyers see when they ask who to call. You watch what it says about your company and your competitors — live, in real time — and you keep the findings either way.
 3. **You decide**: If it makes sense to work together, you approve a fixed scope and price. If not, you leave with clarity and no obligation.
-- Buttons: **Book a 30-minute call**
+- Buttons: **Request a free 30-minute call**
 
 ### Email & Phone
 
@@ -558,7 +558,7 @@ Prefer to talk? Call us at **[+1 704 490 1737](tel:+17044901737)**
   - **Not sure yet — tell me where we stand**
 - Anything we should know? (optional) — "A sentence or two about your situation. Plain English is fine — or skip this and we'll learn it on the call."
 - Helper: Just want the call? Skip this — we'll cover it in thirty minutes.
-- Submit button: **Book a 30-minute call**
+- Submit button: **Request a free 30-minute call**
 - Fine print: By submitting, you agree to our privacy policy. No spam, ever.
 
 ### Success state
@@ -595,7 +595,7 @@ Prefer to talk? Call us at **[+1 704 490 1737](tel:+17044901737)**
 
 - Title: Reading about it is one thing. Knowing where you stand is another.
 - Body: Thirty minutes. A senior strategist shows you what the first answer says about your company right now. You keep the insight either way.
-- Button: **Book a 30-minute call**
+- Button: **Request a free 30-minute call**
 
 ---
 
