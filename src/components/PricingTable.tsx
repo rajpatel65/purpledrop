@@ -10,7 +10,7 @@ export function PricingTable() {
   return (
     <div className="overflow-hidden rounded-2xl border border-line bg-paper shadow-soft">
       <table className="w-full border-collapse text-left">
-        <caption className="sr-only">purpleDrop services and published prices</caption>
+        <caption className="sr-only">Free call followed by an optional consulting day</caption>
         <thead>
           <tr className="border-b border-line bg-cream/60">
             <th scope="col" className="px-6 py-4 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-soft">
@@ -40,9 +40,6 @@ export function PricingTable() {
               <td className="px-6 py-6">
                 <p className="font-serif text-2xl font-medium tracking-tight text-ink">
                   {price(PRICING[service.priceKey])}
-                  {service.priceKey === 'trackingMonthly' && (
-                    <span className="font-sans text-sm text-ink-faint"> /mo</span>
-                  )}
                 </p>
               </td>
             </tr>
@@ -54,8 +51,7 @@ export function PricingTable() {
         <p className="flex items-start gap-3 text-sm text-ink">
           <ShieldCheck className="mt-0.5 h-5 w-5 flex-shrink-0 text-violet" />
           <span>
-            The price on the page is the price you pay. No hourly billing, no surprise invoices.
-            The audit report is yours to keep either way.
+            Start with a free 30-minute call. Then choose: audit $500; consulting day $2,000; day plus 30 days of monitoring and adjustments $3,000.
           </span>
         </p>
       </div>
