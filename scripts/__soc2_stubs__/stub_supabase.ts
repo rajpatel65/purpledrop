@@ -55,6 +55,7 @@ class Builder {
   private orderAsc = true;
   private limitN = Infinity;
   private countMode = false;
+  private patch?: Partial<Row>;
 
   constructor(private table: string) {}
 
@@ -70,31 +71,14 @@ class Builder {
     const existing = row.id ? t.find((r) => r.id === row.id) : undefined;
     if (existing) Object.assign(existing, row);
     else insertRow(this.table, row);
-    return { select: () => this };
+    return this;
   }
   insert(row: Row | Row[]) {
     const rows = Array.isArray(row) ? row : [row];
     for (const r of rows) insertRow(this.table, r as Partial<Row>);
     return Promise.resolve({ data: null, error: null });
   }
-  update(patch: Partial<Row>) {
-    const chain = (conds: Array<[string, unknown]>) => ({
-      eq: (k: string, v: unknown) => {
-        const t = TABLES[this.table] as Row[];
-        for (const r of t) if (matches(r, [...conds, [k, v]])) Object.assign(r, patch);
-        return Promise.resolve({ data: null, error: null });
-      },
-      then: (
-        onF: (v: unknown) => unknown,
-        onR?: (e: unknown) => unknown,
-      ) => {
-        const t = TABLES[this.table] as Row[];
-        for (const r of t) if (matches(r, conds)) Object.assign(r, patch);
-        return Promise.resolve({ data: null, error: null }).then(onF, onR);
-      },
-    });
-    return chain(this.conds.slice());
-  }
+  update(patch: Partial<Row>) { this.patch = patch; return this; }
   eq(k: string, v: unknown) { this.conds.push([k, v]); return this; }
   gt(k: string, v: unknown) { this.conds.push([k, ['gt', v as string]]); return this; }
   gte(k: string, v: unknown) { this.conds.push([k, ['gte', v as string]]); return this; }
@@ -115,6 +99,7 @@ class Builder {
       });
     }
     out = out.slice(0, this.limitN);
+    if (this.patch) for (const row of out) Object.assign(row, this.patch);
     if (this.countMode) return { data: null, count: out.length, error: null };
     return { data: out, error: null };
   }
@@ -135,6 +120,14 @@ export function createClient(_url: string, _key: string) {
   return {
     from: (table: string) => new Builder(table),
     auth: {
+      admin: {
+        generateLink: ({ email }: { email: string }) => Promise.resolve({
+          data: { user: { id: 'auth-user-1', email }, properties: { hashed_token: 'test-hash' } }, error: null,
+        }),
+      },
+      verifyOtp: () => Promise.resolve({ data: { session: {
+        access_token: 'test-access-token', refresh_token: 'test-refresh-token',
+      } }, error: null }),
       // assessment calls supabaseAdmin.auth.getUser(jwt) to verify a user
       getUser: () =>
         Promise.resolve({ data: { user: { id: 'user-1', email: 'user-1@example.com' } }, error: null }),
