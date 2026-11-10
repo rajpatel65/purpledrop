@@ -155,7 +155,7 @@ export function ScorecardPage() {
                   you through what to fix first.
                 </p>
                 <a href="/contact" className="btn-primary mt-6 inline-flex">
-                  Book a 30-minute call
+                  Request a free 30-minute call
                   <ArrowRight className="h-4 w-4" />
                 </a>
               </div>
@@ -251,7 +251,7 @@ export function ScorecardPage() {
       <CtaBand
         title="Security is the foundation. AI visibility is the next step."
         body="We check both for every client. Thirty minutes, and you'll know where you stand."
-        primaryLabel="Book a 30-minute call"
+        primaryLabel="Request a free 30-minute call"
       />
     </Layout>
   );
