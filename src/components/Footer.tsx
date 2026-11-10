@@ -5,9 +5,7 @@ const COLUMNS = [
   {
     heading: 'Services',
     links: [
-      { to: '/services', label: 'The First Conversation Review' },
-      { to: '/services', label: 'The Systems Efficiency Review' },
-      { to: '/services', label: 'The Clarity Build' },
+      { to: '/services', label: 'Audit, consulting and follow-through' },
       { to: '/pricing', label: 'Pricing' },
     ],
   },
