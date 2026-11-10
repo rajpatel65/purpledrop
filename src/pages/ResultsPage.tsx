@@ -99,8 +99,8 @@ export function ResultsPage() {
       </section>
 
       <CtaBand
-        title="See where you stand — in three weeks."
-        body="The First Conversation Review shows you the answer AI gives about your company, and you keep the report either way."
+        title="Start with a free 30-minute call."
+        body="Start with a free 30-minute call. Then choose: audit $500; consulting day $2,000; day plus 30 days of monitoring and adjustments $3,000."
         primaryLabel="Request a free call"
         secondaryLabel="Read the services"
         secondaryTo="/services"
