@@ -227,7 +227,7 @@ export function AboutPage() {
       <CtaBand
         title="We're not an agency. We're a senior team that does one thing."
         body="Thirty minutes will tell you whether we're right for each other. No pitch, no pressure."
-        primaryLabel="Book a 30-minute call"
+        primaryLabel="Request a free 30-minute call"
         secondaryLabel="Read the essays"
         secondaryTo="/resources"
       />
