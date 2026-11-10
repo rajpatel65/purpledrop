@@ -80,7 +80,9 @@ if (!send || !verify || !assess) { console.error('FAIL handlers not registered')
 
 Deno.env.set('SUPABASE_URL', 'http://fake.supabase.co');
 Deno.env.set('SUPABASE_SERVICE_ROLE_KEY', 'fake-key');
-try { Deno.env.delete('RESEND_API_KEY'); } catch { /* not set */ }
+Deno.env.set('RESEND_API_KEY', 're_fake');
+const originalFetch = globalThis.fetch;
+globalThis.fetch = (async () => new Response('{}', { status: 200 })) as typeof fetch;
 
 console.log('A. Origin gate (all three functions)');
 for (const [name, fn] of [['send', send], ['verify', verify], ['assess', assess]] as const) {
@@ -94,7 +96,7 @@ for (const [name, fn] of [['send', send], ['verify', verify], ['assess', assess]
   check(`${name}: OPTIONS no Origin -> ok (no gate)`, pre2.status === 200);
 }
 
-console.log('B. Happy path (dev mode, no email provider)');
+console.log('B. Happy path with mocked email provider');
 resetDb();
 const rB = await send(req('/send', { email: 'Good@Example.COM' }));
 check('send -> 200', rB.status === 200, `got ${rB.status}`);
@@ -103,7 +105,10 @@ check('code stored normalized (lowercased)', !!stored, 'no row found');
 check('code is 6 digits', /^\d{6}$/.test(stored?.code ?? ''));
 const codeA = stored.code as string;
 const rv = await verify(req('/verify', { email: 'Good@Example.COM', code: codeA }));
-check('verify correct code -> 200 verified', rv.status === 200 && (await rv.json()).verified === true);
+const verifiedBody = await rv.json();
+check('verify correct code -> 200 verified', rv.status === 200 && verifiedBody.verified === true);
+check('verification issues auth session', verifiedBody.session?.access_token === 'test-access-token');
+check('profile uses auth user id, not verification code id', db.profiles[0]?.id === 'auth-user-1');
 check('code marked used', db.verification_codes.filter((r) => r.email === 'good@example.com').every((r) => r.used));
 const reUse = await verify(req('/verify', { email: 'a@x.io', code: codeA }));
 check('cannot use someone else\'s code', reUse.status !== 200);
@@ -195,6 +200,18 @@ const gVerify = await verify(req('/verify', { email: 'g@x.io', code: emailCode }
 check('full loop: emailed code verifies', gVerify.status === 200, `got ${gVerify.status}`);
 globalThis.fetch = realFetch;
 Deno.env.delete('RESEND_API_KEY');
+
+console.log('G2. Email delivery failures do not claim success');
+resetDb();
+const missingKey = await send(req('/send', { email: 'missing@x.io' }));
+check('missing email provider -> 503', missingKey.status === 503);
+check('missing provider does not store a code', codesFor('missing@x.io').length === 0);
+Deno.env.set('RESEND_API_KEY', 're_fake');
+globalThis.fetch = (async () => new Response('rejected', { status: 403 })) as typeof fetch;
+const rejected = await send(req('/send', { email: 'reject@x.io' }));
+check('rejected email -> 502', rejected.status === 502);
+check('undelivered code cannot be used', codesFor('reject@x.io').length === 0);
+globalThis.fetch = originalFetch;
 
 console.log('H. Assessment function');
 {
