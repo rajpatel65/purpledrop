@@ -1,7 +1,10 @@
 import { supabase } from './supabase';
 import { SOC2_QUESTIONS, SOC2_SECTIONS, getQuestionsBySection, getOverallStats, getSectionProgress } from './soc2-questions';
 
-const FUNCTIONS_URL = import.meta.env.VITE_SUPABASE_FUNCTIONS_URL || '';
+const FUNCTIONS_URL = (import.meta.env.VITE_SUPABASE_FUNCTIONS_URL ||
+  (import.meta.env.VITE_SUPABASE_URL ? `${import.meta.env.VITE_SUPABASE_URL}/functions/v1` : '')).replace(/\/$/, '');
+// Demo verification is opt-in and never enabled in a production build.
+const DEMO_MODE = import.meta.env.DEV && import.meta.env.VITE_SOC2_DEMO_MODE === 'true';
 const USE_SUPABASE = !!import.meta.env.VITE_SUPABASE_URL && !!import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 const STORAGE_KEYS = {
@@ -50,7 +53,8 @@ async function request(path: string, options: RequestInit = {}) {
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
+      'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY,
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...options.headers,
     },
   });
@@ -89,7 +93,9 @@ export const soc2Api = {
       });
     }
 
-    // Demo mode: store code in localStorage
+    if (!DEMO_MODE) throw new Error('Email verification is not configured. Please contact purpleDrop or try again later.');
+
+    // Local development only: store code in localStorage
     const code = Math.floor(100000 + Math.random() * 900000).toString();
     localStorage.setItem(`soc2_code_${email.toLowerCase()}`, JSON.stringify({
       code,
@@ -101,13 +107,21 @@ export const soc2Api = {
 
   async verifyCode(email: string, code: string) {
     if (USE_SUPABASE) {
-      return request('/verify-code', {
+      const result = await request('/verify-code', {
         method: 'POST',
         body: JSON.stringify({ email, code }),
       });
+      if (!result.session?.access_token || !result.session?.refresh_token) {
+        throw new Error('Verification did not create a session. Please request a new code.');
+      }
+      const { error } = await supabase!.auth.setSession(result.session);
+      if (error) throw new Error('Could not save your session. Please request a new code.');
+      return result;
     }
 
-    // Demo mode: check localStorage
+    if (!DEMO_MODE) throw new Error('Email verification is not configured.');
+
+    // Local development only: check localStorage
     const stored = localStorage.getItem(`soc2_code_${email.toLowerCase()}`);
     if (!stored) throw new Error('No code sent');
 
