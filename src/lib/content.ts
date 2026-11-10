@@ -37,8 +37,8 @@ export const CHAPTERS: Chapter[] = [
     label: 'The shift',
     title: 'You can shape what the first answer says.',
     body: 'We run a confidential review of the first conversation buyers have about your company — the one you never see. We show you what\'s missing, what\'s misunderstood, and what\'s working. Then we help you shape the answer so you\'re chosen more often. You stay in the loop. You keep the findings. You see the movement.',
-    question: 'Book a 30-minute call',
-    cta: { label: 'Book a 30-minute call', to: '/contact' },
+    question: 'Request a free 30-minute call',
+    cta: { label: 'Request a free 30-minute call', to: '/contact' },
   },
 ];
 
@@ -182,5 +182,4 @@ export interface TestimonialSlot {
 }
 
 export const TESTIMONIALS: TestimonialSlot[] = [];
-
 
