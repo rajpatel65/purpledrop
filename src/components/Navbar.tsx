@@ -93,7 +93,7 @@ export function Navbar() {
 
         <div className="hidden items-center gap-3 lg:flex">
           <Link to="/contact" className="btn-primary">
-            Book a call
+            Free 30-min call
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
@@ -147,7 +147,7 @@ export function Navbar() {
               onClick={() => setOpen(false)}
               className="btn-primary mt-4 w-full"
             >
-              Book a call
+              Free 30-min call
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
