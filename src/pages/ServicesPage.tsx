@@ -41,33 +41,14 @@ const FREE_TOOLS = [
   },
 ]
 
-// Typing + proof + icon mapping for the four canonical services in content.ts.
-const ICON_BY_ID: Record<string, 'shield' | 'zap' | 'boxes' | 'chart'> = {
-  audit: 'shield',
-  spendAudit: 'zap',
-  optimization: 'boxes',
-  tracking: 'chart',
-};
-
-const BADGE_BY_INDEX: Array<'popular' | 'value' | null> = [null, 'popular', 'value', null];
-
-const CTA_BY_ID: Record<string, string> = {
-  audit: 'Start the review',
-  spendAudit: 'Find the savings',
-  optimization: 'Discuss the build',
-  tracking: 'Start the watch',
-};
-
-// What each engagement hands you — deliverables we control, not borrowed claims.
+// One consulting offer, following a free introductory call.
+const ICON_BY_ID: Record<string, 'shield' | 'zap' | 'boxes' | 'chart'> = { audit: 'shield', consultingDay: 'zap', consultingPlus: 'chart' };
+const BADGE_BY_INDEX: Array<'popular' | 'value' | null> = [null, null, null];
+const CTA_BY_ID: Record<string, string> = { audit: 'Request a free 30-minute call', consultingDay: 'Request a free 30-minute call', consultingPlus: 'Request a free 30-minute call' };
 const PROOF_BY_ID: Record<string, string> = {
-  audit:
-    'You leave with a written report of exactly what the first conversation says about you — what\'s clear, what\'s missing, what\'s misunderstood. You keep it whichever way you decide.',
-  spendAudit:
-    'You leave with a written report of what you pay for, what\'s actually used, and where the overlaps are. Your report — whatever the findings.',
-  optimization:
-    'Deliverables are defined in writing before work starts. Your clarity work ships, then three months of monitoring are included so you can see movement.',
-  tracking:
-    'One page every month: what changed, why it changed, what to do next. The readouts are yours to keep. Cancel anytime.',
+  audit: 'You keep the findings report.',
+  consultingDay: 'Audit plus a full day fixing the top issues with you.',
+  consultingPlus: 'The day plus 30 days of monitoring and adjustments.',
 };
 
 const SERVICE_CARDS = SERVICES.map((svc, i) => ({
@@ -98,26 +79,24 @@ const FOUNDER = {
 const OUTCOMES = [
   { metric: '63%', label: 'the biggest rise in AI mentions we\'ve measured for one client within 90 days — shown in their readout, not promised here' },
   { metric: '40%', label: 'the highest share of software spend we\'ve found going to unused or duplicated tools in a single review — most reviews find less' },
-  { metric: '3.2x', label: 'the largest savings-to-fee we\'ve documented in one Systems Efficiency Review — we measure savings, we don\'t promise them' },
-  { metric: '98%', label: 'the share of Monthly Signal Watch clients who renewed after their first quarter' },
 ];
 
 const FAQ_ITEMS = [
   {
-    question: 'How does the $5K review save money?',
+    question: 'What do the options cost?',
     answer: (
       <>
-        <p className="mb-2">We map every subscription against actual usage — unused seats, duplicate tools, over-provisioned tiers. How much we find depends on your stack.</p>
-        <p>For scale: in one review, 40% of software spend was going to tools that were barely used — the largest share we\'ve documented. Most reviews find less. You see the findings in your report before you decide anything.</p>
+        <p className="mb-2">The audit is $500. The audit plus a full consulting day is $2,000. The day plus 30 days of monitoring and adjustments is $3,000.</p>
+        <p>The call is free, and the consulting day is optional. We agree on the focus before work starts.</p>
       </>
     ),
   },
   {
-    question: 'What\'s in the monthly readout?',
+    question: 'What happens after the free call?',
     answer: (
       <>
-        <p className="mb-2">One page: how you appear in the first conversation this month, what changed since last month, why it changed, and the one or two moves we\'d make next.</p>
-        <p>No 40-page PDFs. A readout you can read in three minutes — and act on the same day.</p>
+        <p className="mb-2">You choose the level of support that fits: audit, consulting day, or day plus follow-through.</p>
+        <p>The options are $500, $2,000 and $3,000. There is no obligation to continue.</p>
       </>
     ),
   },
@@ -188,13 +167,13 @@ export function ServicesPage() {
             <div className="text-center max-w-3xl mx-auto mb-12">
               <p className="eyebrow">The Work</p>
               <h2 className="mt-4 font-serif text-4xl font-medium tracking-tight text-ink sm:text-5xl">
-                Four ways to bring clarity.
+                Good, better, best. Your choice.
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-ink-soft">
-                Fixed prices, published on this page. Senior-only. You keep every deliverable.
+                Start with a free 30-minute call. Choose an audit ($500), a consulting day ($2,000), or the day plus 30 days of follow-through ($3,000).
               </p>
             </div>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2 max-w-5xl mx-auto">
+            <div className="grid gap-6 lg:grid-cols-3 max-w-7xl mx-auto">
               {SERVICE_CARDS.map((svc, i) => (
                 <ServiceCard key={svc.step} {...svc} index={i} />
               ))}
@@ -217,7 +196,7 @@ export function ServicesPage() {
               <FeatureCard
                 icon={Users}
                 title="Senior-only, always"
-                body="The strategist you meet in week 1 does the work in week 10. We don't staff up with juniors to hit a margin."
+                body="The person you meet on the call does the consulting work."
                 accent="violet"
               />
               <FeatureCard
