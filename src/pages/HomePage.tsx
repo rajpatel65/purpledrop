@@ -282,7 +282,7 @@ export function HomePage() {
               <div>
                 <p className="eyebrow">The work</p>
                 <h2 className="mt-4 font-serif text-4xl font-medium tracking-tight text-ink sm:text-5xl">
-                  Four ways to change what the answer says.
+                  Start free. Choose the support you need.
                 </h2>
               </div>
               <Link to="/pricing" className="text-sm font-semibold text-violet hover:text-violet-deep">
@@ -364,4 +364,4 @@ export function HomePage() {
       />
     </Layout>
   );
-      }
+}
