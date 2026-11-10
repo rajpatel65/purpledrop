@@ -145,7 +145,7 @@ export function ServicesPage() {
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
               <Link to="/contact" className="btn-primary">
-                Book a 30-minute call
+                Request a free 30-minute call
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link to="/soc2" className="btn-outline">
@@ -401,7 +401,7 @@ export function ServicesPage() {
       <CtaBand
         title="Not sure where to start?"
         body="Thirty minutes. We show you what the first conversation says about you. You leave with a straight answer either way."
-        primaryLabel="Book a 30-minute call"
+        primaryLabel="Request a free 30-minute call"
         secondaryLabel="Try the free SOC2 gap check"
         secondaryTo="/soc2"
         calendarEmbed
