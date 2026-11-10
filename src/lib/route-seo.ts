@@ -26,7 +26,7 @@ export const ROUTE_SEO: Record<string, RouteSeo> = {
   '/services': {
     title: 'Services — purpleDrop AI Visibility',
     description:
-      'Four services: the First Conversation Review, the Systems Efficiency Review, the Clarity Build, and the Monthly Signal Watch. Fixed published prices, senior-only team, plain-English reporting.',
+      'Start with a free 30-minute call. If you continue, one day of consulting costs $2,000.',
     path: '/services',
   },
   '/process': {
@@ -44,7 +44,7 @@ export const ROUTE_SEO: Record<string, RouteSeo> = {
   '/pricing': {
     title: 'Pricing — purpleDrop',
     description:
-      'Published prices, no hourly billing: First Conversation Review, Clarity Build, and Monthly Signal Watch. The price on the page is the price you pay.',
+      'Free 30-minute call, then three options: audit $500, consulting day $2,000, day plus 30 days monitoring $3,000.',
     path: '/pricing',
   },
   '/about': {
