@@ -8,7 +8,7 @@ export interface StickyMobileCTAProps {
 }
 
 export function StickyMobileCTA({
-  label = 'Book a 30-minute call',
+  label = 'Request a free 30-minute call',
   href = '/contact',
   showOnPaths = ['/', '/services', '/process', '/results', '/pricing', '/about', '/scorecard', '/calculator', '/soc2'],
 }: StickyMobileCTAProps) {
