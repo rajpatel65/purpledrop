@@ -50,7 +50,7 @@ export interface Service {
   problem: string;
   outcome: string;
   timeline: string;
-  priceKey: 'audit' | 'spendAudit' | 'optimization' | 'trackingMonthly';
+  priceKey: 'audit' | 'consultingDay' | 'consultingPlus';
   priceNote?: string;
   guarantee: string;
   bullets: string[];
@@ -58,72 +58,31 @@ export interface Service {
 
 export const SERVICES: Service[] = [
   {
-    id: 'audit',
-    step: '01',
-    title: 'The First Conversation Review',
-    tagline: 'The first answer decides who gets the call.',
-    problem: 'You don\'t know what buyers hear first — or whether you\'re mentioned at all. Your competitors are in the shortlist while you aren\'t — and you never knew the question was asked.',
-    outcome: 'A confidential review of the first conversation buyers have about your company. What\'s clear. What\'s missing. What\'s misunderstood. Where competitors appear instead of you. We also check your website\'s foundational health — WordPress plugin currency, dependency freshness, SEO on‑page factors, and design/layout consistency — because AI reads what\'s publicly visible, and so do cautious buyers.',
-    timeline: '2–3 weeks',
-    priceKey: 'audit',
-    guarantee: 'Fixed price. Clear findings. Senior‑only. You keep the insight regardless.',
-    bullets: [
-      'What modern AI assistants currently understand about your company',
-      'How your closest competitors appear in the same conversation',
-      'What should be clear about you — but isn\'t',
-      'A plain‑English walkthrough you can share with your team',
-    ],
+    id: 'audit', step: '01', title: 'AI-visibility audit',
+    tagline: 'Good: understand what needs attention.',
+    problem: 'Start with a free 30-minute call to discuss your website.',
+    outcome: 'An AI-visibility audit with a findings report that is yours to keep.',
+    timeline: 'Audit and findings report', priceKey: 'audit',
+    guarantee: 'The findings report is yours to keep.',
+    bullets: ['AI-visibility audit', 'Findings report to keep'],
   },
   {
-    id: 'spendAudit',
-    step: '02',
-    title: 'The Systems Efficiency Review',
-    tagline: 'What you pay for, what you use, what you waste.',
-    problem: 'Most companies pay for tools their teams barely touch — while missing the systems competitors quietly rely on. Last month\'s stack is quietly costing you the shortlist.',
-    outcome: 'A senior‑led review of your software stack: What\'s used. What\'s duplicated. What\'s forgotten. Where automation could replace manual work. We also check for outdated libraries, unmaintained dependencies, and SEO gaps that silently erode rankings — then show you the report you keep either way.',
-    timeline: '2–3 weeks',
-    priceKey: 'spendAudit',
-    guarantee: 'Fixed price. Clear savings. No jargon. You keep the report either way.',
-    bullets: [
-      'Every subscription mapped against actual usage',
-      'Overlaps and duplicates identified',
-      'Gaps where automation could take over',
-      'A plain‑English walkthrough you can act on immediately',
-    ],
+    id: 'consultingDay', step: '02', title: 'The consulting day',
+    tagline: 'Better: understand the issues, then work on them together.',
+    problem: 'Want help acting on the findings, not just reading them?',
+    outcome: 'The audit plus one full day working with you to fix the top issues.',
+    timeline: '1 consulting day', priceKey: 'consultingDay',
+    guarantee: 'Agree on the focus before the consulting day starts.',
+    bullets: ['AI-visibility audit and findings report', 'One full day fixing the top issues with you'],
   },
   {
-    id: 'optimization',
-    step: '03',
-    title: 'The Clarity Build',
-    tagline: 'Clarity wins the shortlist.',
-    problem: 'If your company is hard to understand, the first answer will choose someone else — even if they\'re not better. The decision begins before you ever see it.',
-    outcome: 'Your company becomes easier for modern decision systems to describe accurately: Your services. Your fees. Your strengths. Your proof. Clear. Consistent. Confirmable. Your website\'s technical health — plugin currency, SEO integrity, design consistency — is confirmed accurately, not assumed. You keep the findings either way.',
-    timeline: '6–10 weeks',
-    priceKey: 'optimization',
-    priceNote: 'Includes the First Conversation Review',
-    guarantee: 'Fixed price. No hourly billing. Three months of monitoring included. You keep the insight regardless.',
-    bullets: [
-      'Your company becomes easier for AI systems to describe',
-      'Your services and fees become confirmable, not guessed',
-      'Three months of monitoring included',
-      'Senior‑only team, end to end',
-    ],
-  },
-  {
-    id: 'tracking',
-    step: '04',
-    title: 'The Monthly Signal Watch',
-    tagline: 'See the movement. Stay ahead of it.',
-    problem: 'The first answer changes as systems evolve — and as competitors adjust. Last month\'s position doesn\'t guarantee next month\'s. Your competitors are adjusting as you read this.',
-    outcome: 'A monthly readout of how you appear in the first conversation: What changed. Why it changed. What to do next. You see movement instead of guessing. You stay ahead instead of reacting. You keep clarity instead of losing it quietly.',
-    timeline: 'Monthly',
-    priceKey: 'trackingMonthly',
-    guarantee: 'Fixed monthly price. Quarterly review included. You keep the readouts either way.',
-    bullets: [
-      'Monthly readout of your position in the first conversation',
-      'Changes flagged the moment they appear',
-      'Quarterly strategy call with a senior strategist',
-    ],
+    id: 'consultingPlus', step: '03', title: 'The day plus follow-through',
+    tagline: 'Best: a consulting day with 30 days of follow-through.',
+    problem: 'Want support after the consulting day?',
+    outcome: 'The audit and consulting day, plus 30 days of monitoring and adjustments.',
+    timeline: '1 consulting day + 30 days', priceKey: 'consultingPlus',
+    guarantee: '30 days of monitoring and adjustments are included.',
+    bullets: ['AI-visibility audit and findings report', 'One full day fixing the top issues with you', '30 days of monitoring and adjustments'],
   },
 ];
 
@@ -182,4 +141,3 @@ export interface TestimonialSlot {
 }
 
 export const TESTIMONIALS: TestimonialSlot[] = [];
-
