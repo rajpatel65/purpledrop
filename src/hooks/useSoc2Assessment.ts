@@ -101,7 +101,7 @@ export function useSoc2Assessment() {
     persist({ email: normalized, status: 'verifying', error: null });
     try {
       await soc2Api.sendVerificationCode(normalized);
-      persist({ status: 'verifying' });
+      persist({ status: 'idle' });
     } catch (err) {
       persist({ error: err instanceof Error ? err.message : 'Failed to send code', status: 'idle' });
       throw err;
@@ -124,7 +124,7 @@ export function useSoc2Assessment() {
         answers,
       });
     } catch (err) {
-      persist({ error: err instanceof Error ? err.message : 'Invalid code', status: 'verifying' });
+      persist({ error: err instanceof Error ? err.message : 'Invalid code', status: 'idle' });
       throw err;
     }
   }, [state.email, persist]);
