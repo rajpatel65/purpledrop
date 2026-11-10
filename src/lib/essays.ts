@@ -75,7 +75,7 @@ export const ESSAYS: Essay[] = [
       { type: 'p', content: 'Third, proof. A claim with evidence is a fact. A claim without it is a guess. Reviews, case studies, dates, named clients, measurable outcomes — these are the things a model can verify and therefore repeat. The more of them it finds, the more confidently it recommends you.' },
       { type: 'h2', content: 'Why this is good news' },
       { type: 'p', content: 'If the answer were based on being genuinely best, you couldn\'t do anything about it quickly. But it\'s based on being understood, consistent, and provable — which is work you can actually do. Every source you clean up, every claim you back with evidence, moves the answer in your direction.' },
-      { type: 'p', content: 'The first step isn\'t guesswork either. Run the search yourself: ask three assistants the question a buyer would ask, and look at who appears and who doesn\'t. That\'s your starting line. We run that review for clients in the First Conversation Review — and most are surprised by how much they were missing.' },
+      { type: 'p', content: 'The first step isn\'t guesswork either. Run the search yourself: ask three assistants the question a buyer would ask, and look at who appears and who doesn\'t. That\'s your starting line. We run that review for clients during a consulting day — and most are surprised by how much they were missing.' },
     ],
   },
   {
