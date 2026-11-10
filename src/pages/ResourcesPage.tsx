@@ -59,7 +59,7 @@ export function ResourcesPage() {
       <CtaBand
         title="Reading about it is one thing. Knowing where you stand is another."
         body="Thirty minutes. We show you what AI actually says about your company right now."
-        primaryLabel="Book a 30-minute call"
+        primaryLabel="Request a free 30-minute call"
       />
     </Layout>
   );
