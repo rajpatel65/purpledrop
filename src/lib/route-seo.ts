@@ -56,7 +56,7 @@ export const ROUTE_SEO: Record<string, RouteSeo> = {
   '/contact': {
     title: 'Contact — purpleDrop',
     description:
-      'Book a free 30-minute call. We show you what AI says about your company today, and you keep the findings either way. No pitch, no pressure.',
+      'Request a free 30-minute call. We show you what AI says about your company today, and you keep the findings either way. No pitch, no pressure.',
     path: '/contact',
   },
   '/resources': {
