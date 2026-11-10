@@ -55,7 +55,7 @@ export function PricingPage() {
                 </span>
               </p>
               <Link to="/contact" className="btn-primary">
-                Book a call
+                Request a free call
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -93,7 +93,7 @@ export function PricingPage() {
       <CtaBand
         title="Every engagement starts the same way."
         body="Thirty minutes. You leave knowing where you stand — whether we work together or not."
-        primaryLabel="Book a 30-minute call"
+        primaryLabel="Request a free 30-minute call"
       />
     </Layout>
   );
