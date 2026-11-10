@@ -92,7 +92,7 @@ export function ProcessPage() {
                 </p>
               </div>
               <Link to="/contact" className="btn-primary">
-                Book a call
+                Request a free call
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
