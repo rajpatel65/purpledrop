@@ -16,7 +16,7 @@ interface CtaBandProps {
 export function CtaBand({
   title,
   body,
-  primaryLabel = 'Book a 30-minute call',
+  primaryLabel = 'Request a free 30-minute call',
   primaryTo = '/contact',
   secondaryLabel,
   secondaryTo = '/services',
@@ -40,7 +40,7 @@ export function CtaBand({
               <iframe
                 src={calendarUrl}
                 className="w-full sm:w-[320px] h-[380px] sm:h-[420px] rounded-xl border-0 bg-white shadow-lg"
-                title="Book a call"
+                title="Book a free 30-minute call"
                 style={{ border: 'none' }}
               />
             ) : (
