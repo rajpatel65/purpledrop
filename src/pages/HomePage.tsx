@@ -156,7 +156,7 @@ export function HomePage() {
               <FadeIn delay={0.24}>
                 <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
                   <Link to="/contact" className="btn-primary">
-                    Find out what AI says about you
+                    Request a free 30-minute call
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                   <Link to="/services" className="btn-outline">
@@ -360,8 +360,8 @@ export function HomePage() {
       <CtaBand
         title="Find out what the answer says about your company."
         body="Thirty minutes. We show you what AI says about you today — and what it's missing. You keep the findings either way."
-        primaryLabel="Book a 30-minute call"
+        primaryLabel="Request a free 30-minute call"
       />
     </Layout>
   );
-}
+      }
