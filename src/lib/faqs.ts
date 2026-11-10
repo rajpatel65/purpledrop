@@ -29,7 +29,7 @@ export const homePageFaqs: { q: string; a: string }[] = [
   },
   {
     q: 'How do we begin?',
-    a: 'With a thirty-minute call. You leave knowing where you stand — whether we work together or not. Book a 30-minute call',
+    a: 'With a thirty-minute call. You leave knowing where you stand — whether we work together or not. Request a free 30-minute call',
   },
 ];
 
