@@ -4,9 +4,6 @@ pages_build_output_dir = "dist"
 
 # Cloudflare Pages - static Vite build
 # Supabase is external (no D1 binding needed)
-# Secrets are set via Cloudflare dashboard for Supabase Edge Functions, not here
+# Resend secrets belong in the Supabase dashboard, not Cloudflare Pages
 # Build command: npm run build
 # Output dir: dist
-
-[site]
-bucket = "./dist"
