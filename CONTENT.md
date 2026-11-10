@@ -30,10 +30,9 @@ Tagline: We help established companies get recommended by the AI tools their buy
 Location line: **United States · working with companies everywhere**
 
 Column — Services:
-- The First Conversation Review
-- The Systems Efficiency Review
-- The Clarity Build
-- The Monthly Signal Watch
+- AI-visibility audit
+- The consulting day
+- The day plus follow-through
 
 Column — Company:
 - About
@@ -51,10 +50,10 @@ Legal: © 2026 purpleDrop. All rights reserved. | Privacy | Terms | info@purpled
 
 ### Prices (shared)
 
-- The First Conversation Review — $2,000
-- The Systems Efficiency Review — $1,500
-- The Clarity Build — $10,000
-- The Monthly Signal Watch — $1,500 /month
+- Free 30-minute call, with no obligation.
+- Good: AI-visibility audit and findings report - $500 USD.
+- Better: audit plus a full consulting day fixing top issues with the customer - $2,000 USD.
+- Best: audit and consulting day plus 30 days of monitoring and adjustments - $3,000 USD.
 
 ### Recurring promise (appears in multiple places)
 
@@ -130,7 +129,7 @@ Legal: © 2026 purpleDrop. All rights reserved. | Privacy | Terms | info@purpled
 ### Services section
 
 - Eyebrow: The work
-- Heading: Four ways to change what the answer says.
+- Heading: Choose the support you need.
 - Link: See full pricing →
 - (Service rows: see Services page below)
 
@@ -171,7 +170,7 @@ Legal: © 2026 purpleDrop. All rights reserved. | Privacy | Terms | info@purpled
 ### Meta
 
 - Title: Services — purpleDrop AI Visibility
-- Description: Four services: the First Conversation Review, the Systems Efficiency Review, the Clarity Build, the Monthly Signal Watch. Fixed published prices, senior-only team, plain-English reporting.
+- Description: Free 30-minute call, followed by three options: audit $500, consulting day $2,000, day plus 30 days of follow-through $3,000.
 
 ### Header
 
@@ -195,63 +194,20 @@ Legal: © 2026 purpleDrop. All rights reserved. | Privacy | Terms | info@purpled
 ### Service grid
 
 - Eyebrow: The Work
-- Heading: Four ways to bring clarity.
+- Heading: Good, better, best. Your choice.
 - Sub: Fixed prices, published on this page. Senior-only. You keep every deliverable.
 
-**01 — The First Conversation Review** | $2,000 · 2–3 weeks
+## Good: AI-visibility audit - $500 USD
 
-- Tagline: The first answer decides who gets the call.
-- Problem: You don't know what buyers hear first — or whether you're mentioned at all. Your competitors are in the shortlist while you aren't — and you never knew the question was asked.
-- Outcome: A confidential review of the first conversation buyers have about your company. What's clear. What's missing. What's misunderstood. Where competitors appear instead of you. We also check your website's foundational health — WordPress plugin currency, dependency freshness, SEO on-page factors, and design/layout consistency — because AI reads what's publicly visible, and so do cautious buyers.
-- Proof: You leave with a written report of exactly what the first conversation says about you — what's clear, what's missing, what's misunderstood. You keep it whichever way you decide.
-- Guarantee: Fixed price. Clear findings. Senior-only. You keep the insight regardless.
-- Bullets:
-  - What modern AI assistants currently understand about your company
-  - How your closest competitors appear in the same conversation
-  - What should be clear about you — but isn't
-  - A plain-English walkthrough you can share with your team
-- Button: **Start the review** → /contact
+An AI-visibility audit and a findings report that the customer keeps.
 
-**02 — The Systems Efficiency Review** | $5,000 · 2–3 weeks
+## Better: The consulting day - $2,000 USD
 
-- Tagline: What you pay for, what you use, what you waste.
-- Problem: Most companies pay for tools their teams barely touch — while missing the systems competitors quietly rely on. Last month's stack is quietly costing you the shortlist.
-- Outcome: A senior-led review of your software stack: What's used. What's duplicated. What's forgotten. Where automation could replace manual work. We also check for outdated libraries, unmaintained dependencies, and SEO gaps that silently erode rankings — then show you the report you keep either way.
-- Proof: You leave with a written report of what you pay for, what's actually used, and where the overlaps are. Your report — whatever the findings.
-- Guarantee: Fixed price. Clear savings. No jargon. You keep the report either way.
-- Bullets:
-  - Every subscription mapped against actual usage
-  - Overlaps and duplicates identified
-  - Gaps where automation could take over
-  - A plain-English walkthrough you can act on immediately
-- Button: **Find the savings** → /contact
+The audit plus a full day fixing the top issues with the customer. Agree on the focus before the day starts.
 
-**03 — The Clarity Build** | $10,000 · 6–10 weeks · Includes the First Conversation Review
+## Best: The day plus follow-through - $3,000 USD
 
-- Tagline: Clarity wins the shortlist.
-- Problem: If your company is hard to understand, the first answer will choose someone else — even if they're not better. The decision begins before you ever see it.
-- Outcome: Your company becomes easier for modern decision systems to describe accurately: Your services. Your fees. Your strengths. Your proof. Clear. Consistent. Confirmable. Your website's technical health — plugin currency, SEO integrity, design consistency — is confirmed accurately, not assumed. You keep the findings either way.
-- Proof: Deliverables are defined in writing before work starts. Your clarity work ships, then three months of monitoring are included so you can see movement.
-- Guarantee: Fixed price. No hourly billing. Three months of monitoring included. You keep the insight regardless.
-- Bullets:
-  - Your company becomes easier for AI systems to describe
-  - Your services and fees become confirmable, not guessed
-  - Three months of monitoring included
-  - Senior-only team, end to end
-- Button: **Discuss the build** → /contact
-
-**04 — The Monthly Signal Watch** | $1,500/month · Monthly
-
-- Tagline: See the movement. Stay ahead of it.
-- Problem: The first answer changes as systems evolve — and as competitors adjust. Last month's position doesn't guarantee next month's. Your competitors are adjusting as you read this.
-- Outcome: A monthly readout of how you appear in the first conversation: What changed. Why it changed. What to do next. You see movement instead of guessing. You stay ahead instead of reacting. You keep clarity instead of losing it quietly.
-- Proof: One page every month: what changed, why it changed, what to do next. The readouts are yours to keep. Cancel anytime.
-- Guarantee: Fixed monthly price. Quarterly review included. You keep the readouts either way.
-- Bullets:
-  - Monthly readout of your position in the first conversation
-  - Changes flagged the moment they appear
-  - Quarterly strategy call with a senior strategist
-- Button: **Start the watch** → /contact
+The audit and consulting day plus 30 days of monitoring and adjustments. This is a fixed-price offer, not a monthly subscription.
 
 ### How we're different
 
@@ -298,15 +254,11 @@ Legal: © 2026 purpleDrop. All rights reserved. | Privacy | Terms | info@purpled
 - Sub: Every number below is the far end of what we've documented — not averages, not promises. Your readouts will show your own numbers.
 - **63%** — the biggest rise in AI mentions we've measured for one client within 90 days — shown in their readout, not promised here
 - **40%** — the highest share of software spend we've found going to unused or duplicated tools in a single review — most reviews find less
-- **3.2x** — the largest savings-to-fee we've documented in one Systems Efficiency Review — we measure savings, we don't promise them
-- **98%** — the share of Monthly Signal Watch clients who renewed after their first quarter
 
 ### FAQ (bottom of page)
 
 - Eyebrow: Straight answers
 - Heading: The questions buyers ask before they call.
-- **How does the $5K review save money?** We map every subscription against actual usage — unused seats, duplicate tools, over-provisioned tiers. How much we find depends on your stack. For scale: in one review, 40% of software spend was going to tools that were barely used — the largest share we've documented. Most reviews find less. You see the findings in your report before you decide anything.
-- **What's in the monthly readout?** One page: how you appear in the first conversation this month, what changed since last month, why it changed, and the one or two moves we'd make next. No 40-page PDFs. A readout you can read in three minutes — and act on the same day.
 
 ### CTA band
 
@@ -421,7 +373,7 @@ Legal: © 2026 purpleDrop. All rights reserved. | Privacy | Terms | info@purpled
 ### CTA band
 
 - Title: See where you stand — in three weeks.
-- Body: The First Conversation Review shows you the answer buyers see first. You keep the findings either way.
+- Body: the consulting offer shows you the answer buyers see first. You keep the findings either way.
 - Buttons: **Request a free call** → /contact | **Read the services** → /services
 
 ---
@@ -431,16 +383,15 @@ Legal: © 2026 purpleDrop. All rights reserved. | Privacy | Terms | info@purpled
 ### Pricing
 
 - Title: The price on the page is the price you pay.
-- Body: No hourly billing. No "while we're in here" extras. No surprises. Four services. Four fixed numbers. One principle: clarity wins trust.
+- Body: No hourly billing. No "while we're in here" extras. No surprises. Three options after a free 30-minute call. One principle: clarity wins trust.
 
 ### Pricing Table
 
 | Service | Timeline | Price |
-|---|---|---|
-| **The First Conversation Review** — See what the first answer says about you today. | 2–3 weeks | $2,000 |
-| **The Systems Efficiency Review** — Understand what you pay for, what you use, and what you waste. | 2–3 weeks | $1,500 |
-| **The Clarity Build** — Shape the first answer buyers see. | 6–10 weeks | $10,000 |
-| **The Monthly Signal Watch** — Track how the first answer changes each month. | Monthly | $1,500/mo |
+| --- | --- | --- |
+| AI-visibility audit and findings report | Audit | $500 |
+| Audit plus consulting day | 1 day | $2,000 |
+| Audit and consulting day plus follow-through | 1 day + 30 days | $3,000 |
 
 **Promise:** The price on the page is the price you pay. No hourly billing. No surprise invoices. You keep the findings either way.
 
@@ -551,10 +502,9 @@ Prefer to talk? Call us at **[+1 704 490 1737](tel:+17044901737)**
 - Email (required) — "you@company.com"
 - Company — "Your company"
 - What are you interested in?
-  - **The First Conversation Review**
-  - **The Systems Efficiency Review**
-  - **The Clarity Build**
-  - **The Monthly Signal Watch**
+  - **AI-visibility audit - $500**
+  - **The consulting day - $2,000**
+  - **The day plus follow-through - $3,000**
   - **Not sure yet — tell me where we stand**
 - Anything we should know? (optional) — "A sentence or two about your situation. Plain English is fine — or skip this and we'll learn it on the call."
 - Helper: Just want the call? Skip this — we'll cover it in thirty minutes.
@@ -737,7 +687,7 @@ Prefer to talk? Call us at **[+1 704 490 1737](tel:+17044901737)**
    Most companies pay for software they don't use, buy the same feature twice under different names, and have no idea what the AI tools on their team actually cost. We map every subscription against real usage, flag the duplicates and overlaps, and show where AI could take over manual work — call notes, CRM updates, competitor research. A report you keep either way.
 
 6. **How long until we see a change?**
-   The audit takes 2–3 weeks and shows you where you stand immediately. Full optimization runs 6–10 weeks, and tracking shows you the movement month by month after that.
+   Choose an audit ($500), audit plus a consulting day ($2,000), or the day plus 30 days of monitoring and adjustments ($3,000).
 
 7. **What if it doesn't work for us?**
    The audit report is yours to keep no matter what. Optimization includes three months of tracking after launch, and every engagement runs at a fixed, published price — so you judge the work on the measured movement, not on promises.
