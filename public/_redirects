@@ -1,1 +1,2 @@
-/*    /index.html   200
+# Routes are prerendered to /<route>/index.html.
+# Unknown paths use 404.html; do not rewrite every route to the home page.
