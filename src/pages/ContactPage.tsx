@@ -70,7 +70,7 @@ export function ContactPage() {
               Let's find out what AI says about you.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              Thirty minutes. No pitch deck, no pressure. You leave with a straight answer about
+              A free 30-minute call. No pitch deck, no pressure. You leave with a straight answer about
               where you stand — whether we ever work together or not.
             </p>
           </FadeIn>
@@ -155,11 +155,11 @@ export function ContactPage() {
                     <Check className="h-8 w-8 text-violet" />
                   </div>
                   <h2 className="mt-6 font-serif text-3xl font-medium tracking-tight text-ink">
-                    Thanks for reaching out.
+                    Your call request is sent.
                   </h2>
                   <p className="mt-3 max-w-sm text-sm leading-relaxed text-ink-soft">
-                    A senior strategist will reply within one business day. No bots, no sequences,
-                    no spam.
+                    We will reply within one business day to arrange your free 30-minute call.
+                    Your call is not booked yet.
                   </p>
                   <Link to="/" className="btn-outline mt-8">
                     Back to home
@@ -167,6 +167,9 @@ export function ContactPage() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
+                  <p className="text-sm leading-relaxed text-ink-soft">
+                    Request your free 30-minute call below. We will email you to arrange a time.
+                  </p>
                   <div>
                     <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-ink">
                       Name <span className="text-violet">*</span>
@@ -220,7 +223,7 @@ export function ContactPage() {
                     <input id="honey" name="_honey" value={form._honey} onChange={handleChange} tabIndex={-1} autoComplete="off" />
                   </div>
                   <button type="submit" disabled={status === 'sending'} className="btn-primary w-full disabled:opacity-60">
-                    {status === 'sending' ? 'Sending…' : 'Book a 30-minute call'}
+                    {status === 'sending' ? 'Sending…' : 'Request a free 30-minute call'}
                     {status !== 'sending' && <ArrowRight className="h-4 w-4" />}
                   </button>
                   {status === 'error' && (
