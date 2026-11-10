@@ -31,11 +31,11 @@ export function PricingPage() {
           <FadeIn>
             <p className="eyebrow">Pricing</p>
             <h1 className="mt-5 max-w-3xl font-serif text-5xl font-medium leading-[1.05] tracking-tight text-ink sm:text-6xl">
-              The price on the page is the price you pay.
+              Start free. Choose the support you need.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              No hourly billing. No "while we're in here" extras. Four services, four published
-              numbers, one guarantee.
+              Start with a free 30-minute call. Then choose an audit for $500, a consulting day
+              for $2,000, or the day plus 30 days of monitoring and adjustments for $3,000.
             </p>
           </FadeIn>
         </div>
@@ -51,7 +51,7 @@ export function PricingPage() {
               <p className="flex items-start gap-3 text-sm leading-relaxed text-ink-soft">
                 <BadgeCheck className="mt-0.5 h-5 w-5 flex-shrink-0 text-violet" />
                 <span>
-                  Not sure which one fits? Start with a call — thirty minutes, and you'll know.
+                  The call is free. Choose your level of support afterward, with no obligation.
                 </span>
               </p>
               <Link to="/contact" className="btn-primary">
