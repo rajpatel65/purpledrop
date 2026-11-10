@@ -80,10 +80,10 @@ export function ResourcePostPage() {
       <CtaBand
         title="You don't have to guess where you stand."
         body="Thirty minutes. We show you what AI says about your company and your competitors right now."
-        primaryLabel="Book a 30-minute call"
+        primaryLabel="Request a free 30-minute call"
         secondaryLabel="Read another essay"
         secondaryTo="/resources"
       />
     </Layout>
   );
-}
+                    }
