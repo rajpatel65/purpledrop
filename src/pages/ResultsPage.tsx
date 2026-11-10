@@ -101,7 +101,7 @@ export function ResultsPage() {
       <CtaBand
         title="See where you stand — in three weeks."
         body="The First Conversation Review shows you the answer AI gives about your company, and you keep the report either way."
-        primaryLabel="Book a call"
+        primaryLabel="Request a free call"
         secondaryLabel="Read the services"
         secondaryTo="/services"
       />
