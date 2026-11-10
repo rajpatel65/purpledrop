@@ -1,0 +1,11 @@
+# Public code-request and code-exchange endpoints run before a user has a JWT.
+# Their handlers enforce origin, input validation, and rate limits.
+[functions.send-verification]
+verify_jwt = false
+
+[functions.verify-code]
+verify_jwt = false
+
+# assessment keeps the platform JWT gate and validates the user in its handler.
+[functions.assessment]
+verify_jwt = true
