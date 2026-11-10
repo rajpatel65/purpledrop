@@ -124,8 +124,8 @@ export function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-ink">You decide</h3>
                     <p className="mt-1 text-sm leading-relaxed text-ink-soft">
-                      If it makes sense to work together, you approve a fixed scope and price. If
-                      not, you leave with the insight and no obligation.
+                      After the free call, choose an audit ($500), the consulting day ($2,000), or the day plus 30 days of follow-through ($3,000).
+                      We agree on the focus first. There is no obligation to continue.
                     </p>
                   </div>
                 </li>
@@ -194,10 +194,9 @@ export function ContactPage() {
                     </label>
                     <select id="interest" name="interest" value={form.interest} onChange={handleChange} className={inputClass}>
                       <option value="">Select...</option>
-                      <option value="audit">The First Conversation Review</option>
-                      <option value="spendAudit">The Systems Efficiency Review</option>
-                      <option value="optimization">The Clarity Build</option>
-                      <option value="tracking">The Monthly Signal Watch</option>
+                      <option value="audit">AI-visibility audit - $500</option>
+                      <option value="consultingDay">Consulting day - $2,000</option>
+                      <option value="consultingPlus">Day plus 30 days of follow-through - $3,000</option>
                       <option value="unsure">Not sure yet — tell me where we stand</option>
                     </select>
                   </div>
