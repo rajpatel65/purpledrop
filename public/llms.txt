@@ -4,15 +4,15 @@
 
 We work with established businesses in the United States, Canada, the United Kingdom, and Australia.
 
-## Services (fixed, published prices)
-- First Conversation Review — $2,000. A review of how AI currently describes and recommends your company.
-- Systems Efficiency Review — $5,000. A review of your software stack and what it costs you.
-- Clarity Build — $10,000. Structured work so AI describes you accurately, trustworthily, and distinctly.
-- Monthly Signal Watch — $1,500/month. Ongoing measurement and reporting of what AI says about you.
+## Consulting
+- Start with a free 30-minute call.
+- Good: AI-visibility audit and findings report - $500 USD.
+- Better: audit plus one full consulting day fixing top issues with you - $2,000 USD.
+- Best: the audit and consulting day plus 30 days of monitoring and adjustments - $3,000 USD.
 
 ## Key pages
 - [Home](https://purpledrop.com/): Overview of the approach.
-- [Services](https://purpledrop.com/services): The four services in detail.
+- [Services](https://purpledrop.com/services): The consulting-day offer.
 - [Pricing](https://purpledrop.com/pricing): Published prices, no hourly billing.
 - [Process](https://purpledrop.com/process): How an engagement works, step by step.
 - [Results](https://purpledrop.com/results): Documented outcomes, labeled with their basis.
