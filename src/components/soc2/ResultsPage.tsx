@@ -288,7 +288,7 @@ export function ResultsPage({ sessionId, answers, email }: ResultsPageProps) {
                     className="block w-full px-4 py-3 bg-cream text-ink rounded-lg font-medium text-center hover:bg-cream/80 transition-colors flex items-center justify-center gap-2"
                   >
                     <FileText className="w-4 h-4" />
-                    View Systems Efficiency Review
+                    Explore the consulting day
                   </Link>
                   <button
                     onClick={downloadReport}
@@ -318,7 +318,7 @@ export function ResultsPage({ sessionId, answers, email }: ResultsPageProps) {
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                      You decide if Systems Efficiency Review fits
+                      You decide if a $2,000 consulting day fits
                     </li>
                   </ul>
                 </div>
