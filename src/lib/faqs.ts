@@ -1,11 +1,11 @@
 export const homePageFaqs: { q: string; a: string }[] = [
   {
     q: 'What will I actually see?',
-    a: 'You see the first answer buyers get when they ask who to call. Not a theory. Not a slide. The real first conversation — the one happening today, before anyone visits your website. You see: What\'s clear. What\'s missing. What\'s misunderstood. Where competitors appear instead of you. If you want to see your own first answer, start with The First Conversation Review.',
+    a: 'You see the first answer buyers get when they ask who to call. Not a theory. Not a slide. The real first conversation — the one happening today, before anyone visits your website. You see: What\'s clear. What\'s missing. What\'s misunderstood. Where competitors appear instead of you. If you want to see your own first answer, start with a free 30-minute call.',
   },
   {
     q: 'How fast does this change?',
-    a: 'Faster than most companies expect. Once your company becomes easier for modern systems to understand, the first answer begins shifting within weeks — sometimes days. The deeper structural changes take longer, but the movement begins early. If you want monthly visibility, consider The Monthly Signal Watch.',
+    a: 'Faster than most companies expect. Once your company becomes easier for modern systems to understand, the first answer begins shifting within weeks — sometimes days. The deeper structural changes take longer, but the movement begins early. The consulting day is one day of work, not a promise of a specific result or timeline.',
   },
   {
     q: 'Do you guarantee a specific position?',
@@ -29,14 +29,14 @@ export const homePageFaqs: { q: string; a: string }[] = [
   },
   {
     q: 'How do we begin?',
-    a: 'With a thirty-minute call. You leave knowing where you stand — whether we work together or not. Request a free 30-minute call',
+    a: 'Start with a free 30-minute call. Then choose: audit $500; consulting day $2,000; day plus 30 days of monitoring and adjustments $3,000.',
   },
 ];
 
 export const contactFaqs: { q: string; a: string }[] = [
   {
     q: 'What happens after I submit?',
-    a: 'A senior strategist — not a bot — reads what you send and replies within one business day. We surface the first conversation buyers have about your company. You watch what it says about your company and your competitors — live, in real time — and you keep the findings either way. You decide if it makes sense to work together, approve a fixed scope and price. If not, you leave with clarity and no obligation.',
+    a: 'A senior strategist — not a bot — reads what you send and replies within one business day. We surface the first conversation buyers have about your company. You watch what it says about your company and your competitors — live, in real time — and you keep the findings either way. You decide if it makes sense to work together, agree on the focus of an optional $2,000 consulting day. If not, you leave with clarity and no obligation.',
   },
   {
     q: 'Is the call really free?',
@@ -48,6 +48,6 @@ export const contactFaqs: { q: string; a: string }[] = [
   },
   {
     q: 'Do you sign NDAs?',
-    a: 'On request, before any review. A confidential review should stay confidential. We can execute an NDA prior to The First Conversation Review.',
+    a: 'On request, before any review. A confidential review should stay confidential. We can execute an NDA before your consulting day.',
   },
 ];
