@@ -1,7 +1,7 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
-const ALLOWED_ORIGINS = ['https://purpledrop.com', 'https://www.purpledrop.com', 'http://localhost:3000', 'http://localhost:5173'];
+const ALLOWED_ORIGINS = ['https://purpledrop.com', 'https://www.purpledrop.com', 'https://purpledrop-newsite.pages.dev', 'http://localhost:3000', 'http://localhost:5173'];
 function getCorsHeaders(req: Request) {
   const origin = req.headers.get('Origin') || '';
   const allowed = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
@@ -106,33 +106,44 @@ serve(async (req) => {
       });
     }
 
-    // Mark code as used
-    await supabaseAdmin
+    // Atomically consume the code so concurrent requests cannot replay it.
+    const { data: consumed, error: consumeError } = await supabaseAdmin
       .from('verification_codes')
       .update({ used: true })
-      .eq('id', verification.id);
-
-    // Create or get user profile
-    const { data: profile, error: profileError } = await supabaseAdmin
-      .from('profiles')
-      .upsert({
-        id: verification.id, // We'll use a different approach
-        email: normalizedEmail,
-        email_verified: true,
-      }, { onConflict: 'email' })
-      .select()
+      .eq('id', verification.id)
+      .eq('used', false)
+      .select('id')
       .single();
+    if (consumeError || !consumed) {
+      return new Response(JSON.stringify({ error: 'Code already used. Please request a new code.' }), {
+        status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
 
-    // Actually, we need to create auth user or use existing
-    // For simplicity, let's create a session token they can use
-    // In production, you'd use Supabase Auth proper
+    // Issue a real Supabase Auth session after proving inbox access. No second
+    // email is sent: generateLink is for delivery via a custom provider.
+    const { data: link, error: linkError } = await supabaseAdmin.auth.admin.generateLink({
+      type: 'magiclink', email: normalizedEmail,
+    });
+    if (linkError || !link?.properties?.hashed_token || !link.user) {
+      throw new Error('Could not create auth identity');
+    }
+    const { error: profileError } = await supabaseAdmin.from('profiles').upsert({
+      id: link.user.id, email: normalizedEmail, email_verified: true,
+    }, { onConflict: 'email' });
+    if (profileError) throw new Error('Could not save verified profile');
+
+    const { data: authData, error: authError } = await supabaseAdmin.auth.verifyOtp({
+      token_hash: link.properties.hashed_token, type: 'email',
+    });
+    if (authError || !authData.session) throw new Error('Could not create auth session');
 
     return new Response(JSON.stringify({
-      success: true,
-      email: normalizedEmail,
-      verified: true,
-      // Return a token they can use for subsequent requests
-      // In production: use Supabase Auth session
+      success: true, email: normalizedEmail, verified: true,
+      session: {
+        access_token: authData.session.access_token,
+        refresh_token: authData.session.refresh_token,
+      },
     }), {
       status: 200,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
