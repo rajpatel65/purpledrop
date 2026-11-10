@@ -459,7 +459,7 @@ You get straight answers — not jargon, not theatrics.
 ### CTA band
 
 - Title: Every engagement starts the same way.
-- Body: A twenty-minute conversation. You leave knowing where you stand — whether we work together or not.
+- Body: A free 30-minute call. You leave knowing where you stand — whether we work together or not.
 - Button: **Request a free 30-minute call**
 
 ---
