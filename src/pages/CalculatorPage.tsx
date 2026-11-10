@@ -348,7 +348,7 @@ export function CalculatorPage() {
               {/* CTA */}
               <div className="mt-10 text-center">
                 <a href="/contact" className="btn-primary inline-flex">
-                  Book a 30-minute call
+                  Request a free 30-minute call
                   <ArrowRight className="h-4 w-4" />
                 </a>
                 <p className="mt-3 text-xs text-ink-faint">
@@ -501,7 +501,7 @@ export function CalculatorPage() {
       <CtaBand
         title="Numbers don't lie. But the real picture is richer."
         body="Book a free call — we'll show you exactly what AI says about your company and competitors today."
-        primaryLabel="Book a 30-minute call"
+        primaryLabel="Request a free 30-minute call"
       />
     </Layout>
   );
