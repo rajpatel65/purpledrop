@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, PhoneCall, Mail, Shield, Calculator, SearchCheck, ArrowUpRight, Smartphone } from 'lucide-react';
+import { ArrowRight, Mail, Shield, Calculator, SearchCheck, ArrowUpRight, Smartphone } from 'lucide-react';
 import { useSeo } from '../hooks/useSeo';
 import { ROUTE_SEO } from '../lib/route-seo';
 import { Layout } from '../components/Layout';
@@ -365,10 +365,6 @@ export function HomePage() {
                 </p>
               </div>
               <div className="flex flex-col gap-3 sm:flex-row">
-                <a href={`tel:${CONTACT.phone}`} className="btn-outline">
-                  <PhoneCall className="h-4 w-4" />
-                  {CONTACT.phone}
-                </a>
                 <a href={`mailto:${CONTACT.email}`} className="btn-outline">
                   <Mail className="h-4 w-4" />
                   {CONTACT.email}
