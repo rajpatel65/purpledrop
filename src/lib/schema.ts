@@ -1,3 +1,6 @@
+import { SERVICES } from './content';
+import { PRICING } from './pricing';
+
 export const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
@@ -6,7 +9,7 @@ export const organizationSchema = {
   url: 'https://purpledrop.com',
   logo: 'https://purpledrop.com/favicon.svg',
   description:
-    'purpleDrop helps established companies get recommended by AI assistants. We audit what AI says about a company, then optimize so AI describes it accurately.',
+    'purpleDrop provides AI visibility reviews and website help. We record agreed checks, explain gaps and scope the next work.',
   areaServed: ['US', 'CA', 'UK', 'AU'],
   contactPoint: {
     '@type': 'ContactPoint',
@@ -22,7 +25,7 @@ export const websiteSchema = {
   '@id': 'https://purpledrop.com/#website',
   url: 'https://purpledrop.com',
   name: 'purpleDrop',
-  description: 'We help companies get recommended by ChatGPT, Gemini, Claude, Perplexity, Copilot, and more.',
+  description: 'AI visibility reviews, planning days and follow-through for business owners.',
   publisher: { '@id': 'https://purpledrop.com/#org' },
 };
 
@@ -37,38 +40,8 @@ export function serviceSchema() {
       '@type': 'OfferCatalog',
       name: 'purpleDrop Services',
       itemListElement: [
-        {
-          '@type': 'Offer',
-          name: 'Free 30-minute call',
-          description: 'Free introductory call with no obligation.',
-          price: '0',
-          priceCurrency: 'USD',
-          url: 'https://purpledrop.com/pricing',
-        },
-        {
-          '@type': 'Offer',
-          name: 'AI-visibility audit',
-          description: 'AI-visibility audit and findings report to keep.',
-          price: '500',
-          priceCurrency: 'USD',
-          url: 'https://purpledrop.com/pricing',
-        },
-        {
-          '@type': 'Offer',
-          name: 'The consulting day',
-          description: 'Audit plus one full day fixing the top issues with you.',
-          price: '2000',
-          priceCurrency: 'USD',
-          url: 'https://purpledrop.com/pricing',
-        },
-        {
-          '@type': 'Offer',
-          name: 'The day plus follow-through',
-          description: 'Audit and consulting day plus 30 days of monitoring and adjustments.',
-          price: '3000',
-          priceCurrency: 'USD',
-          url: 'https://purpledrop.com/pricing',
-        },
+        { '@type': 'Offer', name: 'Free 30-minute call', description: 'Free introductory call. Detailed review and report are paid work.', price: '0', priceCurrency: 'USD', url: 'https://purpledrop.com/pricing' },
+        ...SERVICES.map(service => ({ '@type': 'Offer', name: service.title, description: service.outcome, price: String(PRICING[service.priceKey]), priceCurrency: 'USD', url: 'https://purpledrop.com/pricing' })),
       ],
     },
   };
@@ -103,4 +76,4 @@ export function articleSchema(essay: {
     author: { '@type': 'Organization', '@id': 'https://purpledrop.com/#org' },
     publisher: { '@id': 'https://purpledrop.com/#org' },
   };
-}
+      }
