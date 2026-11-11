@@ -5,7 +5,7 @@ import { FadeIn } from './FadeIn';
 const PERSONALITIES = [
   {
     id: 'd',
-    label: 'Show me the ROI',
+    label: 'Show me the options',
     desc: 'What does this cost and what changes?',
     target: '#services',
     icon: TrendingUp,
@@ -27,7 +27,7 @@ const PERSONALITIES = [
   {
     id: 'c',
     label: 'Show me the data',
-    desc: "What's the methodology?",
+    desc: "How do you check the answers?",
     target: '#learn',
     icon: BarChart3,
   },
@@ -51,7 +51,7 @@ export function PersonalitySelector() {
     try {
       localStorage.setItem(STORAGE_KEY, id);
     } catch {
-      /* localStorage unavailable — skip persistence */
+      /* localStorage unavailable - skip persistence */
     }
     const el = document.querySelector(target);
     if (el) {
@@ -83,7 +83,7 @@ export function PersonalitySelector() {
             What matters most to you?
           </h2>
           <p className="mt-3 text-center text-sm text-ink-soft">
-            Pick one — we&apos;ll show you the parts that answer your question.
+            Pick one - we&apos;ll show you the parts that answer your question.
           </p>
         </FadeIn>
         <FadeIn delay={0.1}>
