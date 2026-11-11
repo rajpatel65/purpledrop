@@ -27,13 +27,6 @@ type FreeTool = {
 
 const FREE_TOOLS: FreeTool[] = [
   {
-    to: '/soc2',
-    label: 'SOC2 Readiness Assessment',
-    description: '42 questions across CC1–CC9. Email-verified. Download JSON/CSV gap report. Every "No" and "Don\'t know" becomes a lead signal for us.',
-    icon: Shield,
-    highlight: 'Most comprehensive',
-  },
-  {
     to: '/scorecard',
     label: 'Security Scorecard',
     description: 'Verify your email with a code, then view six automated public checks on screen. Results last up to 10 minutes and clear when you leave or switch tabs. No report is emailed.',
@@ -235,11 +228,11 @@ export function HomePage() {
                 Start here. No call required.
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-ink-soft">
-                Three self-serve diagnostics that show you exactly where you stand — before you spend a dollar.
-                Each tool explains its limits. The scorecard shows temporary on-screen results; the SOC2 self-assessment offers a downloadable gap report.
+                Two self-serve diagnostics that show you exactly where you stand — before you spend a dollar.
+                Each tool explains its limits. The scorecard shows temporary on-screen results; the calculator shows its assumptions before you get a number.
               </p>
             </div>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-6 sm:grid-cols-2 max-w-4xl mx-auto">
               {FREE_TOOLS.map((tool) => (
                 <FreeToolCard key={tool.to} tool={tool} />
               ))}
@@ -279,9 +272,6 @@ export function HomePage() {
               </Link>
               <Link to="/about" className="btn border border-white/40 text-white hover:bg-white/10">
                 Who&apos;s behind this
-              </Link>
-              <Link to="/soc2" className="btn border border-white/40 text-white hover:bg-white/10">
-                SOC2 Readiness Assessment
               </Link>
             </div>
             <p className="mt-8 text-sm leading-relaxed text-violet-200/80">
