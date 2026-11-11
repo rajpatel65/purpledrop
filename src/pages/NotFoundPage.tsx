@@ -14,11 +14,11 @@ export function NotFoundPage() {
           <FadeIn>
             <p className="font-serif text-8xl font-medium text-violet">404</p>
             <h1 className="mt-6 font-serif text-4xl font-medium tracking-tight text-ink">
-              This page walked out of the meeting.
+              We could not find that page.
             </h1>
             <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-ink-soft">
-              The page you're after doesn't exist — or moved. Here's where you were probably
-              headed.
+              The link may be old or the address may be wrong. Go home or see the services
+              to choose your next step.
             </p>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
               <Link to="/" className="btn-primary">

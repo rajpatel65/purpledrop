@@ -1,53 +1,53 @@
 export const homePageFaqs: { q: string; a: string }[] = [
   {
-    q: 'What will I actually see?',
-    a: 'You see the first answer buyers get when they ask who to call. Not a theory. Not a slide. The real first conversation — the one happening today, before anyone visits your website. You see: What\'s clear. What\'s missing. What\'s misunderstood. Where competitors appear instead of you. If you want to see your own first answer, start with a free 30-minute call.',
+    "q": "What do you mean by AI visibility?",
+    "a": "Whether your business appears when someone asks an AI assistant about services like yours, and whether the answer describes you correctly. A review checks a sample of agreed questions. It cannot tell us what every buyer sees."
   },
   {
-    q: 'How fast does this change?',
-    a: 'Faster than most companies expect. Once your company becomes easier for modern systems to understand, the first answer begins shifting within weeks — sometimes days. The deeper structural changes take longer, but the movement begins early. The consulting day is one day of work, not a promise of a specific result or timeline.',
+    "q": "What happens during the Planning Day?",
+    "a": "We spend a day with you reviewing the findings, choosing priorities and agreeing the next steps. It is a meeting day, not a deadline for finishing every fix. The written scope states which changes are included, who will do them and when."
   },
   {
-    q: 'Do you guarantee a specific position?',
-    a: 'No — and nobody honest will. Modern systems don\'t work like rankings. They describe the company they can understand most easily. We make your company easier to understand — clearly, consistently, and confirmably. That\'s what moves the answer. If someone guarantees a position, they\'re guessing with your money.',
+    "q": "Do you guarantee more leads or a place in AI answers?",
+    "a": "No. We can improve the information you publish and track the answers we test. AI tools and search engines decide what to show. We do not guarantee a listing, recommendation, ranking, timeline or number of leads."
   },
   {
-    q: 'Do you work with small companies?',
-    a: 'We work with companies that need to be chosen. Size isn\'t the deciding factor. Clarity is. If your buyers ask an AI assistant who to call — and you need to be in that answer — we can help. If you\'re unsure, ask for a 30-minute call.',
+    "q": "What could doing nothing cost?",
+    "a": "If a buyer does not find your business, they may contact someone else. We cannot know how often that happens from a website check alone. Use the lead value calculator with your own numbers to explore what a few extra enquiries could be worth, not to measure lost sales."
   },
   {
-    q: 'Do you work internationally?',
-    a: 'Yes. Most of our work happens remotely, in the open, on your tools. We work across all US and UK time zones and meet in person when we\'re nearby.',
+    "q": "Do you work with small businesses?",
+    "a": "Yes. Start with your services, location and the customers you want to reach. The free call helps us decide whether a review is useful for your business."
   },
   {
-    q: 'What do you need from us?',
-    a: 'A single point of contact and plain English. We don\'t need a committee. We don\'t need a deck. We don\'t need a discovery marathon. One senior contact is enough. We handle the rest.',
+    "q": "Will you change our website?",
+    "a": "Only within the scope you approve. Small fixes, website redesigns and a security configuration review need clear written scope. Redesigns are quoted separately. A public website check cannot reveal every plugin, internal setting or security problem."
   },
   {
-    q: 'Will this affect our website?',
-    a: 'Only if clarity demands it — and only after you approve it. If clarity requires small adjustments, we tell you plainly and explain why. If your site itself is dated, a redesign is a separate, quoted project — and we never change anything without your approval.',
+    "q": "What does 30-Day Support include?",
+    "a": "The review and Planning Day, followed by 30 days of monitoring and agreed adjustments. Before work starts, we write down the checks, updates and adjustments included. It is not unlimited development or an ongoing retainer."
   },
   {
-    q: 'How do we begin?',
-    a: 'Start with a free 30-minute call. Then choose the level of support that fits: an AI-visibility audit, a consulting day, or the day plus 30 days of follow-through. Current prices are on the pricing page.',
-  },
+    "q": "How do we begin?",
+    "a": "Request a free 30-minute call. Then choose an AI Visibility Review, Review + Planning Day, or Planning Day + 30-Day Support. See the pricing page for current options. Scope and price are agreed in writing before work starts."
+  }
 ];
 
 export const contactFaqs: { q: string; a: string }[] = [
   {
-    q: 'What happens after I submit?',
-    a: 'A senior strategist — not a bot — reads what you send and replies within one business day. We surface the first conversation buyers have about your company. You watch what it says about your company and your competitors — live, in real time — and you keep the findings either way. You decide if it makes sense to work together, agree on the focus of an optional $2,500 consulting day. If not, you leave with clarity and no obligation.',
+    "q": "What happens after I submit?",
+    "a": "We read your request and reply within one business day to arrange a free 30-minute call. Submitting the form does not book a time. On the call, we discuss your business and explain the review. You decide whether to continue."
   },
   {
-    q: 'Is the call really free?',
-    a: 'Yes. Thirty minutes. No deck. No pressure. You leave with a straight answer about where you stand — whether we ever work together or not.',
+    "q": "Is the call really free?",
+    "a": "Yes. The call is free and there is no obligation to buy. The detailed review and report are paid work."
   },
   {
-    q: 'Where are you based?',
-    a: 'We work with companies across the United States. Most of our work happens remotely, in the open, on your tools. We work across all US time zones — and meet face-to-face when we\'re nearby.',
+    "q": "Where do we meet?",
+    "a": "Most work is remote. Tell us your location and preferred time when you contact us. We will agree the meeting details with you."
   },
   {
-    q: 'Do you sign NDAs?',
-    a: 'On request, before any review. A confidential review should stay confidential. We can execute an NDA before your consulting day.',
-  },
+    "q": "Can we sign an NDA?",
+    "a": "Yes, on request before you share confidential information. Do not send passwords or sensitive customer data through the contact form."
+  }
 ];

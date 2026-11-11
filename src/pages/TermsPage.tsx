@@ -14,7 +14,7 @@ const SECTIONS = [
   },
   {
     title: 'Engagements',
-    body: 'Every engagement is governed by a written statement of work agreed in advance, with a fixed price. The price on the agreement is the price you pay.',
+    body: 'Every engagement has a written scope and fixed price agreed before work starts. The Planning Day is a day meeting with you, not a promise that all fixes finish that day. The agreement states the included work, completion dates and any 30-day support. Additional work needs a separate quote and approval.',
   },
   {
     title: 'Intellectual property',

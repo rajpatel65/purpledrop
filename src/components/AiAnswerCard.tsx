@@ -24,7 +24,7 @@ export function AiAnswerCard() {
           <span className="h-3 w-3 rounded-full bg-amber-300" />
           <span className="h-3 w-3 rounded-full bg-emerald-300" />
           <p className="ml-3 font-mono text-xs uppercase tracking-[0.18em] text-ink-faint">
-            Your buyer&apos;s AI assistant
+            Illustration only - not a real AI answer
           </p>
         </div>
 
@@ -56,11 +56,11 @@ export function AiAnswerCard() {
 
           <div className="rounded-xl border border-dashed border-violet bg-violet-tint/30 px-5 py-4">
             <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-violet-deep">
-              Your company isn&apos;t in the answer
+              What if your company is missing?
             </p>
             <p className="mt-1 text-sm leading-relaxed text-ink-soft">
-              And you never knew the question was asked. That&apos;s the quiet cost of the AI
-              shortlist.
+              A buyer may contact someone else before you get a chance. The firms and answer
+              above are fictional, not evidence of actual recommendations or lost leads.
             </p>
           </div>
         </div>

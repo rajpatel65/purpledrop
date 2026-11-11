@@ -12,8 +12,8 @@ import { homePageFaqs } from '../lib/faqs';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 
 const NOT_INCLUDED = [
-  { title: 'Design-only refreshes', body: 'We take on full website redesigns when AI visibility is the goal, quoted separately from $5,000. If you only want a visual refresh, we\'ll say so and point you to someone who does that well.' },
-  { title: 'Advertising or paid media', body: 'We improve what AI and search say about you organically. We don\'t buy visibility.' },
+  { title: 'Design-only refreshes', body: 'Website redesigns are quoted separately, from $5,000. The quote depends on page count, content and features such as e-commerce. A security configuration review is also separately scoped and priced.' },
+  { title: 'Advertising or paid media', body: 'These options do not include paid advertising or ad spend. We review and improve the information buyers and search tools can find about your business.' },
   { title: 'Guaranteed rankings', body: 'Nobody can guarantee a specific position in an AI answer. If someone does, they\'re guessing with your money.' },
 ];
 
@@ -34,8 +34,9 @@ export function PricingPage() {
               Start free. Choose the support you need.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              Start with a free 30-minute call. Then choose an audit for $1,200, a consulting day
-              for $2,500, or the day plus 30 days of monitoring and adjustments for $4,500.
+              Choose how much help you want: a review report, a day together to plan the work,
+              or the review and day with 30 days of support. The meeting takes a day.
+              Fixes may take longer; we agree what is included and when it will be done in writing.
             </p>
           </FadeIn>
         </div>
@@ -91,10 +92,10 @@ export function PricingPage() {
       </section>
 
       <CtaBand
-        title="Every engagement starts the same way."
-        body="Thirty minutes. You leave knowing where you stand — whether we work together or not."
+        title="Know what you are buying before work starts."
+        body="The free call helps you choose. Your written scope confirms the work, price and completion dates. No guaranteed rankings or lead numbers."
         primaryLabel="Request a free 30-minute call"
       />
     </Layout>
   );
-}
+                }

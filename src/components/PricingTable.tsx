@@ -10,14 +10,14 @@ export function PricingTable() {
   return (
     <div className="overflow-hidden rounded-2xl border border-line bg-paper shadow-soft">
       <table className="w-full border-collapse text-left">
-        <caption className="sr-only">Free call followed by an optional consulting day</caption>
+        <caption className="sr-only">Three review and support options after a free call</caption>
         <thead>
           <tr className="border-b border-line bg-cream/60">
             <th scope="col" className="px-6 py-4 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-soft">
               Service
             </th>
             <th scope="col" className="hidden px-6 py-4 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-soft sm:table-cell">
-              Timeline
+              What is included
             </th>
             <th scope="col" className="px-6 py-4 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-soft">
               Price
@@ -32,7 +32,7 @@ export function PricingTable() {
                   <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-violet" />
                   <div>
                     <p className="font-semibold text-ink">{service.title}</p>
-                    <p className="mt-1 text-sm leading-relaxed text-ink-soft">{service.tagline}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-ink-soft">{service.tagline}<span className="mt-2 block text-xs">{service.guarantee}</span></p>
                   </div>
                 </div>
               </td>
@@ -51,7 +51,7 @@ export function PricingTable() {
         <p className="flex items-start gap-3 text-sm text-ink">
           <ShieldCheck className="mt-0.5 h-5 w-5 flex-shrink-0 text-violet" />
           <span>
-            Start with a free 30-minute call. Then choose: audit $1,200; consulting day $2,500; day plus 30 days of monitoring and adjustments $4,500.
+            Start with a free 30-minute call. Then choose: AI Visibility Review $1,200; Review + Planning Day $2,500; Planning Day + 30-Day Support $4,500.
           </span>
         </p>
       </div>

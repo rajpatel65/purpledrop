@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Mail, Shield, Calculator, SearchCheck, ArrowUpRight, Smartphone } from 'lucide-react';
 import { useSeo } from '../hooks/useSeo';
@@ -107,7 +107,7 @@ function Chapter({ index }: { index: number }) {
                 </Link>
                 {!last && (
                   <span className="font-mono text-xs uppercase tracking-[0.18em] text-ink-faint">
-                    Next — {CHAPTERS[index + 1].label}
+                    Next - {CHAPTERS[index + 1].label}
                   </span>
                 )}
               </div>
@@ -120,6 +120,8 @@ function Chapter({ index }: { index: number }) {
 }
 
 export function HomePage() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   useSeo(ROUTE_SEO['/']);
 
   return (
@@ -140,45 +142,45 @@ export function HomePage() {
               </FadeIn>
               <FadeIn delay={0.16}>
                 <p className="mt-8 max-w-2xl text-lg leading-relaxed text-ink-soft sm:text-xl">
-                  Every month, buyers get one answer and a shortlist. If your business isn&rsquo;t clear
-                  to the systems answering, someone else gets the call - and you never see it happen.
-                  Check where you stand in three plain-English ways. Free to look, yours to keep.
+                  If a buyer asks AI who to hire and your business is missing, they may call someone else.
+                  We review your website and public listings, show you the gaps and help you decide
+                  what to fix. Start with a free call; the detailed review is paid.
                 </p>
               </FadeIn>
               <FadeIn delay={0.24}>
                 <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-                  <Link to="/scorecard" className="btn-primary">
-                    See where you stand - free
+                  <Link to="/contact" className="btn-primary">
+                    Find out where to start
                     <ArrowRight className="h-4 w-4" />
                   </Link>
-                  <Link to="/contact" className="btn-outline">
-                    Request a free 30-minute call
+                  <Link to="/services" className="btn-outline">
+                    See what we do
                   </Link>
                 </div>
                 <p className="mt-6 flex items-center gap-2 text-sm text-ink-soft">
                   <Calculator className="h-4 w-4 text-violet" />
-                  What are a few lost jobs a month worth?{' '}
+                  What could a few more enquiries be worth?{' '}
                   <Link to="/calculator" className="font-medium text-violet underline decoration-violet/30 underline-offset-4 hover:decoration-violet">
                     Put your own numbers in the calculator.
                   </Link>
                 </p>
                 <div className="mt-8 grid gap-3 sm:grid-cols-3">
-                  <Link to="/scorecard" className="group rounded-xl border border-line bg-cream/40 p-4 transition-colors hover:border-violet/30 hover:bg-cream/70">
+                  <Link to="/contact" className="group rounded-xl border border-line bg-cream/40 p-4 transition-colors hover:border-violet/30 hover:bg-cream/70">
                     <div className="flex items-center gap-2 font-semibold text-ink">
                       <SearchCheck className="h-4 w-4 text-violet" />
                       Can AI find me?
                     </div>
                     <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-                      Free check. See what the first answer can and can&rsquo;t say about you.
+                      Check whether AI mentions your business and gets the details right. Ask about the review.
                     </p>
                   </Link>
-                  <Link to="/scorecard" className="group rounded-xl border border-line bg-cream/40 p-4 transition-colors hover:border-violet/30 hover:bg-cream/70">
+                  <Link to="/contact" className="group rounded-xl border border-line bg-cream/40 p-4 transition-colors hover:border-violet/30 hover:bg-cream/70">
                     <div className="flex items-center gap-2 font-semibold text-ink">
                       <Smartphone className="h-4 w-4 text-violet" />
                       Is my site dated?
                     </div>
                     <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-                      Free check. Your site on a phone, and what it&rsquo;s really built on.
+                      Review how your site looks and works on a phone. Ask about a separately quoted redesign.
                     </p>
                   </Link>
                   <Link to="/services" className="group rounded-xl border border-line bg-cream/40 p-4 transition-colors hover:border-violet/30 hover:bg-cream/70">
@@ -187,14 +189,14 @@ export function HomePage() {
                       Is my site safe?
                     </div>
                     <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-                      Free basics now, full security review with a fix plan when you&rsquo;re ready.
+                      A paid security configuration review. We agree the scope and price before we start.
                     </p>
                   </Link>
                 </div>
               </FadeIn>
               <FadeIn delay={0.32}>
                 <p className="mt-10 font-mono text-xs uppercase tracking-[0.18em] text-ink-faint">
-                  100% senior-led · Fixed published prices · You keep the audit report
+                  Work with the person you meet · Written scope and price · Keep your review report
                 </p>
               </FadeIn>
             </div>
@@ -206,19 +208,19 @@ export function HomePage() {
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_28%_12%,rgba(212,168,67,0.12),transparent_70%)]" />
               <div className="absolute inset-0 opacity-30 [background-image:radial-gradient(rgba(109,40,217,0.14)_1px,transparent_1px)] [background-size:24px_24px]" />
               <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-paper to-transparent lg:w-28" />
-              <Suspense
+              {mounted && <Suspense
                 fallback={
                   <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(109,40,217,0.12),transparent_62%)]" />
                 }
               >
                 <HeroScene />
-              </Suspense>
+              </Suspense>}
             </div>
           </div>
         </div>
       </section>
 
-      {/* FREE TOOLS — Prominent placement right after hero */}
+      {/* FREE TOOLS - Prominent placement right after hero */}
       <section id="tools" className="border-t border-line bg-cream/30 py-20">
         <div className="container-page">
           <FadeIn>
@@ -228,8 +230,8 @@ export function HomePage() {
                 Start here. No call required.
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-ink-soft">
-                Two self-serve diagnostics that show you exactly where you stand — before you spend a dollar.
-                Each tool explains its limits. The scorecard shows temporary on-screen results; the calculator shows its assumptions before you get a number.
+                Try a public-basics security check or estimate lead value using your own numbers.
+                These tools do not run the paid AI Visibility Review or prove your site is secure.
               </p>
             </div>
             <div className="grid gap-6 sm:grid-cols-2 max-w-4xl mx-auto">
@@ -244,12 +246,12 @@ export function HomePage() {
       {/* PERSONALITY SELECTOR */}
       <PersonalitySelector />
 
-      {/* STORYLINE — 4 chapters */}
+      {/* STORYLINE - 4 chapters */}
       {CHAPTERS.map((_, i) => (
         <Chapter key={i} index={i} />
       ))}
 
-      {/* TIER-2 EDUCATION — what buyers actually see */}
+      {/* TIER-2 EDUCATION - what buyers actually see */}
       <section id="learn" className="border-t border-line bg-violet-deep py-24 text-white">
         <div className="container-page grid items-center gap-14 lg:grid-cols-[1fr_0.85fr]">
           <FadeIn>
@@ -257,13 +259,12 @@ export function HomePage() {
               If this is the first you&apos;re hearing of it
             </p>
             <h2 className="mt-5 max-w-2xl font-serif text-4xl font-medium leading-tight tracking-tight text-white sm:text-5xl">
-              Your buyers ask an AI assistant before they call anyone.
+              What if a buyer asks AI who to call?
             </h2>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-violet-100/90">
-              No matter what your IT team, your consultants, or your web agency tell you, this is
-              happening this week. Someone types a question like the one on the right, gets a short,
-              confident list, and books two or three calls from it. Your company is either in that
-              answer or it isn&apos;t — and nobody is telling you which.
+              They may see a list of businesses before visiting a website. If yours is missing,
+              you may not get a chance to explain why you are the right choice. The example
+              shows that risk; it is not a real buyer conversation or evidence of lost leads.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-6">
               <Link to="/contact" className="btn bg-white text-violet-deep hover:bg-violet-tint">
@@ -276,14 +277,14 @@ export function HomePage() {
             </div>
             <p className="mt-8 text-sm leading-relaxed text-violet-200/80">
               Try it yourself right now: open ChatGPT, Claude, or Perplexity and ask
-              &ldquo;Who should I hire for [your service]?&rdquo; — then see who appears.
+              &ldquo;Who should I hire for [your service]?&rdquo; - then see who appears.
             </p>
           </FadeIn>
           <AiAnswerCard />
         </div>
       </section>
 
-      {/* CALCULATOR — Challenger moment */}
+      {/* CALCULATOR - Challenger moment */}
       <HomeCalculator />
 
       {/* SERVICES */}
@@ -316,7 +317,7 @@ export function HomePage() {
           <FadeIn>
             <p className="eyebrow">How we work</p>
             <h2 className="mt-4 max-w-2xl font-serif text-4xl font-medium tracking-tight text-ink sm:text-5xl">
-              A story in four acts. You stay in the loop for every one.
+              A clear next step, from the first call to follow-through.
             </h2>
           </FadeIn>
           <div className="mt-14">
@@ -350,8 +351,8 @@ export function HomePage() {
                   Or just talk to a person.
                 </h2>
                 <p className="mt-2 max-w-md text-sm leading-relaxed text-ink-soft">
-                  A senior strategist answers — not a bot, not a sales sequence. Thirty minutes,
-                  and you&apos;ll know where you stand.
+                  Talk to the person who will do the work. Use the free call to discuss your business
+                  and decide whether a paid review makes sense.
                 </p>
               </div>
               <div className="flex flex-col gap-3 sm:flex-row">
@@ -367,7 +368,7 @@ export function HomePage() {
 
       <CtaBand
         title="Find out what the answer says about your company."
-        body="Thirty minutes. We show you what AI says about you today — and what it's missing. You keep the findings either way."
+        body="Tell us about your business. We will explain what the review covers and help you choose a next step, with no obligation to buy."
         primaryLabel="Request a free 30-minute call"
       />
     </Layout>

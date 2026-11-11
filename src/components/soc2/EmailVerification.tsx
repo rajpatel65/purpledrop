@@ -100,7 +100,7 @@ export function EmailVerification({ onVerified, sendCode, verifyCode, error, sta
               <Lock className="w-8 h-8" />
             </div>
             <h1 className="text-2xl font-semibold text-ink">SOC2 Security Readiness Assessment</h1>
-            <p className="text-ink-soft mt-2">Verify your email to begin. Your progress is saved automatically.</p>
+            <p className="text-ink-soft mt-2">Legacy self-assessment. Not an audit, attestation or certification. Verify your email to begin; progress is saved automatically. This is not part of the AI visibility offers.</p>
           </div>
 
           {error && (

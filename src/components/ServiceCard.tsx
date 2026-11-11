@@ -104,7 +104,7 @@ export function ServiceCard({
         </ul>
 
         <p className="mb-6 flex items-start gap-2 text-sm text-ink">
-          <span className="font-semibold text-ink-soft">Guarantee:</span>
+          <span className="font-semibold text-ink-soft">Scope:</span>
           <span className="text-ink-soft">{guarantee}</span>
         </p>
 
