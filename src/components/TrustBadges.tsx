@@ -11,8 +11,8 @@ export interface TrustBadgeProps {
 const BADGES = [
   {
     icon: Shield,
-    title: 'SOC2-Ready Security',
-    description: 'Governance checklists built into every engagement',
+    title: 'Confidential by Default',
+    description: 'NDAs on request; every engagement stays between us',
   },
   {
     icon: BadgeCheck,
