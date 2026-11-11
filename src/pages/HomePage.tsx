@@ -140,7 +140,7 @@ export function HomePage() {
                 <p className="eyebrow">AI & search visibility experts</p>
               </FadeIn>
               <FadeIn delay={0.08}>
-                <h1 className="mt-6 max-w-3xl font-serif text-5xl font-medium leading-[1.05] tracking-tight text-ink sm:text-6xl lg:text-[4.4rem]">
+                <h1 className="mt-6 max-w-3xl font-serif text-5xl font-medium leading-[1.05] tracking-tight text-ink [text-wrap:balance] sm:text-6xl lg:text-[4.4rem]">
                   Doing nothing is a decision.{' '}
                   <span className="italic text-violet">Your competitors&rsquo; websites thank you for it.</span>
                 </h1>
@@ -209,7 +209,9 @@ export function HomePage() {
             {/* Shaded 3D panel */}
             <div className="relative h-[340px] sm:h-[440px] lg:h-auto lg:min-h-[640px]">
               <div className="absolute inset-0 bg-gradient-to-br from-cream/60 via-cream to-violet-tint" />
-              <div className="absolute inset-0 opacity-50 [background-image:radial-gradient(rgba(109,40,217,0.16)_1px,transparent_1px)] [background-size:22px_22px]" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_55%_at_68%_78%,rgba(124,58,237,0.20),transparent_70%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_28%_12%,rgba(212,168,67,0.12),transparent_70%)]" />
+              <div className="absolute inset-0 opacity-30 [background-image:radial-gradient(rgba(109,40,217,0.14)_1px,transparent_1px)] [background-size:24px_24px]" />
               <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-paper to-transparent lg:w-28" />
               <Suspense
                 fallback={
