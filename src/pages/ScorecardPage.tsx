@@ -186,7 +186,8 @@ export function ScorecardPage() {
                     </label>
                     <input
                       id="domain"
-                      type="url"
+                      type="text"
+                      inputMode="url"
                       required
                       placeholder="yourdomain.com"
                       value={domain}
