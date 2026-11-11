@@ -59,7 +59,7 @@ export function CtaBand({
             )}
           </div>
           <p className="mt-8 text-xs font-mono uppercase tracking-[0.18em] text-violet-200/80">
-            Fixed published prices · You keep the audit report · No jargon, ever
+            Written scope and price · Keep your review report · Plain-English findings
           </p>
         </FadeIn>
       </div>
