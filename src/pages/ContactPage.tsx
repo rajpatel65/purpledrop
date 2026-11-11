@@ -125,7 +125,7 @@ export function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-ink">You decide</h3>
                     <p className="mt-1 text-sm leading-relaxed text-ink-soft">
-                      After the free call, choose an audit ($500), the consulting day ($2,000), or the day plus 30 days of follow-through ($3,000).
+                      After the free call, choose an audit ($1,200), the consulting day ($2,500), or the day plus 30 days of follow-through ($4,500).
                       We agree on the focus first. There is no obligation to continue.
                     </p>
                   </div>
@@ -197,9 +197,9 @@ export function ContactPage() {
                     </label>
                     <select id="interest" name="interest" value={form.interest} onChange={handleChange} className={inputClass}>
                       <option value="">Select...</option>
-                      <option value="audit">AI-visibility audit - $500</option>
-                      <option value="consultingDay">Consulting day - $2,000</option>
-                      <option value="consultingPlus">Day plus 30 days of follow-through - $3,000</option>
+                      <option value="audit">AI-visibility audit - $1,200</option>
+                      <option value="consultingDay">Consulting day - $2,500</option>
+                      <option value="consultingPlus">Day plus 30 days of follow-through - $4,500</option>
                       <option value="unsure">Not sure yet — tell me where we stand</option>
                     </select>
                   </div>
@@ -262,4 +262,4 @@ export function ContactPage() {
       </section>
     </Layout>
   );
-                      }
+}

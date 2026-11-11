@@ -25,18 +25,18 @@ export const homePageFaqs: { q: string; a: string }[] = [
   },
   {
     q: 'Will this affect our website?',
-    a: 'Only if clarity demands it — and only after you approve it. We don\'t redesign websites. We don\'t touch your CMS. We don\'t change anything without your approval. If clarity requires adjustments, we tell you plainly and explain why.',
+    a: 'Only if clarity demands it — and only after you approve it. If clarity requires small adjustments, we tell you plainly and explain why. If your site itself is dated, a redesign is a separate, quoted project — and we never change anything without your approval.',
   },
   {
     q: 'How do we begin?',
-    a: 'Start with a free 30-minute call. Then choose: audit $500; consulting day $2,000; day plus 30 days of monitoring and adjustments $3,000.',
+    a: 'Start with a free 30-minute call. Then choose the level of support that fits: an AI-visibility audit, a consulting day, or the day plus 30 days of follow-through. Current prices are on the pricing page.',
   },
 ];
 
 export const contactFaqs: { q: string; a: string }[] = [
   {
     q: 'What happens after I submit?',
-    a: 'A senior strategist — not a bot — reads what you send and replies within one business day. We surface the first conversation buyers have about your company. You watch what it says about your company and your competitors — live, in real time — and you keep the findings either way. You decide if it makes sense to work together, agree on the focus of an optional $2,000 consulting day. If not, you leave with clarity and no obligation.',
+    a: 'A senior strategist — not a bot — reads what you send and replies within one business day. We surface the first conversation buyers have about your company. You watch what it says about your company and your competitors — live, in real time — and you keep the findings either way. You decide if it makes sense to work together, agree on the focus of an optional $2,500 consulting day. If not, you leave with clarity and no obligation.',
   },
   {
     q: 'Is the call really free?',

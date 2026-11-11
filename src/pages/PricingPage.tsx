@@ -12,7 +12,7 @@ import { homePageFaqs } from '../lib/faqs';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 
 const NOT_INCLUDED = [
-  { title: 'Design services', body: 'We are not a design agency. If your website needs to look better, we\'ll say so and point you to someone who does that well.' },
+  { title: 'Design-only refreshes', body: 'We take on full website redesigns when AI visibility is the goal, quoted separately from $5,000. If you only want a visual refresh, we\'ll say so and point you to someone who does that well.' },
   { title: 'Advertising or paid media', body: 'We improve what AI and search say about you organically. We don\'t buy visibility.' },
   { title: 'Guaranteed rankings', body: 'Nobody can guarantee a specific position in an AI answer. If someone does, they\'re guessing with your money.' },
 ];
@@ -34,8 +34,8 @@ export function PricingPage() {
               Start free. Choose the support you need.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              Start with a free 30-minute call. Then choose an audit for $500, a consulting day
-              for $2,000, or the day plus 30 days of monitoring and adjustments for $3,000.
+              Start with a free 30-minute call. Then choose an audit for $1,200, a consulting day
+              for $2,500, or the day plus 30 days of monitoring and adjustments for $4,500.
             </p>
           </FadeIn>
         </div>

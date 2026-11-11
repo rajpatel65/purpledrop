@@ -14,6 +14,7 @@ export interface RouteSeo {
   description: string;
   path: string;
   type?: 'website' | 'article';
+  noindex?: boolean;
 }
 
 export const ROUTE_SEO: Record<string, RouteSeo> = {
@@ -26,7 +27,7 @@ export const ROUTE_SEO: Record<string, RouteSeo> = {
   '/services': {
     title: 'Services — purpleDrop AI Visibility',
     description:
-      'Start with a free 30-minute call. If you continue, one day of consulting costs $2,000.',
+      'Start with a free 30-minute call. If you continue, one day of consulting costs $2,500.',
     path: '/services',
   },
   '/process': {
@@ -44,7 +45,7 @@ export const ROUTE_SEO: Record<string, RouteSeo> = {
   '/pricing': {
     title: 'Pricing — purpleDrop',
     description:
-      'Free 30-minute call, then three options: audit $500, consulting day $2,000, day plus 30 days monitoring $3,000.',
+      'Free 30-minute call, then three options: audit $1,200, consulting day $2,500, day plus 30 days monitoring $4,500.',
     path: '/pricing',
   },
   '/about': {
@@ -94,6 +95,7 @@ export const ROUTE_SEO: Record<string, RouteSeo> = {
     description:
       'A 42-question self-reported readiness assessment across nine sections. Email verification protects access, not the accuracy of answers. Not an audit or attestation.',
     path: '/soc2',
+    noindex: true,
   },
   '/not-found': {
     title: 'Page not found — purpleDrop',
@@ -111,4 +113,4 @@ export function essaySeo(slug: string): RouteSeo | null {
     path: `/resources/${essay.slug}`,
     type: 'article',
   };
-}
+    }

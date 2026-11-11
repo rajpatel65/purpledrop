@@ -5,6 +5,7 @@ export interface SeoProps {
   description: string;
   path?: string;
   type?: 'website' | 'article';
+  noindex?: boolean;
 }
 
 const BASE_URL = 'https://purpledrop.com';
@@ -19,9 +20,14 @@ function upsertMeta(attr: 'name' | 'property', key: string, content: string) {
   el.setAttribute('content', content);
 }
 
-export function useSeo({ title, description, path = '/', type = 'website' }: SeoProps) {
+export function useSeo({ title, description, path = '/', type = 'website', noindex = false }: SeoProps) {
   useEffect(() => {
     document.title = title;
+    if (noindex) {
+      upsertMeta('name', 'robots', 'noindex, nofollow');
+    } else {
+      document.head.querySelector('meta[name="robots"]')?.remove();
+    }
     upsertMeta('name', 'description', description);
     upsertMeta('property', 'og:title', title);
     upsertMeta('property', 'og:description', description);
@@ -41,5 +47,5 @@ export function useSeo({ title, description, path = '/', type = 'website' }: Seo
       document.head.appendChild(canonical);
     }
     canonical.href = BASE_URL + path;
-  }, [title, description, path, type]);
+  }, [title, description, path, type, noindex]);
 }

@@ -51,7 +51,7 @@ export function PricingTable() {
         <p className="flex items-start gap-3 text-sm text-ink">
           <ShieldCheck className="mt-0.5 h-5 w-5 flex-shrink-0 text-violet" />
           <span>
-            Start with a free 30-minute call. Then choose: audit $500; consulting day $2,000; day plus 30 days of monitoring and adjustments $3,000.
+            Start with a free 30-minute call. Then choose: audit $1,200; consulting day $2,500; day plus 30 days of monitoring and adjustments $4,500.
           </span>
         </p>
       </div>

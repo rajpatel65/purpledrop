@@ -1,6 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
-import { Menu, X, ArrowRight, ChevronDown, Shield, Calculator, SearchCheck } from 'lucide-react';
+import { Menu, X, ArrowRight, ChevronDown, Calculator, SearchCheck } from 'lucide-react';
 import { Logo } from './Logo';
 
 const NAV_LINKS = [
@@ -13,7 +13,6 @@ const NAV_LINKS = [
 ];
 
 const FREE_TOOLS = [
-  { to: '/soc2', label: 'SOC2 Readiness Assessment', description: '42-question self-assessment across nine sections. Not an audit.', icon: Shield },
   { to: '/scorecard', label: 'Security Scorecard', description: 'Six public checks after email verification. On-screen results.', icon: SearchCheck },
   { to: '/calculator', label: 'Lead Value Calculator', description: 'Your leads, close rate and job value. A monthly what-if estimate.', icon: Calculator },
 ];
@@ -155,4 +154,4 @@ export function Navbar() {
       )}
     </header>
   );
-                              }
+                }
