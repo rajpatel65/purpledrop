@@ -1,1 +1,1 @@
-export const PRICING = { audit: 500, consultingDay: 2000, consultingPlus: 3000 } as const;
+export const PRICING = { audit: 1200, consultingDay: 2500, consultingPlus: 4500 } as const;
