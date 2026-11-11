@@ -13,7 +13,7 @@ interface QuestionCardProps {
 }
 
 const OPTIONS = [
-  { value: 'yes' as const, label: 'Yes', icon: Shield, color: 'bg-green-50 text-green-700 border-green-300 hover:bg-green-100', description: 'Fully implemented and documented' },
+  { value: 'yes' as const, label: 'Yes', icon: Shield, color: 'bg-violet-tint text-violet-deep border-violet/30 hover:bg-violet/10', description: 'I report this is implemented; evidence not reviewed' },
   { value: 'no' as const, label: 'No', icon: AlertTriangle, color: 'bg-red-50 text-red-700 border-red-300 hover:bg-red-100', description: 'Not implemented or not documented' },
   { value: 'dont_know' as const, label: 'Don\'t Know', icon: Info, color: 'bg-yellow-50 text-yellow-700 border-yellow-300 hover:bg-yellow-100', description: 'Unsure or partially implemented' },
 ];
@@ -32,7 +32,7 @@ export function QuestionCard({ question, answer, onAnswer, index, showHelp, onTo
   };
 
   return (
-    <FadeIn delay={index * 50} className="relative">
+    <FadeIn delay={Math.min(index * 0.05, 0.2)} className="relative">
       <div
         ref={cardRef}
         className={`bg-paper rounded-xl border-2 transition-all duration-300 ${
@@ -114,12 +114,12 @@ export function QuestionCard({ question, answer, onAnswer, index, showHelp, onTo
               <Shield className="w-5 h-5 text-violet" />
               <div className="text-sm text-violet-deep">
                 <span className="font-medium">
-                  {answer === 'yes' ? 'Compliant' : answer === 'no' ? 'Gap identified' : 'Uncertain'}
+                  {answer === 'yes' ? 'Reported Yes' : answer === 'no' ? 'Gap identified' : 'Uncertain'}
                 </span>
                 {' — '}
                 {answer === 'no' && 'This will appear in your gap report as a lead item.'}
                 {answer === 'dont_know' && 'We\'ll help you investigate this during a follow-up.'}
-                {answer === 'yes' && 'Good. Keep evidence accessible for auditors.'}
+                {answer === 'yes' && 'Self-reported only. Keep evidence for an independent review.'}
               </div>
             </div>
           )}
