@@ -95,6 +95,8 @@ serve(async (req) => {
       });
     }
 
+    if (form === 'scorecard') return new Response(JSON.stringify({ error: 'Email verification is required. Please use the scorecard page.' }), { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+
     const email = clean(body.email, 254).toLowerCase();
     if (!EMAIL_RE.test(email)) {
       return new Response(JSON.stringify({ error: 'Valid email required' }), {

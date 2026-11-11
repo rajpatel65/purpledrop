@@ -7,3 +7,6 @@ pages_build_output_dir = "dist"
 # Resend secrets belong in the Supabase dashboard, not Cloudflare Pages
 # Build command: npm run build
 # Output dir: dist
+
+[vars]
+VITE_TURNSTILE_SITE_KEY = "0x4AAAAAAFv21rsn0rhJ-KJF"

@@ -14,3 +14,7 @@ verify_jwt = true
 # time. Its handler enforces origin, honeypot, and input validation.
 [functions.submit-lead]
 verify_jwt = false
+
+# One-time scanner tokens are checked in the handler.
+[functions.website-scorecard]
+verify_jwt = false

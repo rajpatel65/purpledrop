@@ -1,3 +1,4 @@
+import { scorecardFlow } from '../_shared/scorecard-flow.ts';
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
@@ -43,6 +44,10 @@ serve(async (req) => {
   try {
     let body: any;
     try { body = await req.json(); } catch { return new Response(JSON.stringify({ error: 'Invalid JSON' }), { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }); }
+    if (body.purpose === 'scorecard') {
+      if (req.method !== 'POST') return new Response('Method not allowed', { status: 405, headers: corsHeaders });
+      return await scorecardFlow(req, body, corsHeaders, 'verify');
+    }
     const email = typeof body.email === 'string' ? body.email.trim().slice(0, 254) : '';
     const code = typeof body.code === 'string' ? body.code.trim().slice(0, 10) : '';
 

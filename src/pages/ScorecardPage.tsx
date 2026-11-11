@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Shield, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { useSeo } from '../hooks/useSeo';
 import { ROUTE_SEO } from '../lib/route-seo';
@@ -7,82 +7,74 @@ import { FadeIn } from '../components/FadeIn';
 import { CtaBand } from '../components/CtaBand';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 
-const LEAD_ENDPOINT = `${(import.meta.env.VITE_SUPABASE_URL || '').replace(/\/$/, '')}/functions/v1/submit-lead`;
+const FUNCTIONS_URL = `${(import.meta.env.VITE_SUPABASE_URL || '').replace(/\/$/, '')}/functions/v1`;
 
-const CHECKS = [
-  {
-    name: 'SSL/TLS Certificate',
-    icon: Shield,
-    what: 'Is your certificate valid, properly configured, and not expiring soon?',
-    why: 'An expired or weak certificate triggers browser warnings and kills trust instantly. AI tools also flag insecure sites.',
-  },
-  {
-    name: 'Security Headers',
-    icon: Shield,
-    what: 'CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Permissions-Policy.',
-    why: 'These headers tell browsers how to protect your visitors. Missing headers = vulnerable to injection, clickjacking, and data leaks.',
-  },
-  {
-    name: 'Email Authentication',
-    icon: Shield,
-    what: 'SPF, DKIM, DMARC records configured correctly.',
-    why: 'Without these, anyone can spoof your domain in emails. Phishing attacks impersonate you, and your deliverability drops.',
-  },
-  {
-    name: 'Cookie Security',
-    icon: Shield,
-    what: 'HttpOnly, Secure, SameSite flags on all cookies.',
-    why: 'Cookies without these flags can be stolen via XSS attacks or sent over unencrypted connections.',
-  },
-  {
-    name: 'HTTPS Enforcement',
-    icon: Shield,
-    what: 'HTTP redirects to HTTPS, no mixed content.',
-    why: 'If any part of your site loads over HTTP, attackers can intercept and modify traffic. Browsers punish this.',
-  },
-  {
-    name: 'DNS Configuration',
-    icon: Shield,
-    what: 'MX, TXT, CAA records properly set.',
-    why: 'Missing DNS records break email delivery, weaken authentication, and signal neglect to security scanners.',
-  },
-];
-
-type FormState = 'idle' | 'sending' | 'done' | 'error';
+declare global { interface Window { turnstile?: { render: (element: HTMLElement, options: Record<string, unknown>) => string; remove: (id: string) => void } } }
+const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || '';
+type CheckResult = { title: string; status: 'pass' | 'review' | 'unknown'; evidence: string[]; action: string };
+type ScanReport = { domain: string; scannedAt: string; checks: CheckResult[] };
+type FormState = 'idle' | 'requesting' | 'code' | 'verifying' | 'scanning' | 'done';
 
 export function ScorecardPage() {
   useSeo(ROUTE_SEO['/scorecard']);
-
   const [email, setEmail] = useState('');
   const [domain, setDomain] = useState('');
   const [consent, setConsent] = useState(false);
+  const [code, setCode] = useState('');
+  const [challenge, setChallenge] = useState('');
   const [state, setState] = useState<FormState>('idle');
+  const [error, setError] = useState('');
+  const [report, setReport] = useState<ScanReport | null>(null);
+  const [expiresAt, setExpiresAt] = useState(0);
+  const [remaining, setRemaining] = useState(600);
+  const generation = useRef(0);
+  const turnstileElement = useRef<HTMLDivElement>(null);
+  const [botToken, setBotToken] = useState('');
+  const reset = (message = '') => { generation.current++; setReport(null); setChallenge(''); setCode(''); setState('idle'); setError(message); setExpiresAt(0); };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!domain || !email || !consent) return;
+  useEffect(() => {
+    if (!TURNSTILE_SITE_KEY || state !== 'idle') return;
+    let widget: string | undefined;
+    const render = () => { if (turnstileElement.current && window.turnstile) widget = window.turnstile.render(turnstileElement.current, {sitekey: TURNSTILE_SITE_KEY, action: 'scorecard', callback: (token: string) => setBotToken(token), 'expired-callback': () => setBotToken(''), 'error-callback': () => setBotToken('')}); };
+    let script = document.querySelector<HTMLScriptElement>('script[data-scorecard-turnstile]');
+    if (window.turnstile) render();
+    else { if (!script) { script = document.createElement('script'); script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'; script.async = true; script.dataset.scorecardTurnstile = 'true'; document.head.appendChild(script); } script.addEventListener('load', render); }
+    return () => { script?.removeEventListener('load', render); if (widget && window.turnstile) window.turnstile.remove(widget); setBotToken(''); };
+  }, [state]);
 
-    setState('sending');
+  useEffect(() => {
+    const clear = () => { if (state === 'done' || state === 'scanning') reset('Your one-time results were cleared. Request a fresh code to run another check.'); };
+    const hidden = () => { if (document.hidden) clear(); };
+    const tick = window.setInterval(() => { if (expiresAt) { const left = Math.max(0, Math.ceil((expiresAt - Date.now()) / 1000)); setRemaining(left); if (left === 0) reset('Your results expired. Request a fresh code to run another check.'); } }, 1000);
+    document.addEventListener('visibilitychange', hidden);
+    window.addEventListener('pagehide', clear);
+    return () => { clearInterval(tick); document.removeEventListener('visibilitychange', hidden); window.removeEventListener('pagehide', clear); };
+  }, [state, expiresAt]);
+  useEffect(() => () => { generation.current++; }, []);
 
-    try {
-      const res = await fetch(LEAD_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          form: 'scorecard',
-          domain,
-          email,
-          consent: true,
-        }),
-      });
-
-      if (!res.ok) throw new Error('Failed');
-      setState('done');
-    } catch {
-      setState('error');
-    }
+  const call = async (path: string, data: Record<string, unknown>) => {
+    const response = await fetch(`${FUNCTIONS_URL}/${path}`, { method: 'POST', cache: 'no-store', headers: { 'Content-Type': 'application/json', apikey: import.meta.env.VITE_SUPABASE_ANON_KEY || '' }, body: JSON.stringify(data) });
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.error || 'Request failed. Please try again later.');
+    return result;
   };
-
+  const requestCode = async (e: React.FormEvent) => {
+    e.preventDefault(); if (!email || !domain || !consent) return;
+    setError(''); setState('requesting');
+    try { const result = await call('send-verification', { purpose: 'scorecard', email, domain, consent, turnstile_token: botToken }); setChallenge(result.challenge_id); setState('code'); }
+    catch (err) { setError(err instanceof Error ? err.message : 'Could not send code.'); setState('idle'); }
+  };
+  const runCheck = async (e: React.FormEvent) => {
+    e.preventDefault(); setError(''); setState('verifying'); const current = generation.current;
+    try {
+      const verified = await call('verify-code', { purpose: 'scorecard', challenge_id: challenge, code });
+      if (generation.current !== current) return;
+      setState('scanning');
+      const result = await call('website-scorecard', { challenge_id: challenge, scan_token: verified.scan_token });
+      if (generation.current !== current) return;
+      setReport(result.report); setExpiresAt(Date.parse(result.expires_at)); setRemaining(600); setState('done'); setCode(''); setChallenge('');
+    } catch (err) { if (generation.current !== current) return; setError(err instanceof Error ? err.message : 'Could not run check.'); setState('code'); }
+  };
   return (
     <Layout>
       <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Security Scorecard' }]} />
@@ -95,8 +87,8 @@ export function ScorecardPage() {
               Security Scorecard
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              We check six security foundations that most teams miss — and that AI
-              tools read when they evaluate your company.
+              Check six security foundations in your public homepage and DNS. Verify
+              your email, then see the findings and next steps here.
             </p>
           </FadeIn>
         </div>
@@ -105,45 +97,28 @@ export function ScorecardPage() {
       {/* FORM OR RESULTS */}
       <section className="border-b border-line bg-cream/50 py-24">
         <div className="container-page max-w-3xl">
-          {state === 'done' ? (
+          {state === 'done' && report ? (
             <FadeIn>
               <div className="text-center">
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-violet-tint">
-                  <CheckCircle2 className="h-8 w-8 text-violet" />
-                </div>
-                <h2 className="mt-6 font-serif text-3xl font-medium tracking-tight text-ink">
-                  We&apos;ll scan your site and send the results.
-                </h2>
-                <p className="mt-3 text-sm text-ink-soft">
-                  Check your inbox within one business day. No spam, no sales sequence —
-                  just the findings.
-                </p>
+                <CheckCircle2 className="mx-auto h-10 w-10 text-violet" />
+                <p className="eyebrow mt-5">Your one-time check</p>
+                <h2 className="mt-4 break-all font-serif text-3xl text-ink">{report.domain}</h2>
+                <p className="mt-3 text-sm text-ink-soft">Checked {new Date(report.scannedAt).toLocaleString()}. Results clear in {Math.floor(remaining / 60)}:{String(remaining % 60).padStart(2, '0')}.</p>
+                <p className="mt-2 text-xs text-ink-soft">Leaving this page or switching tabs clears these results. Reloading cannot restore them. Anything already displayed can still be copied or captured.</p>
               </div>
-
-              {/* What we check — educational */}
-              <div className="mt-12">
-                <p className="eyebrow text-center">What we check</p>
-                <h3 className="mt-4 text-center font-serif text-2xl font-medium text-ink">
-                  Six foundations that keep your site secure and trustworthy.
-                </h3>
-                <div className="mt-8 space-y-4">
-                  {CHECKS.map((check) => (
-                    <div key={check.name} className="card p-6">
-                      <div className="flex items-start gap-4">
-                        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-violet-tint">
-                          <check.icon className="h-5 w-5 text-violet" />
-                        </div>
-                        <div>
-                          <p className="text-sm font-semibold text-ink">{check.name}</p>
-                          <p className="mt-1 text-xs text-ink-soft">{check.what}</p>
-                          <p className="mt-2 text-xs leading-relaxed text-ink">{check.why}</p>
-                        </div>
-                      </div>
+              <div className="mt-8 space-y-4">
+                {report.checks.map(check => (
+                  <div key={check.title} className="card p-6">
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <h3 className="font-semibold text-ink">{check.title}</h3>
+                      <span className="rounded-full bg-violet-tint px-3 py-1 text-xs font-semibold text-violet">{check.status === 'pass' ? 'Observed' : check.status === 'review' ? 'Review' : 'Unverified'}</span>
                     </div>
-                  ))}
-                </div>
+                    <p className="mt-3 text-sm leading-relaxed text-ink-soft">{check.action}</p>
+                    <details className="mt-3 text-xs text-ink-soft"><summary className="cursor-pointer py-2 font-medium">What we observed</summary><ul className="space-y-2">{check.evidence.map((line, i) => <li key={i} className="break-words">{line}</li>)}</ul></details>
+                  </div>
+                ))}
               </div>
-
+              <p className="mt-6 text-xs leading-relaxed text-ink-soft">Observed means the tested condition was seen, not that the site is secure. Review needs context. Unverified needs another check. This is an automated homepage and DNS check, not a penetration test or a full-site audit.</p>
               {/* CTA */}
               <div className="mt-10 card p-8 text-center">
                 <h3 className="font-serif text-2xl font-medium text-ink">
@@ -161,7 +136,7 @@ export function ScorecardPage() {
 
               {/* Run another */}
               <button
-                onClick={() => { setState('idle'); setEmail(''); setDomain(''); setConsent(false); }}
+                onClick={() => reset()}
                 className="mt-6 w-full text-center text-sm text-ink-faint hover:text-ink"
               >
                 Check another domain →
@@ -174,73 +149,28 @@ export function ScorecardPage() {
                   <Shield className="h-6 w-6 text-violet" />
                   <h2 className="font-serif text-2xl font-medium text-ink">Get your free scorecard</h2>
                 </div>
-                <p className="mt-3 text-sm text-ink-soft">
-                  Enter your domain and email. We&apos;ll run a security scan and send you
-                  the results within one business day.
-                </p>
-
-                <form onSubmit={handleSubmit} className="mt-8 space-y-5">
-                  <div>
-                    <label htmlFor="domain" className="mb-1.5 block text-sm font-medium text-ink">
-                      Website URL <span className="text-violet">*</span>
-                    </label>
-                    <input
-                      id="domain"
-                      type="text"
-                      inputMode="url"
-                      required
-                      placeholder="yourdomain.com"
-                      value={domain}
-                      onChange={(e) => setDomain(e.target.value.replace(/^https?:\/\//, '').replace(/\/.*$/, ''))}
-                      className="w-full rounded-xl border border-line bg-paper px-4 py-3 text-sm text-ink placeholder:text-ink-faint focus:border-violet focus:outline-none focus:ring-1 focus:ring-violet"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="sc-email" className="mb-1.5 block text-sm font-medium text-ink">
-                      Work email <span className="text-violet">*</span>
-                    </label>
-                    <input
-                      id="sc-email"
-                      type="email"
-                      required
-                      placeholder="you@company.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="w-full rounded-xl border border-line bg-paper px-4 py-3 text-sm text-ink placeholder:text-ink-faint focus:border-violet focus:outline-none focus:ring-1 focus:ring-violet"
-                    />
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <input
-                      id="consent"
-                      type="checkbox"
-                      required
-                      checked={consent}
-                      onChange={(e) => setConsent(e.target.checked)}
-                      className="mt-1 h-4 w-4 rounded border-line text-violet focus:ring-violet"
-                    />
-                    <label htmlFor="consent" className="text-xs leading-relaxed text-ink-soft">
-                      I give permission to run a one-time security scan on my domain.
-                      We&apos;ll never spam you. Results only.{' '}
-                      <a href="/privacy" className="underline hover:text-ink">Privacy policy</a>.
-                    </label>
-                  </div>
-
-                  {state === 'error' && (
-                    <p className="text-sm text-red-600">Something went wrong. Please try again or email us directly.</p>
-                  )}
-
-                  <button
-                    type="submit"
-                    disabled={state === 'sending' || !domain || !email || !consent}
-                    className="btn-primary w-full disabled:opacity-60"
-                  >
-                    {state === 'sending' ? 'Sending…' : 'Get my scorecard'}
-                    {state !== 'sending' && <ArrowRight className="h-4 w-4" />}
-                  </button>
-                </form>
-
+                <p className="mt-3 text-sm text-ink-soft">Verify your email, then see six simple checks on this page. No report email or download. Results clear after 10 minutes or when you leave.</p>
+                {state === 'code' || state === 'verifying' || state === 'scanning' ? (
+                  <form onSubmit={runCheck} className="mt-8 space-y-5">
+                    <p className="text-sm text-ink-soft">We sent a six-digit code to {email}. It expires in 10 minutes. Three incorrect attempts block verification for 15 minutes.</p>
+                    <label htmlFor="scorecard-code" className="block text-sm font-medium">Verification code</label>
+                    <input id="scorecard-code" type="text" inputMode="numeric" autoComplete="one-time-code" pattern="[0-9]{6}" maxLength={6} required value={code} onChange={e => setCode(e.target.value.replace(/\D/g, ''))} disabled={state !== 'code'} className="w-full rounded-xl border border-line bg-paper px-4 py-3 tracking-widest" />
+                    {error && <p role="alert" className="text-sm text-red-600">{error}</p>}
+                    <button type="submit" disabled={state !== 'code' || code.length !== 6} className="btn-primary w-full disabled:opacity-60">{state === 'scanning' ? 'Checking your website...' : state === 'verifying' ? 'Verifying...' : 'Verify and run check'}</button>
+                    {state === 'code' && <button type="button" onClick={() => reset()} className="w-full py-3 text-sm text-ink-soft">Start again with a fresh code</button>}
+                  </form>
+                ) : (
+                  <form onSubmit={requestCode} className="mt-8 space-y-5">
+                    <div><label htmlFor="domain" className="mb-1.5 block text-sm font-medium text-ink">Website URL</label><input id="domain" type="text" inputMode="url" required maxLength={300} placeholder="yourdomain.com" value={domain} onChange={e => setDomain(e.target.value)} className="w-full rounded-xl border border-line bg-paper px-4 py-3 text-sm" /></div>
+                    <div><label htmlFor="sc-email" className="mb-1.5 block text-sm font-medium text-ink">Work email</label><input id="sc-email" type="email" required maxLength={254} placeholder="you@company.com" value={email} onChange={e => setEmail(e.target.value)} className="w-full rounded-xl border border-line bg-paper px-4 py-3 text-sm" /></div>
+                    <div className="flex items-start gap-3"><input id="consent" type="checkbox" required checked={consent} onChange={e => setConsent(e.target.checked)} className="mt-1 h-4 w-4" /><label htmlFor="consent" className="text-xs leading-relaxed text-ink-soft">I give permission for a one-time security check on this domain and a verification code by email. Results only, no sales sequence. <a href="/privacy" className="underline">Privacy policy</a>.</label></div>
+                    {TURNSTILE_SITE_KEY && <div ref={turnstileElement} className="min-h-16" />}
+                    {error && <p role="alert" className="text-sm text-red-600">{error}</p>}
+                    <button type="submit" disabled={(!!TURNSTILE_SITE_KEY && !botToken) || state === 'requesting' || !email || !domain || !consent} className="btn-primary w-full disabled:opacity-60">{state === 'requesting' ? 'Sending verification code...' : 'Send verification code'}<ArrowRight className="h-4 w-4" /></button>
+                  </form>
+                )}
                 <p className="mt-4 text-center text-xs text-ink-faint">
-                  One-time scan. No storage of your credentials. No spam.
+                  One-time public homepage and DNS check. Not a penetration test. No spam.
                 </p>
               </div>
             </FadeIn>
