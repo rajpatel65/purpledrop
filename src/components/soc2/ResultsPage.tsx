@@ -302,7 +302,7 @@ export function ResultsPage({ sessionId, answers, email }: ResultsPageProps) {
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                      You decide if a $2,000 consulting day fits
+                      You decide if a $2,500 consulting day fits
                     </li>
                   </ul>
                 </div>
