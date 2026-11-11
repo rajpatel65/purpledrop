@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, PhoneCall, Mail, Shield, Calculator, SearchCheck, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, PhoneCall, Mail, Shield, Calculator, SearchCheck, ArrowUpRight, Smartphone } from 'lucide-react';
 import { useSeo } from '../hooks/useSeo';
 import { ROUTE_SEO } from '../lib/route-seo';
 import { Layout } from '../components/Layout';
@@ -140,26 +140,62 @@ export function HomePage() {
                 <p className="eyebrow">AI & search visibility experts</p>
               </FadeIn>
               <FadeIn delay={0.08}>
-                <h1 className="mt-6 max-w-3xl font-serif text-5xl font-medium leading-[1.05] tracking-tight text-ink sm:text-6xl lg:text-[4.4rem]">
-                  The next buyer who asks AI who to hire should{' '}
-                  <span className="italic text-violet">hear your name.</span>
+                <h1 className="mt-6 max-w-3xl font-serif text-5xl font-medium leading-[1.05] tracking-tight text-ink [text-wrap:balance] sm:text-6xl lg:text-[4.4rem]">
+                  Doing nothing is a decision.{' '}
+                  <span className="italic text-violet">Your competitors&rsquo; websites thank you for it.</span>
                 </h1>
               </FadeIn>
               <FadeIn delay={0.16}>
                 <p className="mt-8 max-w-2xl text-lg leading-relaxed text-ink-soft sm:text-xl">
-                  Every week, your buyers ask ChatGPT, Gemini, Claude, Perplexity, and Copilot who
-                  to call — before they ask anyone else. We find out what those tools say about your
-                  company today, then change it until the answer names you.
+                  Every month, buyers get one answer and a shortlist. If your business isn&rsquo;t clear
+                  to the systems answering, someone else gets the call - and you never see it happen.
+                  Check where you stand in three plain-English ways. Free to look, yours to keep.
                 </p>
               </FadeIn>
               <FadeIn delay={0.24}>
                 <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-                  <Link to="/contact" className="btn-primary">
-                    Request a free 30-minute call
+                  <Link to="/scorecard" className="btn-primary">
+                    See where you stand - free
                     <ArrowRight className="h-4 w-4" />
                   </Link>
-                  <Link to="/services" className="btn-outline">
-                    See the services
+                  <Link to="/contact" className="btn-outline">
+                    Request a free 30-minute call
+                  </Link>
+                </div>
+                <p className="mt-6 flex items-center gap-2 text-sm text-ink-soft">
+                  <Calculator className="h-4 w-4 text-violet" />
+                  What are a few lost jobs a month worth?{' '}
+                  <Link to="/calculator" className="font-medium text-violet underline decoration-violet/30 underline-offset-4 hover:decoration-violet">
+                    Put your own numbers in the calculator.
+                  </Link>
+                </p>
+                <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                  <Link to="/scorecard" className="group rounded-xl border border-line bg-cream/40 p-4 transition-colors hover:border-violet/30 hover:bg-cream/70">
+                    <div className="flex items-center gap-2 font-semibold text-ink">
+                      <SearchCheck className="h-4 w-4 text-violet" />
+                      Can AI find me?
+                    </div>
+                    <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+                      Free check. See what the first answer can and can&rsquo;t say about you.
+                    </p>
+                  </Link>
+                  <Link to="/scorecard" className="group rounded-xl border border-line bg-cream/40 p-4 transition-colors hover:border-violet/30 hover:bg-cream/70">
+                    <div className="flex items-center gap-2 font-semibold text-ink">
+                      <Smartphone className="h-4 w-4 text-violet" />
+                      Is my site dated?
+                    </div>
+                    <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+                      Free check. Your site on a phone, and what it&rsquo;s really built on.
+                    </p>
+                  </Link>
+                  <Link to="/services" className="group rounded-xl border border-line bg-cream/40 p-4 transition-colors hover:border-violet/30 hover:bg-cream/70">
+                    <div className="flex items-center gap-2 font-semibold text-ink">
+                      <Shield className="h-4 w-4 text-violet" />
+                      Is my site safe?
+                    </div>
+                    <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+                      Free basics now, full security review with a fix plan when you&rsquo;re ready.
+                    </p>
                   </Link>
                 </div>
               </FadeIn>
@@ -173,7 +209,9 @@ export function HomePage() {
             {/* Shaded 3D panel */}
             <div className="relative h-[340px] sm:h-[440px] lg:h-auto lg:min-h-[640px]">
               <div className="absolute inset-0 bg-gradient-to-br from-cream/60 via-cream to-violet-tint" />
-              <div className="absolute inset-0 opacity-50 [background-image:radial-gradient(rgba(109,40,217,0.16)_1px,transparent_1px)] [background-size:22px_22px]" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_55%_at_68%_78%,rgba(124,58,237,0.20),transparent_70%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_28%_12%,rgba(212,168,67,0.12),transparent_70%)]" />
+              <div className="absolute inset-0 opacity-30 [background-image:radial-gradient(rgba(109,40,217,0.14)_1px,transparent_1px)] [background-size:24px_24px]" />
               <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-paper to-transparent lg:w-28" />
               <Suspense
                 fallback={
@@ -348,4 +386,4 @@ export function HomePage() {
       />
     </Layout>
   );
-                }
+}

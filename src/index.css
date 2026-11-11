@@ -30,10 +30,10 @@
     @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold transition-all duration-300;
   }
   .btn-primary {
-    @apply btn bg-ink text-paper hover:bg-violet;
+    @apply btn bg-ink text-paper shadow-soft hover:-translate-y-0.5 hover:bg-violet hover:shadow-card-hover active:translate-y-0;
   }
   .btn-outline {
-    @apply btn border border-line text-ink hover:border-ink;
+    @apply btn border border-line bg-paper/60 text-ink hover:-translate-y-0.5 hover:border-ink hover:shadow-soft active:translate-y-0;
   }
   .card {
     @apply rounded-2xl border border-line bg-paper shadow-soft;
