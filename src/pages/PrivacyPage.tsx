@@ -6,53 +6,41 @@ import { Breadcrumbs } from '../components/Breadcrumbs';
 
 const SECTIONS = [
   {
-    title: 'Who this covers',
-    body: 'This policy covers purpledrop.com and every service provided by purpleDrop. It applies to anyone who visits the site, sends us an enquiry, or works with us. It\'s a real statement of what we do — written to be read, not to be waived.',
+    "title": "What this policy covers",
+    "body": "This policy covers purpledrop.com, enquiries and the tools on this website. It explains what information you provide and how the website uses it."
   },
   {
-    title: 'What we collect',
-    body: 'The contact form: the name, email address, company and message you choose to send. The correspondence we exchange afterwards. Aggregate analytics (below). And technical data from the server that hosts the site — such as your IP address and browser type — which is logged briefly and automatically by the hosting provider. We don\'t collect anything else, and we never buy or scrape contact details.',
+    "title": "Contact requests",
+    "body": "The contact form sends the name, email, company, selected service and message you enter. Supabase processes the request and Resend delivers it to our business inbox. We use this information to respond and discuss any work you request. Do not include passwords, payment details or sensitive customer information."
   },
   {
-    title: 'How we use it — and the law',
-    body: 'To respond to your enquiry. To provide the services we\'ve agreed to deliver. To send you information you\'ve asked for or agreed to receive. To keep the site working and secure. And to comply with legal obligations. We don\'t sell or rent personal data. Ever. We don\'t share it for advertising, and we don\'t use it to build a profile of you.',
+    "title": "Website checks and verification",
+    "body": "The Security Scorecard asks for a website address, email and permission to run a one-time public check. A verification email confirms access to that email address, not ownership of the website. Verification records and service logs are separate from the results shown in your browser. Clearing the on-screen results does not mean all service records have been deleted."
   },
   {
-    title: 'Email marketing',
-    body: 'We send marketing email only where the law allows — in the US, under the CAN-SPAM Act. Every marketing message has a clear, working unsubscribe, which we honour as fast as we can and no later than the 10 business days the law allows. Replies to your enquiry and updates about work you\'ve agreed to aren\'t marketing and are sent regardless. If you\'re in a state with additional privacy rights, we respect those too.',
+    "title": "Calculator and browser storage",
+    "body": "The lead value calculator uses the numbers you enter in your browser and does not submit them as a lead. The homepage can save your selected navigation preference in this browser. The legacy assessment also uses browser storage and service records to support progress."
   },
   {
-    title: 'Analytics & cookies',
-    body: 'We don\'t use analytics tools, advertising scripts, or marketing trackers of any kind. No third party collects information about your activity across different websites while you\'re on ours. The server logs technical data (IP address, browser type) briefly and automatically, then discards it.',
+    "title": "Service providers",
+    "body": "The website uses hosting services, Supabase for form and tool processing, Resend for email delivery and our email provider for correspondence. Where enabled, Cloudflare Turnstile checks for automated requests. These services process information needed for their part of the website. Their own privacy terms also apply."
   },
   {
-    title: 'Third parties',
-    body: 'We share personal data only with a small number of processors who work on our behalf: Formspree (which receives contact form submissions), our web hosting provider (which serves the site and logs traffic briefly), and our email provider (which delivers messages). Each is bound by a data processing agreement to use your data only on our instructions, keep it secure, and never sell it. We share for no other purpose and with no one else.',
+    "title": "Marketing",
+    "body": "Requesting a verification code does not sign you up for a sales sequence. We use enquiry details to reply to your request. We do not sell your personal information."
   },
   {
-    title: 'Where it\'s stored',
-    body: 'Form submissions are handled by Formspree and stored on their secure infrastructure in the US under a data processing agreement with appropriate safeguards. We don\'t store contact details on our own servers.',
+    "title": "Retention and requests",
+    "body": "To ask what information we hold about you, request a correction or request deletion, email info@purpledrop.com. We will explain what can be removed and what must be kept for agreed work or legal obligations. Service logs, inbox records and assessment records may have different retention periods."
   },
   {
-    title: 'How long we keep it',
-    body: 'Contact form submissions are kept only as long as needed to deal with your enquiry — typically no more than 30 days — then deleted or anonymised. If we work with you, we keep correspondence and records for the duration of the engagement and afterwards only as long as the law requires (in the US, generally six years for tax and accounting records). Analytics data is aggregate and isn\'t tied to you at all.',
+    "title": "Security and limitations",
+    "body": "The website uses HTTPS. No website, public check or provider can guarantee complete security. Send only the information needed for your enquiry. A Security Scorecard result is not a certification or a full security review."
   },
   {
-    title: 'Your rights',
-    body: 'Depending on where you live, state law (including the CCPA/CPRA in California and similar laws elsewhere) may give you rights to access, correct, delete, or receive a copy of your personal data, and to opt out of any sale or sharing of it. All of it is free, and we respond within 30 days — usually much sooner. Email privacy@purpledrop.com and we\'ll help. We never sell personal information, so there\'s no opt-out to ask you for in the first place.',
-  },
-  {
-    title: 'Children',
-    body: 'We don\'t knowingly collect personal information from anyone under 16. This is a business service. If you believe a child has sent us information, email privacy@purpledrop.com and we\'ll delete it.',
-  },
-  {
-    title: 'Security',
-    body: 'The site is served over HTTPS. Our guiding rule is to collect as little as possible — that\'s the strongest security measure of all. The processors we use keep data encrypted in transit, and we never hold more than we need.',
-  },
-  {
-    title: 'Changes',
-    body: 'If this policy changes materially, we\'ll update this page and note the date. We won\'t use your data in a way that\'s materially different from what\'s described here without telling you and, where the law requires, getting fresh consent.',
-  },
+    "title": "Changes",
+    "body": "We will update this page when the website or our use of information changes. Contact info@purpledrop.com with questions."
+  }
 ];
 
 export function PrivacyPage() {
@@ -65,10 +53,10 @@ export function PrivacyPage() {
         <div className="container-page max-w-3xl">
           <p className="eyebrow">Privacy</p>
           <h1 className="mt-5 font-serif text-5xl font-medium leading-[1.05] tracking-tight text-ink">
-            We collect almost nothing. Here's the full list.
+            What you share with us, and how we use it.
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-ink-soft">
-            Last updated: August 2026. This page is written to be read, not to be waived.
+            Draft for review: November 2026. Confirm retention periods and provider terms before publication.
           </p>
         </div>
       </section>
@@ -83,10 +71,10 @@ export function PrivacyPage() {
           ))}
           <p className="pt-6 text-sm leading-relaxed text-ink-faint">
             Questions? Email{' '}
-            <a href="mailto:privacy@purpledrop.com" className="font-medium text-ink underline decoration-line underline-offset-4 hover:decoration-ink">
-              privacy@purpledrop.com
+            <a href="mailto:info@purpledrop.com" className="font-medium text-ink underline decoration-line underline-offset-4 hover:decoration-ink">
+              info@purpledrop.com
             </a>{' '}
-            — or read our{' '}
+            - or read our{' '}
             <Link to="/terms" className="font-medium text-ink underline decoration-line underline-offset-4 hover:decoration-ink">
               terms
             </Link>
@@ -96,4 +84,4 @@ export function PrivacyPage() {
       </section>
     </Layout>
   );
-}
+              }
