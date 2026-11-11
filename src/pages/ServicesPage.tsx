@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, Shield, SearchCheck, Calculator, Users, Compass, BadgeCheck, Mail, CalendarCheck, CalendarDays } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, SearchCheck, Calculator, Users, Compass, BadgeCheck, Mail, CalendarCheck, CalendarDays } from 'lucide-react';
 import { useSeo } from '../hooks/useSeo';
 import { ROUTE_SEO } from '../lib/route-seo';
 import { Layout } from '../components/Layout';
@@ -15,13 +15,6 @@ import { SERVICES, CONTACT } from '../lib/content';
 import { PRICING } from '../lib/pricing';
 
 const FREE_TOOLS = [
-  {
-    to: '/soc2',
-    label: 'SOC2 Readiness Assessment',
-    description: '42 questions across CC1–CC9. Email-verified. Download JSON/CSV gap report. Every "No" and "Don\'t know" becomes a lead signal for us.',
-    icon: Shield,
-    highlight: 'Most comprehensive',
-  },
   {
     to: '/scorecard',
     label: 'Security Scorecard',
@@ -70,7 +63,7 @@ const FAQ_ITEMS = [
     question: 'What do the options cost?',
     answer: (
       <>
-        <p className="mb-2">The audit is $500. The audit plus a full consulting day is $2,000. The day plus 30 days of monitoring and adjustments is $3,000.</p>
+        <p className="mb-2">The audit is $1,200. The audit plus a full consulting day is $2,500. The day plus 30 days of monitoring and adjustments is $4,500.</p>
         <p>The call is free, and the consulting day is optional. We agree on the focus before work starts.</p>
       </>
     ),
@@ -80,7 +73,7 @@ const FAQ_ITEMS = [
     answer: (
       <>
         <p className="mb-2">You choose the level of support that fits: audit, consulting day, or day plus follow-through.</p>
-        <p>The options are $500, $2,000 and $3,000. There is no obligation to continue.</p>
+        <p>The options are $1,200, $2,500 and $4,500. There is no obligation to continue.</p>
       </>
     ),
   },
@@ -111,8 +104,8 @@ export function ServicesPage() {
                 Request a free 30-minute call
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link to="/soc2" className="btn-outline">
-                Start free: the SOC2 gap check
+              <Link to="/scorecard" className="btn-outline">
+                Start free: the security scorecard
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
             </div>
@@ -146,7 +139,7 @@ export function ServicesPage() {
                 Good, better, best. Your choice.
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-ink-soft">
-                Start with a free 30-minute call. Choose an audit ($500), a consulting day ($2,000), or the day plus 30 days of follow-through ($3,000).
+                Start with a free 30-minute call. Choose an audit ($1,200), a consulting day ($2,500), or the day plus 30 days of follow-through ($4,500).
               </p>
             </div>
             <div className="grid gap-6 lg:grid-cols-3 max-w-7xl mx-auto">
@@ -233,11 +226,11 @@ export function ServicesPage() {
                 Not ready to engage? Start here.
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-ink-soft">
-                Three self-serve diagnostics that show you exactly where you stand — before you spend a dollar.
-                Each tool explains its limits. The scorecard shows temporary on-screen results; the SOC2 self-assessment offers a downloadable gap report.
+                Two self-serve diagnostics that show you exactly where you stand — before you spend a dollar.
+                Each tool explains its limits. The scorecard shows temporary on-screen results; the calculator shows its assumptions before you get a number.
               </p>
             </div>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-6 sm:grid-cols-2 max-w-4xl mx-auto">
               {FREE_TOOLS.map((tool) => (
                 <FreeToolCard key={tool.to} tool={tool} />
               ))}
@@ -311,9 +304,9 @@ export function ServicesPage() {
         title="Not sure where to start?"
         body="Thirty minutes. We show you what the first conversation says about you. You leave with a straight answer either way."
         primaryLabel="Request a free 30-minute call"
-        secondaryLabel="Try the free SOC2 gap check"
-        secondaryTo="/soc2"
+        secondaryLabel="Try the free security scorecard"
+        secondaryTo="/scorecard"
       />
     </Layout>
   );
-                  }
+}
