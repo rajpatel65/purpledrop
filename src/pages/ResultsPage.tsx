@@ -9,8 +9,8 @@ import { Breadcrumbs } from '../components/Breadcrumbs';
 
 const HONEST = [
   'We don\'t promise a specific ranking in a specific tool by a specific date. Anyone who does is guessing.',
-  'We don\'t invent results. When you ask for proof, you get the actual answer the AI gives about your company — before and after.',
-  'We don\'t take credit for what you already earned. If AI already describes you well, we\'ll tell you on the first call and send you on your way.',
+  'We don\'t invent results. When you ask for proof, you get the actual answer the AI gives about your company - before and after.',
+  'We separate visibility from sales. A mention in an AI answer does not prove a lead or a sale came from it.',
 ];
 
 export function ResultsPage() {
@@ -24,7 +24,7 @@ export function ResultsPage() {
           <FadeIn>
             <p className="eyebrow">Results</p>
             <h1 className="mt-5 max-w-3xl font-serif text-5xl font-medium leading-[1.05] tracking-tight text-ink sm:text-6xl">
-              Evidence before outcome claims.
+              See what changed, with the evidence to check it.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
               A useful review records the question, the AI tool, the date, the answer and its sources.
@@ -71,12 +71,13 @@ export function ResultsPage() {
                   Ask us what AI says about you.
                 </h2>
                 <p className="mt-4 text-sm leading-relaxed text-ink-soft">
-                  We'll run the review and show you the answer — yours and your competitors'. No
-                  slides, no theory. The actual conversation your buyers are having.
+                  The paid review records answers to agreed buyer questions. You see which businesses
+                  appear and where the information comes from. These are test results, not
+                  private buyer conversations or a count of missed leads.
                 </p>
               </div>
               <Link to="/contact" className="btn-primary mt-8 self-start">
-                Get the answer
+                Ask about the review
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -86,11 +87,11 @@ export function ResultsPage() {
 
       <CtaBand
         title="Start with a free 30-minute call."
-        body="Start with a free 30-minute call. Then choose: audit $1,200; consulting day $2,500; day plus 30 days of monitoring and adjustments $4,500."
+        body="If buyers are finding other businesses instead of yours, the first step is to check the gap. Discuss the review on a free call before you decide to pay."
         primaryLabel="Request a free call"
         secondaryLabel="Read the services"
         secondaryTo="/services"
       />
     </Layout>
   );
-}
+              }
