@@ -79,11 +79,11 @@ export function ResourcePostPage() {
 
       <CtaBand
         title="You don't have to guess where you stand."
-        body="Thirty minutes. We show you what AI says about your company and your competitors right now."
+        body="Use a free call to discuss your business. The paid review records agreed questions, answers, sources and gaps so you can decide what to fix."
         primaryLabel="Request a free 30-minute call"
         secondaryLabel="Read another essay"
         secondaryTo="/resources"
       />
     </Layout>
   );
-                    }
+      }
