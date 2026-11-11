@@ -1,144 +1,78 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { TrendingDown, TrendingUp, ArrowRight, DollarSign } from 'lucide-react';
-import { FadeIn } from './FadeIn';
+import { ArrowRight } from 'lucide-react';
 
-const fmt = (n: number) =>
-  n >= 1000000
-    ? `$${(n / 1000000).toFixed(1)}M`
-    : n >= 1000
-      ? `$${(n / 1000).toFixed(0)}K`
-      : `$${Math.round(n).toLocaleString()}`;
+export function estimateLeadValue(leads: number, closeRate: number, jobValue: number, extraLeads: number) {
+  if (![leads, closeRate, jobValue, extraLeads].every(Number.isFinite) ||
+      Math.min(leads, closeRate, jobValue, extraLeads) < 0 || closeRate > 100) return null;
+  const baselineRevenue = leads * closeRate / 100 * jobValue;
+  const additionalCustomers = extraLeads * closeRate / 100;
+  const additionalRevenue = additionalCustomers * jobValue;
+  return { baselineRevenue, additionalCustomers, additionalRevenue, scenarioRevenue: baselineRevenue + additionalRevenue };
+}
+const money = (n: number) => n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 });
+const count = (n: number) => n.toLocaleString('en-US', { maximumFractionDigits: 2 });
+
+export function LeadValueCalculator({ full = false }: { full?: boolean }) {
+  const [values, setValues] = useState(['', '', '', '']);
+  const [showResults, setShowResults] = useState(false);
+  const parsed = values.map(v => v.trim() === '' ? NaN : Number(v));
+  const result = estimateLeadValue(parsed[0], parsed[1], parsed[2], parsed[3]);
+  const fields = [
+    { label: 'Current monthly leads', help: 'Use enquiries, not website visits.', max: 1000000000, step: '1' },
+    { label: 'Lead-to-customer close rate (%)', help: 'What share of leads become paying customers?', max: 100, step: 'any' },
+    { label: 'Average job or sale value (USD)', help: 'Use one sale value, not lifetime value.', max: 1000000000000, step: 'any' },
+    { label: 'Extra monthly leads to model', help: 'Your what-if input, not a predicted AI uplift.', max: 1000000000, step: '1' },
+  ];
+  const prefix = full ? 'calc' : 'home-calc';
+  return (
+    <div className="card p-6 sm:p-8 md:p-10">
+      <p className="text-sm leading-relaxed text-ink-soft">Enter your own numbers to see what extra leads could be worth. Nothing here measures your AI visibility, predicts lost traffic or promises more enquiries. No email required.</p>
+      <form className="mt-7" onSubmit={e => { e.preventDefault(); if (result) setShowResults(true); }}>
+        <div className="grid gap-6 sm:grid-cols-2">
+          {fields.map((field, i) => (
+            <div key={field.label}>
+              <label htmlFor={`${prefix}-${i}`} className="mb-2 block text-sm font-medium text-ink">{field.label}</label>
+              <input id={`${prefix}-${i}`} type="number" required min="0" max={field.max} step={field.step}
+                value={values[i]} onChange={e => { setValues(values.map((v, j) => j === i ? e.target.value : v)); setShowResults(false); }}
+                aria-describedby={`${prefix}-help-${i}`}
+                className="w-full rounded-xl border border-line bg-paper px-4 py-3 text-base text-ink focus:border-violet focus:outline-none focus:ring-1 focus:ring-violet" />
+              <p id={`${prefix}-help-${i}`} className="mt-2 text-xs leading-relaxed text-ink-soft">{field.help}</p>
+            </div>
+          ))}
+        </div>
+        <button type="submit" className="btn-primary mt-7 w-full sm:w-auto">Calculate estimate <ArrowRight className="h-4 w-4" /></button>
+      </form>
+      <p className="mt-4 text-xs leading-relaxed text-ink-faint">All four inputs are required. Zero is valid. All results use one month and USD. Your inputs are calculated in this page and are not submitted as a lead.</p>
+      {showResults && result && <div className="mt-8 border-t border-line pt-7" aria-live="polite">
+        <p className="eyebrow">Your monthly what-if estimate</p>
+        <div className="mt-5 grid gap-4 sm:grid-cols-2">
+          {[
+            ['Current estimated monthly revenue', money(result.baselineRevenue)],
+            ['Extra expected customers per month', count(result.additionalCustomers)],
+            ['Additional estimated monthly revenue', money(result.additionalRevenue)],
+            ['Total monthly revenue in this scenario', money(result.scenarioRevenue)],
+          ].map(([label, value]) => <div key={label} className="min-w-0 rounded-xl border border-line bg-paper p-5">
+            <p className="text-xs leading-relaxed text-ink-soft">{label}</p>
+            <p className="mt-2 break-words font-serif text-3xl font-medium text-ink">{value}</p>
+          </div>)}
+        </div>
+        <p className="mt-5 text-sm leading-relaxed text-ink-soft">Formula: extra monthly leads × close rate ÷ 100 × average job value = additional estimated monthly revenue. Example only: 10 extra leads × 20% × $500 = $1,000 per month.</p>
+        <p className="mt-3 text-sm leading-relaxed text-ink-soft">This is revenue, not profit or ROI. Delivery costs, margins, marketing spend, refunds and repeat business are excluded. Fractional customers represent an average over time. The scenario assumes your entered close rate and sale value apply to the extra leads; that may not happen in practice.</p>
+        {full && <p className="mt-3 text-sm leading-relaxed text-ink-soft">To check whether AI is actually a source of leads, record how customers found you and compare it with your analytics and sales records. This calculator does not collect or verify those records.</p>}
+      </div>}
+    </div>
+  );
+}
 
 export function HomeCalculator() {
-  const [traffic, setTraffic] = useState('10000');
-  const [conversion, setConversion] = useState('2.0');
-  const [ltv, setLtv] = useState('500');
-  const [showResults, setShowResults] = useState(false);
-
-  const calc = useMemo(() => {
-    const t = parseFloat(traffic) || 0;
-    const cr = (parseFloat(conversion) || 2) / 100;
-    const value = parseFloat(ltv) || 0;
-
-    const traditionalLossRate = 0.35;
-    const geoConversionMultiplier = 2.1;
-    const geoRecaptureRate = 0.30;
-
-    const currentMonthlyRevenue = t * cr * value * 12;
-    const revenueLostAnnual = t * traditionalLossRate * cr * value * 12;
-    const geoRevenuePotentialAnnual = t * traditionalLossRate * geoRecaptureRate * cr * geoConversionMultiplier * value * 12;
-    const netAnnualLoss = revenueLostAnnual - geoRevenuePotentialAnnual;
-
-    return { currentMonthlyRevenue, revenueLostAnnual, geoRevenuePotentialAnnual, netAnnualLoss };
-  }, [traffic, conversion, ltv]);
-
-  return (
-    <section className="border-b border-line bg-paper py-24">
-      <div className="container-page max-w-4xl">
-        <FadeIn>
-          <p className="eyebrow text-center">See your numbers</p>
-          <h2 className="mt-4 text-center font-serif text-4xl font-medium tracking-tight text-ink sm:text-5xl">
-            What is this shift costing you?
-          </h2>
-          <p className="mt-4 text-center text-lg text-ink-soft">
-            Explore a hypothetical scenario. The model assumes a 35% traffic reduction, 30% recapture and 2.1× conversion. These are illustrative assumptions, not measured results or a forecast.
-          </p>
-        </FadeIn>
-
-        <FadeIn delay={0.1}>
-          <div className="mt-12 card p-8 md:p-10">
-            {!showResults ? (
-              <div className="grid gap-5 sm:grid-cols-4">
-                <div>
-                  <label htmlFor="hc-traffic" className="mb-1.5 block text-xs font-medium text-ink-soft">
-                    Monthly organic traffic
-                  </label>
-                  <input
-                    id="hc-traffic"
-                    type="number"
-                    min="0"
-                    value={traffic}
-                    onChange={(e) => setTraffic(e.target.value)}
-                    className="w-full rounded-xl border border-line bg-paper px-4 py-3 text-sm text-ink placeholder:text-ink-faint focus:border-violet focus:outline-none focus:ring-1 focus:ring-violet"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="hc-cr" className="mb-1.5 block text-xs font-medium text-ink-soft">
-                    Conversion rate (%)
-                  </label>
-                  <input
-                    id="hc-cr"
-                    type="number"
-                    min="0"
-                    max="100"
-                    step="0.1"
-                    value={conversion}
-                    onChange={(e) => setConversion(e.target.value)}
-                    className="w-full rounded-xl border border-line bg-paper px-4 py-3 text-sm text-ink placeholder:text-ink-faint focus:border-violet focus:outline-none focus:ring-1 focus:ring-violet"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="hc-ltv" className="mb-1.5 block text-xs font-medium text-ink-soft">
-                    Avg customer value ($)
-                  </label>
-                  <input
-                    id="hc-ltv"
-                    type="number"
-                    min="0"
-                    value={ltv}
-                    onChange={(e) => setLtv(e.target.value)}
-                    className="w-full rounded-xl border border-line bg-paper px-4 py-3 text-sm text-ink placeholder:text-ink-faint focus:border-violet focus:outline-none focus:ring-1 focus:ring-violet"
-                  />
-                </div>
-                <div className="flex items-end">
-                  <button
-                    onClick={() => setShowResults(true)}
-                    className="btn-primary w-full"
-                  >
-                    See impact
-                    <ArrowRight className="h-4 w-4" />
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <>
-                {/* Results */}
-                <div className="grid gap-6 sm:grid-cols-3">
-                  <div className="rounded-xl border border-red-200 bg-red-50/50 p-5 text-center">
-                    <TrendingDown className="mx-auto h-5 w-5 text-red-500" />
-                    <p className="mt-2 font-serif text-3xl font-medium text-red-600">{fmt(calc.revenueLostAnnual)}</p>
-                    <p className="mt-1 text-xs text-red-600/80">Annual revenue at risk</p>
-                  </div>
-                  <div className="rounded-xl border border-green-200 bg-green-50/50 p-5 text-center">
-                    <TrendingUp className="mx-auto h-5 w-5 text-green-600" />
-                    <p className="mt-2 font-serif text-3xl font-medium text-green-700">{fmt(calc.geoRevenuePotentialAnnual)}</p>
-                    <p className="mt-1 text-xs text-green-700/80">GEO recapture potential</p>
-                  </div>
-                  <div className="rounded-xl border border-violet/20 bg-violet-tint p-5 text-center">
-                    <DollarSign className="mx-auto h-5 w-5 text-violet" />
-                    <p className="mt-2 font-serif text-3xl font-medium text-violet">{fmt(calc.netAnnualLoss)}</p>
-                    <p className="mt-1 text-xs text-ink-soft">Net annual impact</p>
-                  </div>
-                </div>
-
-                <div className="mt-6 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-                  <Link to="/calculator" className="btn-primary">
-                    Get the full breakdown
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                  <button
-                    onClick={() => setShowResults(false)}
-                    className="text-sm text-ink-faint hover:text-ink"
-                  >
-                    ← recalculate
-                  </button>
-                </div>
-              </>
-            )}
-          </div>
-        </FadeIn>
-      </div>
-    </section>
-  );
+  return <section className="border-b border-line bg-paper py-24">
+    <div className="container-page max-w-4xl">
+      <p className="eyebrow text-center">See your numbers</p>
+      <h2 className="mt-4 text-center font-serif text-4xl font-medium tracking-tight text-ink sm:text-5xl">What could a few more leads be worth?</h2>
+      <p className="mt-4 text-center text-lg text-ink-soft">A planning estimate using your numbers, not a forecast.</p>
+      <div className="mt-10"><LeadValueCalculator /></div>
+      <p className="mt-6 text-center"><Link to="/calculator" className="text-sm text-violet underline">How the estimate works</Link></p>
+    </div>
+  </section>;
 }
