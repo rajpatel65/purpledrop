@@ -84,9 +84,9 @@ export const ROUTE_SEO: Record<string, RouteSeo> = {
     path: '/scorecard',
   },
   '/calculator': {
-    title: 'SEO Risk & GEO Opportunity Calculator — purpleDrop',
+    title: 'Lead Value Calculator — purpleDrop',
     description:
-      "See how much revenue you're losing as buyers shift from Google to AI assistants — and what GEO optimization could recapture.",
+      "Estimate what extra monthly leads could be worth using your own close rate and job value. No predicted AI uplift, no email required.",
     path: '/calculator',
   },
   '/soc2': {
@@ -111,4 +111,4 @@ export function essaySeo(slug: string): RouteSeo | null {
     path: `/resources/${essay.slug}`,
     type: 'article',
   };
-}
+    }
