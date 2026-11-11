@@ -15,7 +15,6 @@ const STATIC_ROUTES = [
   { path: '/resources', priority: '0.7', changefreq: 'weekly' },
   { path: '/scorecard', priority: '0.8', changefreq: 'monthly' },
   { path: '/calculator', priority: '0.8', changefreq: 'monthly' },
-  { path: '/soc2', priority: '0.7', changefreq: 'monthly' },
   { path: '/privacy', priority: '0.2', changefreq: 'yearly' },
   { path: '/terms', priority: '0.2', changefreq: 'yearly' },
 ];
