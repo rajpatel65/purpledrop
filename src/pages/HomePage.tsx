@@ -6,7 +6,6 @@ import { ROUTE_SEO } from '../lib/route-seo';
 import { Layout } from '../components/Layout';
 import { FadeIn } from '../components/FadeIn';
 import { CtaBand } from '../components/CtaBand';
-import { ServiceRow } from '../components/ServiceRow';
 import { ProcessRail } from '../components/ProcessRail';
 import { CHAPTERS, SERVICES, PROCESS, CONTACT } from '../lib/content';
 import { homePageFaqs } from '../lib/faqs';
@@ -17,62 +16,21 @@ import { HomeCalculator } from '../components/HomeCalculator';
 
 const HeroScene = lazy(() => import('../components/HeroScene').then((m) => ({ default: m.HeroScene })));
 
-type FreeTool = {
-  to: string;
-  label: string;
-  description: string;
-  icon: React.ElementType;
-  highlight: string;
-};
-
-const FREE_TOOLS: FreeTool[] = [
-  {
-    to: '/soc2',
-    label: 'SOC2 Readiness Assessment',
-    description: '42 questions across CC1–CC9. Email-verified. Download JSON/CSV gap report. Every "No" and "Don\'t know" becomes a lead signal for us.',
-    icon: Shield,
-    highlight: 'Most comprehensive',
-  },
-  {
-    to: '/scorecard',
-    label: 'Security Scorecard',
-    description: 'Verify your email with a code, then view six automated public checks on screen. Results last up to 10 minutes and clear when you leave or switch tabs. No report is emailed.',
-    icon: SearchCheck,
-    highlight: 'Instant on-screen checks',
-  },
-  {
-    to: '/calculator',
-    label: 'Lead Value Calculator',
-    description: 'Explore a hypothetical revenue scenario using your inputs and the assumptions shown. This is not a forecast.',
-    icon: Calculator,
-    highlight: 'Revenue math',
-  },
-];
-
-function FreeToolCard({ tool }: { tool: typeof FREE_TOOLS[0] }) {
-  const Icon = tool.icon;
+function CheckCard({ number, title, subtitle, icon: Icon, children, dark = false }: {
+  number: string; title: string; subtitle: string; icon: React.ElementType;
+  children: React.ReactNode; dark?: boolean;
+}) {
   return (
-    <Link
-      to={tool.to}
-      className="group relative flex flex-col h-full p-6 bg-paper border border-line rounded-2xl hover:border-violet/40 hover:shadow-lg transition-all duration-300"
-    >
-      <div className="flex items-start justify-between gap-4 mb-4">
-        <div className="p-3 rounded-xl bg-violet-tint text-violet group-hover:bg-violet group-hover:text-white transition-colors">
-          <Icon className="h-6 w-6" />
-        </div>
-        {tool.highlight && (
-          <span className="flex-shrink-0 px-2 py-0.5 text-[10px] font-mono font-medium uppercase tracking-[0.1em] bg-violet/10 text-violet rounded-full">
-            {tool.highlight}
-          </span>
-        )}
+    <article className={`relative flex h-full flex-col overflow-hidden rounded-[28px] border p-7 sm:p-8 ${dark ? 'border-violet-deep bg-violet-deep text-white shadow-[0_20px_60px_-30px_rgba(76,29,149,0.55)]' : 'border-line bg-paper text-ink shadow-[0_20px_60px_-40px_rgba(76,29,149,0.2)]'}`}>
+      {dark && <div className="pointer-events-none absolute -right-12 -top-12 h-64 w-64 rounded-full bg-violet/40 blur-3xl" />}
+      <div className="relative mb-10 flex items-center justify-between">
+        <span className={`font-mono text-xs tracking-[0.18em] ${dark ? 'text-violet-200' : 'text-ink-faint'}`}>{number} / YOUR NEXT QUESTION</span>
+        <Icon className={`h-6 w-6 ${dark ? 'text-violet-200' : 'text-violet'}`} strokeWidth={1.4} />
       </div>
-      <h3 className="font-semibold text-lg text-ink mb-2 group-hover:text-violet transition-colors">{tool.label}</h3>
-      <p className="text-sm text-ink-soft leading-relaxed flex-1 mb-4">{tool.description}</p>
-      <div className="flex items-center gap-2 text-sm font-medium text-violet group-hover:gap-3 transition-all">
-        Start now
-        <ArrowUpRight className="h-4 w-4" />
-      </div>
-    </Link>
+      <h3 className="relative font-serif text-[2rem] font-medium leading-tight tracking-tight">{title}</h3>
+      <p className={`relative mt-4 text-base leading-relaxed ${dark ? 'text-violet-100' : 'text-ink-soft'}`}>{subtitle}</p>
+      <div className="relative mt-7 flex flex-1 flex-col">{children}</div>
+    </article>
   );
 }
 
@@ -225,24 +183,61 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* FREE TOOLS — Prominent placement right after hero */}
-      <section id="tools" className="border-t border-line bg-cream/30 py-20">
-        <div className="container-page">
+      {/* THREE CHOICES: two self-guided checks and a scoped paid review */}
+      <section id="tools" className="relative overflow-hidden border-t border-line bg-cream/40 py-20 md:py-28">
+        <div className="pointer-events-none absolute right-0 top-0 h-96 w-96 rounded-full bg-violet-tint/60 blur-3xl" />
+        <div className="container-page relative">
           <FadeIn>
-            <div className="text-center max-w-3xl mx-auto mb-12">
-              <p className="eyebrow">Free Tools</p>
-              <h2 className="mt-4 font-serif text-4xl font-medium tracking-tight text-ink sm:text-5xl">
-                Start here. No call required.
-              </h2>
-              <p className="mt-4 text-lg leading-relaxed text-ink-soft">
-                Three self-serve diagnostics that show you exactly where you stand — before you spend a dollar.
-                Each tool explains its limits. The scorecard shows temporary on-screen results; the SOC2 self-assessment offers a downloadable gap report.
-              </p>
+            <div className="mb-12 grid gap-6 md:grid-cols-[1fr_0.65fr] md:items-end">
+              <div>
+                <p className="eyebrow">Three questions. A clearer next step.</p>
+                <h2 className="mt-5 max-w-2xl font-serif text-4xl font-medium leading-[1.08] tracking-tight text-ink sm:text-5xl">Start with the question<br className="hidden sm:block" /> on your mind.</h2>
+              </div>
+              <p className="max-w-md text-lg leading-relaxed text-ink-soft">Two quick checks you can do yourself. A deeper security review when you need one. No score dressed up as a promise.</p>
             </div>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {FREE_TOOLS.map((tool) => (
-                <FreeToolCard key={tool.to} tool={tool} />
-              ))}
+          </FadeIn>
+          <div className="grid gap-5 lg:grid-cols-3">
+            <FadeIn>
+              <CheckCard number="01" title="Can AI find me?" subtitle="Start with the answer your buyers might see." icon={SearchCheck} dark>
+                <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-violet-200">Free / self-guided</p>
+                <div className="mt-5 rounded-2xl border border-white/15 bg-white/5 p-5">
+                  <p className="font-serif text-xl leading-snug">&ldquo;Who should I hire for [your service] in [your area]?&rdquo;</p>
+                </div>
+                <p className="mt-5 text-sm leading-relaxed text-violet-100">Ask an AI assistant. Save the question, date, answer and linked sources. Is your business named? Is the description right? Repeat in another assistant.</p>
+                <p className="mb-7 mt-4 text-xs leading-relaxed text-violet-200">One answer is a snapshot, not a ranking. Answers vary by tool, wording and time. This is a manual check, not an automated AI scan.</p>
+                <Link to="/contact" className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-white">Want help reading the answer? <ArrowUpRight className="h-4 w-4" /></Link>
+              </CheckCard>
+            </FadeIn>
+            <FadeIn delay={0.08}>
+              <CheckCard number="02" title="Is my site dated?" subtitle="Look at your website the way a new customer does." icon={Smartphone}>
+                <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-violet">Free / self-guided</p>
+                <ol className="mt-5 divide-y divide-line text-sm leading-relaxed text-ink-soft">
+                  <li className="py-3">Open it on your phone. Can you read it without pinching or zooming?</li>
+                  <li className="py-3">Can a new visitor tell what you do, where you work and why to trust you?</li>
+                  <li className="py-3">Try the main button and contact form. Is the next step obvious?</li>
+                </ol>
+                <p className="mb-7 mt-5 text-xs leading-relaxed text-ink-faint">A useful first look, not a performance test or accessibility audit. A redesign preview is a separate conversation.</p>
+                <Link to="/contact" className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-violet">Talk through a redesign preview <ArrowUpRight className="h-4 w-4" /></Link>
+              </CheckCard>
+            </FadeIn>
+            <FadeIn delay={0.16}>
+              <CheckCard number="03" title="Is my site safe?" subtitle="Start with public basics. Go deeper with a clear scope." icon={Shield}>
+                <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-violet">Free basics / paid review</p>
+                <p className="mt-5 text-sm leading-relaxed text-ink-soft">The free scorecard checks six public homepage and DNS foundations. Verify your email to see temporary results on screen.</p>
+                <Link to="/scorecard" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-violet">Run the free security scorecard <ArrowUpRight className="h-4 w-4" /></Link>
+                <div className="my-6 border-t border-line pt-5">
+                  <p className="font-semibold text-ink">Need more than the basics?</p>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-soft">A paid security configuration review: agreed scope, findings and a prioritized fix plan.</p>
+                </div>
+                <p className="mb-7 text-xs leading-relaxed text-ink-faint">Neither option proves a site is secure. The review is not a penetration test or a certification.</p>
+                <Link to="/contact" className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-violet">Discuss a security review <ArrowUpRight className="h-4 w-4" /></Link>
+              </CheckCard>
+            </FadeIn>
+          </div>
+          <FadeIn>
+            <div className="mt-7 flex flex-col justify-between gap-4 rounded-2xl border border-line bg-paper/70 p-6 sm:flex-row sm:items-center">
+              <div><p className="font-semibold text-ink">Want to put a number on a what-if?</p><p className="mt-1 text-sm text-ink-soft">Use your own inputs. No invented losses, no predicted uplift.</p></div>
+              <Link to="/calculator" className="inline-flex items-center gap-2 text-sm font-semibold text-violet">Open the lead value calculator <ArrowRight className="h-4 w-4" /></Link>
             </div>
           </FadeIn>
         </div>
@@ -313,8 +308,12 @@ export function HomePage() {
             </div>
           </FadeIn>
           <div className="mt-8">
-            {SERVICES.map((service, i) => (
-              <ServiceRow key={service.id} service={service} index={i} />
+            {SERVICES.map((service) => (
+              <div key={service.id} className="border-t border-line py-8">
+                <h3 className="font-serif text-3xl text-ink">{service.title}</h3>
+                <p className="mt-3 max-w-2xl text-ink-soft">{service.outcome}</p>
+                <Link to="/contact" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-violet">Discuss the scope <ArrowRight className="h-4 w-4" /></Link>
+              </div>
             ))}
           </div>
         </div>
@@ -386,4 +385,4 @@ export function HomePage() {
       />
     </Layout>
   );
-}
+      }
