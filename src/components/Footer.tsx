@@ -31,7 +31,7 @@ const COLUMNS = [
     heading: 'Free Tools',
     links: [
       { to: '/scorecard', label: 'Security Scorecard' },
-      { to: '/calculator', label: 'AI Visibility Calculator' },
+      { to: '/calculator', label: 'Lead Value Calculator' },
       { to: '/soc2', label: 'SOC2 Readiness Assessment' },
     ],
   },
@@ -92,4 +92,4 @@ export function Footer() {
       </div>
     </footer>
   );
-}
+  }
