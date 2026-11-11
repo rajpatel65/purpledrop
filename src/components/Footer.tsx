@@ -5,7 +5,7 @@ const COLUMNS = [
   {
     heading: 'Services',
     links: [
-      { to: '/services', label: 'Audit, consulting and follow-through' },
+      { to: '/services', label: 'Review, planning day and support' },
       { to: '/pricing', label: 'Pricing' },
     ],
   },
@@ -23,7 +23,7 @@ const COLUMNS = [
     links: [
       { to: '/resources', label: 'All essays' },
       { to: '/resources/the-report-your-web-agency-sends-you', label: 'The agency report, decoded' },
-      { to: '/resources/your-buyers-ask-ai-before-they-ask-you', label: 'Buyers ask AI first' },
+      { to: '/resources/your-buyers-ask-ai-before-they-ask-you', label: 'Buyers may ask AI first' },
       { to: '/resources/the-quiet-cost-of-a-beautiful-website', label: 'The cost of beauty' },
     ],
   },
@@ -44,8 +44,8 @@ export function Footer() {
           <div>
             <Logo />
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-ink-soft">
-              We help established companies get recommended by the AI tools their buyers
-              actually consult — then keep watching what the answer says.
+              AI visibility reviews and website help for business owners. See the gaps,
+              agree the work and check what changes.
             </p>
             <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.2em] text-violet">
               United States · working with companies everywhere
@@ -91,4 +91,4 @@ export function Footer() {
       </div>
     </footer>
   );
-            }
+}
