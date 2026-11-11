@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Mail, Shield, Calculator, SearchCheck, ArrowUpRight, Smartphone } from 'lucide-react';
 import { useSeo } from '../hooks/useSeo';
@@ -86,98 +86,32 @@ function Chapter({ index }: { index: number }) {
 
 export function HomePage() {
   useSeo(ROUTE_SEO['/']);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   return (
     <Layout>
-      {/* HERO */}
-      <section className="relative overflow-hidden bg-paper">
+      {/* A single brand sculpture, with the offer kept in normal HTML. */}
+      <section className="bg-paper pb-12 pt-10 md:pb-16 md:pt-14">
         <div className="container-page">
-          <div className="grid items-stretch lg:grid-cols-[1.08fr_0.92fr]">
-            <div className="flex flex-col justify-center py-20 md:py-24 lg:py-32 lg:pr-14">
-              <FadeIn>
-                <p className="eyebrow">AI & search visibility experts</p>
-              </FadeIn>
-              <FadeIn delay={0.08}>
-                <h1 className="mt-6 max-w-3xl font-serif text-5xl font-medium leading-[1.05] tracking-tight text-ink [text-wrap:balance] sm:text-6xl lg:text-[4.4rem]">
-                  Doing nothing is a decision.{' '}
-                  <span className="italic text-violet">Your competitors&rsquo; websites thank you for it.</span>
-                </h1>
-              </FadeIn>
-              <FadeIn delay={0.16}>
-                <p className="mt-8 max-w-2xl text-lg leading-relaxed text-ink-soft sm:text-xl">
-                  Every month, buyers get one answer and a shortlist. If your business isn&rsquo;t clear
-                  to the systems answering, someone else gets the call - and you never see it happen.
-                  Check where you stand in three plain-English ways. Free to look, yours to keep.
-                </p>
-              </FadeIn>
-              <FadeIn delay={0.24}>
-                <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-                  <Link to="/scorecard" className="btn-primary">
-                    See where you stand - free
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                  <Link to="/contact" className="btn-outline">
-                    Request a free 30-minute call
-                  </Link>
-                </div>
-                <p className="mt-6 flex items-center gap-2 text-sm text-ink-soft">
-                  <Calculator className="h-4 w-4 text-violet" />
-                  What are a few lost jobs a month worth?{' '}
-                  <Link to="/calculator" className="font-medium text-violet underline decoration-violet/30 underline-offset-4 hover:decoration-violet">
-                    Put your own numbers in the calculator.
-                  </Link>
-                </p>
-                <div className="mt-8 grid gap-3 sm:grid-cols-3">
-                  <Link to="/scorecard" className="group rounded-xl border border-line bg-cream/40 p-4 transition-colors hover:border-violet/30 hover:bg-cream/70">
-                    <div className="flex items-center gap-2 font-semibold text-ink">
-                      <SearchCheck className="h-4 w-4 text-violet" />
-                      Can AI find me?
-                    </div>
-                    <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-                      Free check. See what the first answer can and can&rsquo;t say about you.
-                    </p>
-                  </Link>
-                  <Link to="/scorecard" className="group rounded-xl border border-line bg-cream/40 p-4 transition-colors hover:border-violet/30 hover:bg-cream/70">
-                    <div className="flex items-center gap-2 font-semibold text-ink">
-                      <Smartphone className="h-4 w-4 text-violet" />
-                      Is my site dated?
-                    </div>
-                    <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-                      Free check. Your site on a phone, and what it&rsquo;s really built on.
-                    </p>
-                  </Link>
-                  <Link to="/services" className="group rounded-xl border border-line bg-cream/40 p-4 transition-colors hover:border-violet/30 hover:bg-cream/70">
-                    <div className="flex items-center gap-2 font-semibold text-ink">
-                      <Shield className="h-4 w-4 text-violet" />
-                      Is my site safe?
-                    </div>
-                    <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-                      Free basics now, full security review with a fix plan when you&rsquo;re ready.
-                    </p>
-                  </Link>
-                </div>
-              </FadeIn>
-              <FadeIn delay={0.32}>
-                <p className="mt-10 font-mono text-xs uppercase tracking-[0.18em] text-ink-faint">
-                  100% senior-led · Fixed published prices · You keep the audit report
-                </p>
-              </FadeIn>
+          <div className="grid gap-x-12 gap-y-7 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+            <div className="contents lg:block lg:py-6">
+              <h1 className="order-1 max-w-3xl font-serif text-[2.9rem] font-medium leading-[1.04] tracking-tight text-ink [text-wrap:balance] sm:text-6xl lg:text-[3.7rem] xl:text-[4.2rem]">
+                Doing nothing is a decision.{' '}
+                <span className="italic text-violet">Your competitors&rsquo; websites thank you for it.</span>
+              </h1>
+              <p className="order-3 mt-0 lg:mt-6 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">Every month, buyers get one answer and a shortlist. If your business isn&rsquo;t clear to the systems answering, someone else gets the call - and you never see it happen.</p>
+              <div className="order-4 mt-0 lg:mt-7 flex flex-wrap gap-3">
+                <a href="#tools" className="btn-primary">Explore the three checks <ArrowRight className="h-4 w-4" /></a>
+                <Link to="/contact" className="btn-outline">Request a free 30-minute call</Link>
+              </div>
+              <p className="order-5 mt-0 lg:mt-5 max-w-lg text-sm leading-relaxed text-ink-soft">Check where you stand in three plain-English ways. Two free self-guided checks. A deeper security review when you need one.</p>
             </div>
-
-            {/* Shaded 3D panel */}
-            <div className="relative h-[340px] sm:h-[440px] lg:h-auto lg:min-h-[640px]">
-              <div className="absolute inset-0 bg-gradient-to-br from-cream/60 via-cream to-violet-tint" />
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_55%_at_68%_78%,rgba(124,58,237,0.20),transparent_70%)]" />
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_28%_12%,rgba(212,168,67,0.12),transparent_70%)]" />
-              <div className="absolute inset-0 opacity-30 [background-image:radial-gradient(rgba(109,40,217,0.14)_1px,transparent_1px)] [background-size:24px_24px]" />
-              <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-paper to-transparent lg:w-28" />
-              <Suspense
-                fallback={
-                  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(109,40,217,0.12),transparent_62%)]" />
-                }
-              >
-                <HeroScene />
-              </Suspense>
+            <div className="order-2 lg:order-none relative h-[350px] overflow-hidden rounded-[4px] bg-[#21152e] sm:h-[490px] lg:h-[640px]">
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_12%,rgba(181,148,216,0.19),transparent_65%)]" />
+              <div className="absolute left-7 top-7 z-10 flex items-center gap-2 text-xs text-[#d6c5e7]"><span className="h-1.5 w-1.5 rounded-full bg-[#b9a0d4]" />purpleDrop / a clearer presence</div>
+              {mounted ? <Suspense fallback={<img src="/drop-poster.svg" alt="" className="absolute inset-0 h-full w-full object-contain" />}><HeroScene /></Suspense> : <img src="/drop-poster.svg" alt="" className="absolute inset-0 h-full w-full object-contain" />}
+              <p className="absolute bottom-7 left-7 right-7 border-t border-white/20 pt-4 text-xs leading-relaxed text-[#d6c5e7]">Less noise. More clarity.<span className="mt-1 block text-[#b7a2c9]">An illustration, not a visibility score.</span></p>
             </div>
           </div>
         </div>
@@ -237,7 +171,7 @@ export function HomePage() {
           <FadeIn>
             <div className="mt-7 flex flex-col justify-between gap-4 rounded-2xl border border-line bg-paper/70 p-6 sm:flex-row sm:items-center">
               <div><p className="font-semibold text-ink">Want to put a number on a what-if?</p><p className="mt-1 text-sm text-ink-soft">Use your own inputs. No invented losses, no predicted uplift.</p></div>
-              <Link to="/calculator" className="inline-flex items-center gap-2 text-sm font-semibold text-violet">Open the lead value calculator <ArrowRight className="h-4 w-4" /></Link>
+              <Link to="/calculator" className="inline-flex items-center gap-2 text-sm font-semibold text-violet">Open the lead value calculator <Calculator className="h-4 w-4" /></Link>
             </div>
           </FadeIn>
         </div>

@@ -1,291 +1,102 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 
-const NODE_COUNT = 60;
-const ASSEMBLE_DURATION = 2.5;
-const RADIUS = 3.2;
-const SCATTER_SPREAD = 12;
-
-function fibonacciSphere(count: number, radius: number) {
-  const points: THREE.Vector3[] = [];
-  const goldenAngle = Math.PI * (3 - Math.sqrt(5));
-  for (let i = 0; i < count; i++) {
-    const y = 1 - (i / (count - 1)) * 2;
-    const r = Math.sqrt(Math.max(0, 1 - y * y));
-    const theta = goldenAngle * i;
-    points.push(
-      new THREE.Vector3(Math.cos(theta) * r, y, Math.sin(theta) * r).multiplyScalar(radius),
-    );
-  }
-  return points;
-}
-
-function scatterPoint(spread: number) {
-  return new THREE.Vector3(
-    (Math.random() - 0.5) * spread,
-    (Math.random() - 0.5) * spread,
-    (Math.random() - 0.5) * spread,
-  );
-}
-
-function dustField(count: number, inner: number, outer: number) {
-  const positions = new Float32Array(count * 3);
-  for (let i = 0; i < count; i++) {
-    const dir = new THREE.Vector3(
-      Math.random() * 2 - 1,
-      Math.random() * 2 - 1,
-      Math.random() * 2 - 1,
-    ).normalize();
-    const r = inner + Math.random() * (outer - inner);
-    positions.set([dir.x * r, dir.y * r, dir.z * r], i * 3);
-  }
-  return positions;
-}
-
-const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
-
+/** A single authored brand object. Decorative: no claims or controls live in the canvas. */
 export function HeroScene() {
   const mountRef = useRef<HTMLDivElement>(null);
-
+  const [ready, setReady] = useState(false);
   useEffect(() => {
     const mount = mountRef.current;
     if (!mount) return;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    const scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(0xf6f1e7, 8.5, 16);
-    const camera = new THREE.PerspectiveCamera(45, mount.clientWidth / Math.max(mount.clientHeight, 1), 0.1, 100);
-    camera.position.z = 8;
-
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
-    renderer.setClearColor(0x000000, 0);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-    renderer.setSize(mount.clientWidth, mount.clientHeight);
+    const motion = matchMedia('(prefers-reduced-motion: reduce)');
+    let renderer: THREE.WebGLRenderer;
+    try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' }); }
+    catch { return; } // The poster remains visible when WebGL is unavailable.
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+    renderer.setSize(mount.clientWidth, Math.max(1, mount.clientHeight));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.12;
+    renderer.toneMappingExposure = 1.25;
     mount.appendChild(renderer.domElement);
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(35, mount.clientWidth / Math.max(1, mount.clientHeight), 0.1, 50);
+    camera.position.set(0, 0.25, 8.8);
+    camera.lookAt(0, 0.2, 0);
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    const room = new RoomEnvironment();
+    const environment = pmrem.fromScene(room, 0.04);
+    scene.environment = environment.texture;
+    room.dispose();
+    const key = new THREE.DirectionalLight(0xfff3e4, 4);
+    key.position.set(-3, 4, 5); scene.add(key);
+    const rim = new THREE.DirectionalLight(0xa68bff, 3);
+    rim.position.set(3, 1, -2); scene.add(rim);
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x24113f, 1.4));
 
-    // Lighting: warm key, violet rim, champagne accent - reads as polished chrome on cream.
-    scene.add(new THREE.AmbientLight(0xfff6e8, 0.68));
-    const key = new THREE.DirectionalLight(0xffffff, 1.3);
-    key.position.set(4, 6, 6);
-    scene.add(key);
-    const rim = new THREE.PointLight(0x8b5cf6, 26, 24, 2);
-    rim.position.set(-5.5, -2, -3.5);
-    scene.add(rim);
-    const accent = new THREE.PointLight(0xf0b95e, 14, 20, 2);
-    accent.position.set(3.5, -4, 2.5);
-    scene.add(accent);
-
-    const group = new THREE.Group();
-    scene.add(group);
-
-    // Chrome-violet torus knot core, scaled in during the assemble.
-    const coreGeo = new THREE.TorusKnotGeometry(1.02, 0.3, 220, 36);
-    const coreMat = new THREE.MeshStandardMaterial({
-      color: 0x7c3aed,
-      metalness: 0.85,
-      roughness: 0.22,
+    // Curved lathe profile, not a stock knot: broad belly, drawn-out point, rounded base.
+    const curve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(0,-1.45,0), new THREE.Vector3(0.58,-1.34,0),
+      new THREE.Vector3(1.04,-0.96,0), new THREE.Vector3(1.17,-0.35,0),
+      new THREE.Vector3(1.01,0.35,0), new THREE.Vector3(0.62,1.05,0),
+      new THREE.Vector3(0.22,1.75,0), new THREE.Vector3(0,2.28,0),
+    ]);
+    const profile = curve.getPoints(72).map(p => new THREE.Vector2(Math.max(0,p.x),p.y));
+    const geometry = new THREE.LatheGeometry(profile, 96);
+    const material = new THREE.MeshPhysicalMaterial({
+      color: 0x7852bd, metalness: 0.92, roughness: 0.17,
+      clearcoat: 1, clearcoatRoughness: 0.14, envMapIntensity: 1.65,
     });
-    const core = new THREE.Mesh(coreGeo, coreMat);
-    core.scale.setScalar(0.001);
-    group.add(core);
+    const drop = new THREE.Mesh(geometry, material);
+    const group = new THREE.Group(); group.add(drop); scene.add(group);
+    drop.rotation.z = -0.18;
+    group.scale.setScalar(0.82);
 
-    // Structural wire shell counter-rotating around the core.
-    const shellGeo = new THREE.IcosahedronGeometry(2.55, 1);
-    const shellMat = new THREE.MeshBasicMaterial({
-      color: 0x6d28d9,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.16,
-    });
-    const shell = new THREE.Mesh(shellGeo, shellMat);
-    group.add(shell);
+    const textureCanvas = document.createElement('canvas'); textureCanvas.width = textureCanvas.height = 128;
+    const context = textureCanvas.getContext('2d');
+    if (context) { const gradient = context.createRadialGradient(64,64,2,64,64,64); gradient.addColorStop(0,'rgba(6,2,17,0.6)'); gradient.addColorStop(1,'rgba(6,2,17,0)'); context.fillStyle=gradient; context.fillRect(0,0,128,128); }
+    const shadowTexture = new THREE.CanvasTexture(textureCanvas);
+    const shadowGeometry = new THREE.PlaneGeometry(4.8,1.15);
+    const shadowMaterial = new THREE.MeshBasicMaterial({map:shadowTexture,transparent:true,depthWrite:false,opacity:0.7});
+    const shadow = new THREE.Mesh(shadowGeometry,shadowMaterial); shadow.position.set(0,-1.85,-0.1); scene.add(shadow);
 
-    // Nodes: scattered cloud that assembles onto a sphere surface, lit so they catch the key light.
-    const endPositions = fibonacciSphere(NODE_COUNT, RADIUS);
-    const startPositions = endPositions.map(() => scatterPoint(SCATTER_SPREAD));
-    const current = startPositions.map((p) => p.clone());
-
-    const nodeGeo = new THREE.SphereGeometry(0.055, 12, 12);
-    const nodeMat = new THREE.MeshStandardMaterial({ color: 0x6d28d9, roughness: 0.35, metalness: 0.15 });
-    const mesh = new THREE.InstancedMesh(nodeGeo, nodeMat, NODE_COUNT);
-    const dummy = new THREE.Object3D();
-    group.add(mesh);
-
-    // Connection lines between nodes that land near each other.
-    const linePositions: number[] = [];
-    const threshold = RADIUS * 0.5;
-    for (let i = 0; i < endPositions.length; i++) {
-      for (let j = i + 1; j < endPositions.length; j++) {
-        if (endPositions[i].distanceTo(endPositions[j]) < threshold) {
-          linePositions.push(...endPositions[i].toArray(), ...endPositions[j].toArray());
-        }
-      }
-    }
-    const lineGeo = new THREE.BufferGeometry();
-    lineGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(linePositions), 3));
-    const lineMat = new THREE.LineBasicMaterial({
-      color: 0x6d28d9,
-      transparent: true,
-      opacity: 0,
-    });
-    const lines = new THREE.LineSegments(lineGeo, lineMat);
-    group.add(lines);
-
-    // Two dust layers give real depth: near violet motes, far warm sparks fading into fog.
-    const dustNearGeo = new THREE.BufferGeometry();
-    dustNearGeo.setAttribute('position', new THREE.BufferAttribute(dustField(340, 4.2, 7.5), 3));
-    const dustNearMat = new THREE.PointsMaterial({
-      color: 0x8b5cf6,
-      size: 0.045,
-      transparent: true,
-      opacity: 0.5,
-      sizeAttenuation: true,
-      depthWrite: false,
-    });
-    const dustNear = new THREE.Points(dustNearGeo, dustNearMat);
-    scene.add(dustNear);
-
-    const dustFarGeo = new THREE.BufferGeometry();
-    dustFarGeo.setAttribute('position', new THREE.BufferAttribute(dustField(140, 7.5, 12), 3));
-    const dustFarMat = new THREE.PointsMaterial({
-      color: 0xd9a648,
-      size: 0.07,
-      transparent: true,
-      opacity: 0.32,
-      sizeAttenuation: true,
-      depthWrite: false,
-    });
-    const dustFar = new THREE.Points(dustFarGeo, dustFarMat);
-    scene.add(dustFar);
-
-    const applyPose = (eased: number) => {
-      for (let i = 0; i < NODE_COUNT; i++) {
-        current[i].lerpVectors(startPositions[i], endPositions[i], eased);
-        dummy.position.copy(current[i]);
-        dummy.scale.setScalar(THREE.MathUtils.lerp(0.4, 1, eased));
-        dummy.updateMatrix();
-        mesh.setMatrixAt(i, dummy.matrix);
-      }
-      mesh.instanceMatrix.needsUpdate = true;
-      lineMat.opacity = eased > 0.75 ? 0.16 : 0;
-      core.scale.setScalar(Math.max(0.001, THREE.MathUtils.lerp(0.55, 1, eased)));
-      shellMat.opacity = THREE.MathUtils.lerp(0, 0.16, eased);
+    const pointer = {x:0,y:0}; let progress=0; let raf=0; let visible=false; let start=0;
+    let settled=false; let lastFrame=0;
+    const pose = (time:number) => {
+      const t = motion.matches ? 1 : Math.min((time-start)/1500,1);
+      const ease=1-Math.pow(1-t,4);
+      group.position.y = 0.12 + (1-ease)*0.38;
+      group.rotation.y = -0.32 + (1-ease)*0.5 + pointer.x*0.12 + progress*0.3;
+      group.rotation.x = pointer.y*0.07 + progress*0.08;
+      group.rotation.z = -0.08*ease;
+      settled=t===1;
+      renderer.render(scene,camera);
+      mount.dataset.rendered='true';
     };
-
-    const mouse = { x: 0, y: 0 };
-    const smooth = { x: 0, y: 0 };
-    const onMove = (e: MouseEvent) => {
-      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    const tick=(time:number)=> {
+      raf=0;
+      if (!visible || document.hidden) return;
+      // Deliberately settles to a still frame, no endless idle spin.
+      if (time-lastFrame>30 || settled) { pose(time);lastFrame=time; }
+      if(!settled&&!motion.matches) raf=requestAnimationFrame(tick);
     };
-    window.addEventListener('mousemove', onMove);
-
-    let scrollProgress = 0;
-    const onScroll = () => {
-      scrollProgress = Math.min(Math.max(window.scrollY / window.innerHeight, 0), 1);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-
-    const clock = new THREE.Clock();
-    let startTime: number | null = null;
-    let raf = 0;
-
-    const tick = () => {
-      raf = requestAnimationFrame(tick);
-      const delta = clock.getDelta();
-      const elapsed = clock.elapsedTime;
-      if (startTime === null) startTime = elapsed;
-      const t = Math.min((elapsed - startTime) / ASSEMBLE_DURATION, 1);
-      applyPose(easeOutCubic(t));
-
-      // Damped cursor parallax plus a scroll-linked turn, so the object feels physical.
-      smooth.x += (mouse.x - smooth.x) * 0.03;
-      smooth.y += (mouse.y - smooth.y) * 0.03;
-
-      core.rotation.x += delta * 0.16;
-      core.rotation.y += delta * 0.22;
-      shell.rotation.y -= delta * 0.05;
-      shell.rotation.x += delta * 0.02;
-      dustNear.rotation.y += delta * 0.012;
-      dustFar.rotation.y -= delta * 0.008;
-
-      const breathe = 1 + Math.sin(elapsed * 0.5) * 0.02;
-      group.scale.setScalar(breathe);
-      group.rotation.y += delta * 0.04;
-      group.rotation.x += (smooth.y * 0.12 - group.rotation.x) * 0.02;
-      group.rotation.z += (-smooth.x * 0.15 - group.rotation.z) * 0.02;
-      group.rotation.y += (scrollProgress * 0.6 - 0) * 0.02;
-      renderer.render(scene, camera);
-    };
-
-    if (!reduced) tick();
-
-    if (reduced) {
-      applyPose(1);
-      core.rotation.set(0.6, 0.8, 0);
-      // Static pose, no motion. Repaint briefly so the still frame
-      // reliably reaches the screen in every browser.
-      let stillFrames = 0;
-      const still = () => {
-        renderer.render(scene, camera);
-        if (++stillFrames < 90) raf = requestAnimationFrame(still);
-      };
-      raf = requestAnimationFrame(still);
-    }
-
-    const onResize = () => {
-      const w = mount.clientWidth;
-      const h = Math.max(mount.clientHeight, 1);
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
-    };
-    window.addEventListener('resize', onResize);
-
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (reduced) return;
-        if (entry.isIntersecting) {
-          startTime = null;
-          clock.getDelta();
-          if (!raf) tick();
-        } else if (raf) {
-          cancelAnimationFrame(raf);
-          raf = 0;
-        }
-      },
-      { threshold: 0.02 },
-    );
+    const repaint=()=> { if(!raf&&visible&&!document.hidden) raf=requestAnimationFrame(tick); };
+    const onPointer=(e:PointerEvent)=> { if(motion.matches||e.pointerType==='touch')return; const b=mount.getBoundingClientRect();pointer.x=THREE.MathUtils.clamp((e.clientX-b.left)/b.width-0.5,-0.5,0.5);pointer.y=THREE.MathUtils.clamp((e.clientY-b.top)/b.height-0.5,-0.5,0.5);repaint(); };
+    const onScroll=()=> { if(motion.matches)return; const b=mount.getBoundingClientRect(); progress=THREE.MathUtils.clamp(-b.top/Math.max(b.height,1),0,1);repaint(); };
+    const resize=()=> { camera.aspect=mount.clientWidth/Math.max(mount.clientHeight,1);camera.updateProjectionMatrix();renderer.setSize(mount.clientWidth,Math.max(mount.clientHeight,1));repaint(); };
+    const onMotion=()=> {pointer.x=pointer.y=progress=0;settled=motion.matches;repaint();};
+    const onVisibility=()=>{if(document.hidden){cancelAnimationFrame(raf);raf=0;}else repaint();};
+    const onLoss=(e:Event)=>{e.preventDefault();cancelAnimationFrame(raf);raf=0;setReady(false);};
+    const io = new IntersectionObserver(([e])=>{ visible=e.isIntersecting;if(visible){if(!start)start=performance.now();repaint();}else{cancelAnimationFrame(raf);raf=0;} },{threshold:0.01});
     io.observe(mount);
-
-    return () => {
-      io.disconnect();
-      cancelAnimationFrame(raf);
-      window.removeEventListener('mousemove', onMove);
-      window.removeEventListener('resize', onResize);
-      window.removeEventListener('scroll', onScroll);
-      if (mount.contains(renderer.domElement)) mount.removeChild(renderer.domElement);
-      coreGeo.dispose();
-      coreMat.dispose();
-      shellGeo.dispose();
-      shellMat.dispose();
-      nodeGeo.dispose();
-      nodeMat.dispose();
-      lineGeo.dispose();
-      lineMat.dispose();
-      dustNearGeo.dispose();
-      dustNearMat.dispose();
-      dustFarGeo.dispose();
-      dustFarMat.dispose();
-      renderer.dispose();
-    };
-  }, []);
-
-  return (
-    <div ref={mountRef} aria-hidden="true" className="pointer-events-none absolute inset-0">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(109,40,217,0.07),transparent_62%)]" />
-    </div>
-  );
-}
+    const ro=new ResizeObserver(resize);ro.observe(mount);
+    window.addEventListener('pointermove',onPointer,{passive:true});window.addEventListener('scroll',onScroll,{passive:true});
+    document.addEventListener('visibilitychange',onVisibility);motion.addEventListener('change',onMotion);
+    renderer.domElement.addEventListener('webglcontextlost',onLoss);
+    pose(performance.now()+1500);setReady(true); settled=false;
+    return()=>{io.disconnect();ro.disconnect();cancelAnimationFrame(raf);window.removeEventListener('pointermove',onPointer);window.removeEventListener('scroll',onScroll);document.removeEventListener('visibilitychange',onVisibility);motion.removeEventListener('change',onMotion);renderer.domElement.removeEventListener('webglcontextlost',onLoss);geometry.dispose();material.dispose();shadowGeometry.dispose();shadowMaterial.dispose();shadowTexture.dispose();environment.dispose();pmrem.dispose();renderer.dispose();renderer.domElement.remove();};
+  },[]);
+  return <div aria-hidden="true" className="absolute inset-0">
+    <img src="/drop-poster.svg" alt="" className={`absolute inset-0 h-full w-full object-contain ${ready?'opacity-0':'opacity-100'}`} />
+    <div ref={mountRef} className={`absolute inset-0 ${ready?'opacity-100':'opacity-0'}`} />
+  </div>;
+      }
