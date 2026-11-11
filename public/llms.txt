@@ -1,6 +1,6 @@
 # purpleDrop
 
-> purpleDrop (purpledrop.com) is a senior-only team that helps established companies become the answer AI assistants recommend. We audit what ChatGPT, Claude, Gemini, and Perplexity say about a company — then change it.
+> purpleDrop (purpledrop.com) is a senior-only team that helps established companies become the answer AI assistants recommend. We audit what ChatGPT, Claude, Gemini, and Perplexity say about a company - then improve the signals behind those answers and track what changes.
 
 We work with established businesses in the United States, Canada, the United Kingdom, and Australia.
 
