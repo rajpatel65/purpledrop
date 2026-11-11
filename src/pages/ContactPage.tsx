@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Check, Clock, Lock, Search, ShieldCheck, PhoneCall } from 'lucide-react';
+import { ArrowRight, Check, Clock, Lock, Search, ShieldCheck, CalendarDays } from 'lucide-react';
 import { useSeo } from '../hooks/useSeo';
 import { ROUTE_SEO } from '../lib/route-seo';
 import { Layout } from '../components/Layout';
@@ -139,11 +139,13 @@ export function ContactPage() {
                 </a>
               </p>
               <a
-                href={`tel:${CONTACT.phone}`}
+                href="https://cal.com/raj-p-jpxod6/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="mt-3 inline-flex items-center gap-2 rounded-full border border-line bg-cream/50 px-4 py-2 text-sm font-medium text-ink transition-colors hover:border-violet"
               >
-                <PhoneCall className="h-4 w-4 text-violet" />
-                Prefer to talk? Call us on {CONTACT.phone}
+                <CalendarDays className="h-4 w-4 text-violet" />
+                Prefer to pick a time? Book a free 30-minute call on our calendar
               </a>
             </div>
           </FadeIn>
@@ -260,4 +262,4 @@ export function ContactPage() {
       </section>
     </Layout>
   );
-}
+                      }
