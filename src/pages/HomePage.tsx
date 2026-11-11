@@ -102,7 +102,7 @@ export function HomePage() {
               </h1>
               <p className="order-3 mt-0 lg:mt-6 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">Every month, buyers get one answer and a shortlist. If your business isn&rsquo;t clear to the systems answering, someone else gets the call - and you never see it happen.</p>
               <div className="order-4 mt-0 lg:mt-7 flex flex-wrap gap-3">
-                <Link to="/#tools" className="btn-primary">Explore the three checks <ArrowRight className="h-4 w-4" /></Link>
+                <a href="#tools" className="btn-primary">Explore the three checks <ArrowRight className="h-4 w-4" /></a>
                 <Link to="/contact" className="btn-outline">Request a free 30-minute call</Link>
               </div>
               <p className="order-5 mt-0 lg:mt-5 max-w-lg text-sm leading-relaxed text-ink-soft">Check where you stand in three plain-English ways. Two free self-guided checks. A deeper security review when you need one.</p>
