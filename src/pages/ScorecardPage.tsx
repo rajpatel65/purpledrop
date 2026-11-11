@@ -87,8 +87,9 @@ export function ScorecardPage() {
               Security Scorecard
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              Check six security foundations in your public homepage and DNS. Verify
-              your email, then see the findings and next steps here.
+              Check six public website and DNS settings. Verify your email, then see the findings here.
+              This tool does not test AI visibility or prove your website is secure.
+              A paid security configuration review is separate work.
             </p>
           </FadeIn>
         </div>
@@ -122,11 +123,11 @@ export function ScorecardPage() {
               {/* CTA */}
               <div className="mt-10 card p-8 text-center">
                 <h3 className="font-serif text-2xl font-medium text-ink">
-                  Security is the foundation. AI visibility is the next step.
+                  Need help understanding these settings?
                 </h3>
                 <p className="mt-3 text-sm text-ink-soft">
-                  We check both for every client. Book a free call and we&apos;ll walk
-                  you through what to fix first.
+                  Ask about a paid security configuration review. We agree the scope and price
+                  before work starts. It is not included automatically in an AI Visibility Review.
                 </p>
                 <a href="/contact" className="btn-primary mt-6 inline-flex">
                   Request a free 30-minute call
@@ -179,8 +180,8 @@ export function ScorecardPage() {
       </section>
 
       <CtaBand
-        title="Security is the foundation. AI visibility is the next step."
-        body="We check both for every client. Thirty minutes, and you'll know where you stand."
+        title="Need help understanding these settings?"
+        body="Discuss a paid security configuration review on a free call. Scope and price are agreed separately; this automated check is not a security guarantee."
         primaryLabel="Request a free 30-minute call"
       />
     </Layout>
