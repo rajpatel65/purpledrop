@@ -49,6 +49,7 @@ function prerenderFile(route, outPath) {
     )
     .replace(
       '</head>',
+      (seo.noindex ? `    <meta name="robots" content="noindex, nofollow" />\n` : '') +
       `    <meta property="og:title" content="${esc(seo.title)}" />\n` +
         `    <meta property="og:description" content="${esc(seo.description)}" />\n` +
         `    <meta property="og:type" content="${seo.type === 'article' ? 'article' : 'website'}" />\n` +
