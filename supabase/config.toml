@@ -9,3 +9,8 @@ verify_jwt = false
 # assessment keeps the platform JWT gate and validates the user in its handler.
 [functions.assessment]
 verify_jwt = true
+
+# submit-lead is a public lead-capture endpoint: no user JWT exists at form
+# time. Its handler enforces origin, honeypot, and input validation.
+[functions.submit-lead]
+verify_jwt = false

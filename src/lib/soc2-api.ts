@@ -15,17 +15,20 @@ const STORAGE_KEYS = {
   LEAD_SIGNALS: 'soc2_lead_signals',
 } as const;
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xpwdqkbl';
+const LEAD_ENDPOINT = `${(import.meta.env.VITE_SUPABASE_URL || '').replace(/\/$/, '')}/functions/v1/submit-lead`;
 
 // Demo-mode safety net: if Supabase env vars aren't configured on the deployed
-// site, relays the lead to Formspree so SOC2 completions are never silently
-// lost in localStorage. Errors are swallowed — never block the user flow.
+// site, relays the lead to the submit-lead endpoint so SOC2 completions are
+// never silently lost in localStorage. Errors are swallowed — never block the
+// user flow. Needs VITE_SUPABASE_URL to know where the function lives; without
+// it there is nowhere to relay to.
 async function relayFallbackLead(payload: Record<string, unknown>) {
   try {
-    await fetch(FORMSPREE_ENDPOINT, {
+    if (!import.meta.env.VITE_SUPABASE_URL) return false;
+    await fetch(LEAD_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify({ ...payload, _subject: 'purpleDrop SOC2 assessment (fallback capture)' }),
+      body: JSON.stringify({ ...payload, form: 'soc2-fallback' }),
     });
     return true;
   } catch {

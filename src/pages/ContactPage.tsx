@@ -12,7 +12,7 @@ import { JsonLd } from '../components/JsonLd';
 import { faqSchema } from '../lib/schema';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xpwdqkbl';
+const LEAD_ENDPOINT = `${(import.meta.env.VITE_SUPABASE_URL || '').replace(/\/$/, '')}/functions/v1/submit-lead`;
 
 const TRUST = [
   { icon: Clock, label: 'Response within one business day' },
@@ -37,10 +37,11 @@ export function ContactPage() {
     if (form._honey) return;
     setStatus('sending');
     try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
+      const res = await fetch(LEAD_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
+          form: 'contact',
           name: form.name,
           email: form.email,
           company: form.company,

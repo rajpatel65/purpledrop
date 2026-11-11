@@ -7,7 +7,7 @@ import { FadeIn } from '../components/FadeIn';
 import { CtaBand } from '../components/CtaBand';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xpwdqkbl';
+const LEAD_ENDPOINT = `${(import.meta.env.VITE_SUPABASE_URL || '').replace(/\/$/, '')}/functions/v1/submit-lead`;
 
 const CHECKS = [
   {
@@ -65,15 +65,14 @@ export function ScorecardPage() {
     setState('sending');
 
     try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
+      const res = await fetch(LEAD_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          _subject: `Security Scorecard Request: ${domain}`,
+          form: 'scorecard',
           domain,
           email,
           consent: true,
-          type: 'scorecard',
         }),
       });
 
