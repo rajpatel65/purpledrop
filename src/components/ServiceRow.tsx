@@ -2,11 +2,9 @@ import { Check, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { FadeIn } from './FadeIn';
 import type { Service } from '../lib/content';
-import { useCurrency } from '../hooks/useCurrency';
-import { PRICING } from '../lib/pricing';
 
 export function ServiceRow({ service, index }: { service: Service; index: number }) {
-  const { price } = useCurrency();
+
 
   return (
     <FadeIn delay={index * 0.08}>
@@ -35,13 +33,13 @@ export function ServiceRow({ service, index }: { service: Service; index: number
           </ul>
 
           <p className="mt-6 flex items-start gap-2 text-sm text-ink">
-            <span className="font-semibold">Guarantee:</span>
+            <span className="font-semibold">Scope:</span>
             <span className="text-ink-soft">{service.guarantee}</span>
           </p>
         </div>
 
         <div className="flex flex-col items-start gap-3 md:items-end md:border-l md:border-line md:pl-8">
-          <p className="font-serif text-3xl font-medium tracking-tight text-ink">{price(PRICING[service.priceKey])}</p>
+          <Link to="/pricing" className="text-sm font-semibold text-violet">See price and details</Link>
           <p className="flex items-center gap-1.5 text-xs text-ink-faint">
             <Clock className="h-3.5 w-3.5" />
             {service.timeline}
