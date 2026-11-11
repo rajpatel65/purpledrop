@@ -92,7 +92,7 @@ export const ROUTE_SEO: Record<string, RouteSeo> = {
   '/soc2': {
     title: 'SOC2 Readiness Assessment — purpleDrop',
     description:
-      'A structured 42-question readiness assessment across eight controls. Verified by a real code sent to your email; a senior engineer reviews the results.',
+      'A 42-question self-reported readiness assessment across nine sections. Email verification protects access, not the accuracy of answers. Not an audit or attestation.',
     path: '/soc2',
   },
   '/not-found': {
@@ -111,4 +111,4 @@ export function essaySeo(slug: string): RouteSeo | null {
     path: `/resources/${essay.slug}`,
     type: 'article',
   };
-    }
+}
