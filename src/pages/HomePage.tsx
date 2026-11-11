@@ -171,7 +171,7 @@ export function HomePage() {
           <FadeIn>
             <div className="mt-7 flex flex-col justify-between gap-4 rounded-2xl border border-line bg-paper/70 p-6 sm:flex-row sm:items-center">
               <div><p className="font-semibold text-ink">Want to put a number on a what-if?</p><p className="mt-1 text-sm text-ink-soft">Use your own inputs. No invented losses, no predicted uplift.</p></div>
-              <Link to="/calculator" className="inline-flex items-center gap-2 text-sm font-semibold text-violet">Open the lead value calculator <ArrowRight className="h-4 w-4" /></Link>
+              <Link to="/calculator" className="inline-flex items-center gap-2 text-sm font-semibold text-violet">Open the lead value calculator <Calculator className="h-4 w-4" /></Link>
             </div>
           </FadeIn>
         </div>
