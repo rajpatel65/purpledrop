@@ -7,7 +7,7 @@ export interface SeoProps {
   type?: 'website' | 'article';
 }
 
-const BASE_URL = 'https://purpledrop.pages.dev';
+const BASE_URL = 'https://purpledrop.com';
 
 function upsertMeta(attr: 'name' | 'property', key: string, content: string) {
   let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
