@@ -42,7 +42,7 @@ const FREE_TOOLS: FreeTool[] = [
   },
   {
     to: '/calculator',
-    label: 'AI Visibility Calculator',
+    label: 'Lead Value Calculator',
     description: 'Explore a hypothetical revenue scenario using your inputs and the assumptions shown. This is not a forecast.',
     icon: Calculator,
     highlight: 'Revenue math',
@@ -348,4 +348,4 @@ export function HomePage() {
       />
     </Layout>
   );
-}
+                }
