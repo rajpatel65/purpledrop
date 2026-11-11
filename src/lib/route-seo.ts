@@ -20,7 +20,7 @@ export const ROUTE_SEO: Record<string, RouteSeo> = {
   '/': {
     title: 'purpleDrop — Get Recommended by AI',
     description:
-      'When a buyer asks AI who to hire, is your company in the answer? We find out what AI says about you — then we change it.',
+      'When a buyer asks AI who to hire, is your company in the answer? We find out what AI says about you - then improve the signals behind those answers and track what changes.',
     path: '/',
   },
   '/services': {
