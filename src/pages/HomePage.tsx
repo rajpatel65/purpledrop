@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, PhoneCall, Mail, Shield, Calculator, SearchCheck, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, PhoneCall, Mail, Shield, Calculator, SearchCheck, ArrowUpRight, Smartphone } from 'lucide-react';
 import { useSeo } from '../hooks/useSeo';
 import { ROUTE_SEO } from '../lib/route-seo';
 import { Layout } from '../components/Layout';
@@ -141,25 +141,61 @@ export function HomePage() {
               </FadeIn>
               <FadeIn delay={0.08}>
                 <h1 className="mt-6 max-w-3xl font-serif text-5xl font-medium leading-[1.05] tracking-tight text-ink sm:text-6xl lg:text-[4.4rem]">
-                  The next buyer who asks AI who to hire should{' '}
-                  <span className="italic text-violet">hear your name.</span>
+                  Doing nothing is a decision.{' '}
+                  <span className="italic text-violet">Your competitors&rsquo; websites thank you for it.</span>
                 </h1>
               </FadeIn>
               <FadeIn delay={0.16}>
                 <p className="mt-8 max-w-2xl text-lg leading-relaxed text-ink-soft sm:text-xl">
-                  Every week, your buyers ask ChatGPT, Gemini, Claude, Perplexity, and Copilot who
-                  to call — before they ask anyone else. We find out what those tools say about your
-                  company today, then change it until the answer names you.
+                  Every month, buyers get one answer and a shortlist. If your business isn&rsquo;t clear
+                  to the systems answering, someone else gets the call - and you never see it happen.
+                  Check where you stand in three plain-English ways. Free to look, yours to keep.
                 </p>
               </FadeIn>
               <FadeIn delay={0.24}>
                 <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-                  <Link to="/contact" className="btn-primary">
-                    Request a free 30-minute call
+                  <Link to="/scorecard" className="btn-primary">
+                    See where you stand - free
                     <ArrowRight className="h-4 w-4" />
                   </Link>
-                  <Link to="/services" className="btn-outline">
-                    See the services
+                  <Link to="/contact" className="btn-outline">
+                    Request a free 30-minute call
+                  </Link>
+                </div>
+                <p className="mt-6 flex items-center gap-2 text-sm text-ink-soft">
+                  <Calculator className="h-4 w-4 text-violet" />
+                  What are a few lost jobs a month worth?{' '}
+                  <Link to="/calculator" className="font-medium text-violet underline decoration-violet/30 underline-offset-4 hover:decoration-violet">
+                    Put your own numbers in the calculator.
+                  </Link>
+                </p>
+                <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                  <Link to="/scorecard" className="group rounded-xl border border-line bg-cream/40 p-4 transition-colors hover:border-violet/30 hover:bg-cream/70">
+                    <div className="flex items-center gap-2 font-semibold text-ink">
+                      <SearchCheck className="h-4 w-4 text-violet" />
+                      Can AI find me?
+                    </div>
+                    <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+                      Free check. See what the first answer can and can&rsquo;t say about you.
+                    </p>
+                  </Link>
+                  <Link to="/scorecard" className="group rounded-xl border border-line bg-cream/40 p-4 transition-colors hover:border-violet/30 hover:bg-cream/70">
+                    <div className="flex items-center gap-2 font-semibold text-ink">
+                      <Smartphone className="h-4 w-4 text-violet" />
+                      Is my site dated?
+                    </div>
+                    <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+                      Free check. Your site on a phone, and what it&rsquo;s really built on.
+                    </p>
+                  </Link>
+                  <Link to="/services" className="group rounded-xl border border-line bg-cream/40 p-4 transition-colors hover:border-violet/30 hover:bg-cream/70">
+                    <div className="flex items-center gap-2 font-semibold text-ink">
+                      <Shield className="h-4 w-4 text-violet" />
+                      Is my site safe?
+                    </div>
+                    <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+                      Free basics now, full security review with a fix plan when you&rsquo;re ready.
+                    </p>
                   </Link>
                 </div>
               </FadeIn>
@@ -348,4 +384,4 @@ export function HomePage() {
       />
     </Layout>
   );
-                }
+}
