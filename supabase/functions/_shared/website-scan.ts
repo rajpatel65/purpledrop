@@ -42,29 +42,76 @@ async function assertPublic(host: string) {
     Promise.all([Deno.resolveDns(host, 'A').catch(() => []), Deno.resolveDns(host, 'AAAA').catch(() => [])]).then(x => x.flat())]);
   const ips = [...a.records, ...aaaa.records, ...system];
   if (!ips.length || ips.some(ip => !publicIP(ip))) throw new Error('Website did not resolve exclusively to public addresses.');
+  return [...new Set(ips)];
 }
 
 type Page = { url: string; status: number; headers: Headers; body: string; redirected: boolean };
+// Pin the TCP destination to the validated public address while preserving the
+// original TLS SNI, certificate identity and Host. A second hostname lookup in
+// fetch would otherwise leave a DNS-rebinding window between check and connect.
+export function parseHttpResponse(raw: Uint8Array): {status:number;headers:Headers;body:string} {
+  const latin = new TextDecoder('iso-8859-1').decode(raw);
+  const split=latin.indexOf('\r\n\r\n');
+  if(split<0 || split>16384)throw new Error('Invalid response headers');
+  const lines=latin.slice(0,split).split('\r\n');
+  const status=Number(lines.shift()?.match(/^HTTP\/1\.[01] (\d{3})/)?.[1]);
+  if(!status)throw new Error('Invalid HTTP status');
+  const headers=new Headers();for(const line of lines){const colon=line.indexOf(':');if(colon>0)headers.append(line.slice(0,colon),line.slice(colon+1).trim());}
+  let bytes=raw.slice(split+4);
+  if(headers.get('transfer-encoding')?.toLowerCase().includes('chunked')){
+    const chunks:Uint8Array[]=[];let total=0;let position=0;
+    while(position<bytes.length && total<262144){
+      let end=position;while(end+1<bytes.length && !(bytes[end]===13&&bytes[end+1]===10))end++;
+      const line=new TextDecoder().decode(bytes.slice(position,end));
+      if(!/^[0-9a-f]+(?:;[^\r\n]*)?$/i.test(line))break;
+      const size=parseInt(line,16);if(!Number.isFinite(size)||size===0)break;
+      const part=bytes.slice(end+2,Math.min(end+2+size,end+2+262144-total));chunks.push(part);total+=part.length;position=end+2+size+2;
+    }
+    bytes=new Uint8Array(total);let offset=0;for(const part of chunks){bytes.set(part,offset);offset+=part.length;}
+  }
+  // The request asks for identity encoding. Do not mistake compressed bytes for
+  // HTML if a server ignores it. Transport checks still use status/headers.
+  const encoding=headers.get('content-encoding');
+  return {status,headers,body:encoding&&encoding!=='identity'?'':new TextDecoder().decode(bytes.slice(0,262144))};
+}
+async function pinnedGet(url: URL, ip: string): Promise<{status:number;headers:Headers;body:string}> {
+  let socket: Deno.Conn | null=null;let expired=false;
+  const timer=setTimeout(()=>{expired=true;try{socket?.close();}catch{/* closed */}},7000);
+  try {
+    // Deno.connect receives an IP literal, so no second DNS lookup is possible.
+    const connecting=Deno.connect({hostname:ip,port:url.protocol==='https:'?443:80});
+    let connectTimer:number|undefined;
+    const tcp=await Promise.race([connecting.then(c=>{if(expired){c.close();throw new Error('Connection timed out');}return c;}),new Promise<never>((_,reject)=>{connectTimer=setTimeout(()=>{expired=true;reject(new Error('Connection timed out'));},7000);})]).finally(()=>clearTimeout(connectTimer));
+    socket=tcp;
+    if(expired)throw new Error('Connection timed out');
+    if(url.protocol==='https:')socket=await Deno.startTls(tcp,{hostname:url.hostname,alpnProtocols:['http/1.1']});
+    if(expired)throw new Error('Connection timed out');
+    const request=new TextEncoder().encode(`GET ${url.pathname+url.search} HTTP/1.1\r\nHost: ${url.hostname}\r\nUser-Agent: PurpleDrop-Scorecard/1.0 (+https://purpledrop.com/scorecard)\r\nAccept-Encoding: identity\r\nConnection: close\r\n\r\n`);
+    let written=0;while(written<request.length)written+=await socket.write(request.subarray(written));
+    const chunks:Uint8Array[]=[];let total=0;let headerEnd=-1;let length:number|null=null;
+    while(total<524288){
+      const buffer=new Uint8Array(Math.min(32768,524288-total));const count=await socket.read(buffer);if(count===null)break;
+      chunks.push(buffer.slice(0,count));total+=count;
+      if(headerEnd<0){
+        const prefix=new Uint8Array(total);let pos=0;for(const c of chunks){prefix.set(c,pos);pos+=c.length;}
+        const text=new TextDecoder().decode(prefix);headerEnd=text.indexOf('\r\n\r\n');
+        if(headerEnd<0 && total>16384)throw new Error('Response headers too large');
+        if(headerEnd>=0){const h=text.slice(0,headerEnd);const status=Number(h.match(/^HTTP\/1\.[01] (\d{3})/)?.[1]);if([301,302,303,307,308].includes(status))break;const value=h.match(/\r\ncontent-length:\s*(\d+)/i)?.[1];length=value?Number(value):null;}
+      }
+      if(headerEnd>=0&&length!==null&&total>=headerEnd+4+length)break;
+    }
+    const raw=new Uint8Array(total);let offset=0;for(const c of chunks){raw.set(c,offset);offset+=c.length;}
+    return parseHttpResponse(raw);
+  } finally {clearTimeout(timer);try{socket?.close();}catch{/* closed */}}
+}
 async function publicFetch(input: string): Promise<Page> {
-  let url = new URL(input);
-  for (let hop = 0; hop < 6; hop++) {
-    if (!['https:', 'http:'].includes(url.protocol) || url.port || url.username || url.password) throw new Error('Unsafe redirect destination.');
-    await assertPublic(url.hostname);
-    const res = await fetch(url, { redirect: 'manual', headers: { 'User-Agent': 'PurpleDrop-Scorecard/1.0 (+https://purpledrop.com/scorecard)' }, signal: AbortSignal.timeout(7000) });
-    if ([301,302,303,307,308].includes(res.status) && res.headers.has('location')) {
-      await res.body?.cancel();
-      url = new URL(res.headers.get('location')!, url);
-      continue;
-    }
-    // Read only the first 256 KiB. This is a homepage response check, not a crawl.
-    let body = ''; let bytes = 0;
-    const reader = res.body?.getReader();
-    if (reader) {
-      const decoder = new TextDecoder();
-      try { while (bytes < 262144) { const chunk = await reader.read(); if (chunk.done) break; bytes += chunk.value.length; body += decoder.decode(chunk.value.slice(0, Math.max(0, 262144 - (bytes - chunk.value.length))), { stream: true }); } }
-      finally { await reader.cancel().catch(() => {}); }
-    }
-    return { url: url.href, status: res.status, headers: res.headers, body, redirected: hop > 0 };
+  let url=new URL(input);
+  for(let hop=0;hop<6;hop++){
+    if(!['https:','http:'].includes(url.protocol)||url.port||url.username||url.password)throw new Error('Unsafe redirect destination.');
+    const ips=await assertPublic(url.hostname);
+    const res=await pinnedGet(url,ips[0]);
+    if([301,302,303,307,308].includes(res.status)&&res.headers.has('location')){url=new URL(res.headers.get('location')!,url);continue;}
+    return {...res,url:url.href,redirected:hop>0};
   }
   throw new Error('Too many redirects.');
 }
@@ -73,7 +120,7 @@ export async function scanWebsite(domain: string): Promise<Report> {
   domain = normalizeDomain(domain);
   const emailDomain = domain.startsWith('www.') ? domain.slice(4) : domain;
   const [httpsResult, httpResult, txt, dmarc, mx, caa] = await Promise.all([
-    publicFetch(`https://${domain}`).then(value => ({ value, error: '' })).catch(() => ({ value: null, error: 'HTTPS request could not be completed with normal certificate validation.' })),
+    publicFetch(`https://${domain}`).then(value => ({ value, error: '' })).catch((error) => { console.error('HTTPS transport unavailable', error?.name, error?.message); return { value: null, error: 'HTTPS request could not be completed with normal certificate validation.' }; }),
     publicFetch(`http://${domain}`).catch(() => null), dns(emailDomain, 'TXT'), dns(`_dmarc.${emailDomain}`, 'TXT'), dns(emailDomain, 'MX'), dns(domain, 'CAA'),
   ]);
   const page = httpsResult.value;

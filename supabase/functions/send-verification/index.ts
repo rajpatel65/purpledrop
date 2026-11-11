@@ -46,7 +46,7 @@ serve(async (req) => {
   try {
     let body: any;
     try {
-      body = await req.json();
+      const raw = await req.text(); if (raw.length > 4096) return new Response('Request too large', {status:413,headers:corsHeaders}); body = JSON.parse(raw);
     } catch {
       return new Response(JSON.stringify({ error: 'Invalid JSON' }), { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
     }

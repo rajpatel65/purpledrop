@@ -26,3 +26,10 @@ Deno.test('results responses cannot be retrieved with invalid or consumed tokens
  try {const res=await scorecardFlow(new Request('https://test.test'),{challenge_id:crypto.randomUUID(),scan_token:crypto.randomUUID()+crypto.randomUUID()},{},'scan');assert(res.status===401,'reject');assert(res.headers.get('Cache-Control')?.includes('no-store'),'no cache');}
  finally{globalThis.fetch=original;}
 });
+Deno.test('bounded HTTP parser preserves headers and handles chunked HTML', async () => {
+ const {parseHttpResponse}=await import('../_shared/website-scan.ts');
+ const res=parseHttpResponse(new TextEncoder().encode('HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nTransfer-Encoding: chunked\r\nSet-Cookie: a=secret; Secure\r\nSet-Cookie: b=secret; HttpOnly\r\n\r\n4\r\nWiki\r\n5\r\npedia\r\n0\r\n\r\n'));
+ assert(res.status===200 && res.body==='Wikipedia','chunked');
+ assert(res.headers.getSetCookie().length===2,'cookies');
+ let rejected=false;try{parseHttpResponse(new TextEncoder().encode('not HTTP'));}catch{rejected=true;}assert(rejected,'bad headers');
+});

@@ -30,7 +30,7 @@ export async function scorecardFlow(req: Request, body: Record<string,unknown>, 
    // including a fresh code request. Atomic verification prevents parallel guesses.
    const blocked=await db('rpc/scorecard_is_blocked',{address:email,source_ip:ip});
    if (blocked === true) return reply({error:'Three failed attempts. Wait 15 minutes before trying again.'},429,cors);
-   if (!await limit([`code-email:${emailHash}`,`code-ip:${ip}`,'code-global'],[3,5,50],[hour,hour,day])) return reply({error:'Too many code requests. Please try again later.'},429,cors);
+   if (!await limit([`bot-ip:${ip}`,'bot-global'],[20,1000],[hour,day])) return reply({error:'Too many requests. Please try again later.'},429,cors);
    const turnstileSecret=Deno.env.get('TURNSTILE_SECRET_KEY');
    if (turnstileSecret) {
      if (typeof body.turnstile_token !== 'string' || body.turnstile_token.length > 2048) return reply({error:'Complete the bot check before requesting a code.'},403,cors);
@@ -38,6 +38,7 @@ export async function scorecardFlow(req: Request, body: Record<string,unknown>, 
      const verdict=await check.json();
      if(!check.ok || !verdict.success || verdict.action!=='scorecard' || !['purpledrop.com','www.purpledrop.com','purpledrop.pages.dev','purpledrop-newsite.pages.dev','localhost'].includes(verdict.hostname)) return reply({error:'Bot check failed or expired. Please try again.'},403,cors);
    }
+   if (!await limit([`code-email:${emailHash}`,`code-ip:${ip}`,'code-global'],[3,5,50],[hour,hour,day])) return reply({error:'Too many code requests. Please try again later.'},429,cors);
    const id=crypto.randomUUID(); const random=new Uint32Array(1); do {crypto.getRandomValues(random);} while(random[0]>=4294800000);
    const code=String(100000+random[0]%900000);
    await db('scorecard_challenges',{id,email,domain,ip_hash:ip,code_hash:await digest(`${id}:${code}`),expires_at:new Date(Date.now()+600000).toISOString()});
