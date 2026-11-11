@@ -86,7 +86,7 @@ export function ResultsPage() {
 
       <CtaBand
         title="Start with a free 30-minute call."
-        body="Start with a free 30-minute call. Then choose: audit $500; consulting day $2,000; day plus 30 days of monitoring and adjustments $3,000."
+        body="Start with a free 30-minute call. Then choose: audit $1,200; consulting day $2,500; day plus 30 days of monitoring and adjustments $4,500."
         primaryLabel="Request a free call"
         secondaryLabel="Read the services"
         secondaryTo="/services"
