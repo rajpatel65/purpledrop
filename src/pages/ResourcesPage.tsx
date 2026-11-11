@@ -17,11 +17,11 @@ export function ResourcesPage() {
           <FadeIn>
             <p className="eyebrow">Essays &amp; Notes</p>
             <h1 className="mt-5 max-w-3xl font-serif text-5xl font-medium leading-[1.05] tracking-tight text-ink sm:text-6xl">
-              Notes on the new search.
+              Plain-English guides to getting found.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              How AI decides who to recommend, what it means for your company, and what actually
-              changes who it picks. Written by the people doing the work — not a content calendar.
+              What to check in AI answers, why clear business details matter and how to choose
+              the next work. Practical guidance, not promises about how every AI tool behaves.
             </p>
           </FadeIn>
         </div>
@@ -58,7 +58,7 @@ export function ResourcesPage() {
 
       <CtaBand
         title="Reading about it is one thing. Knowing where you stand is another."
-        body="Thirty minutes. We show you what AI actually says about your company right now."
+        body="Discuss your business and find out what a paid AI Visibility Review includes. Start with a free 30-minute call."
         primaryLabel="Request a free 30-minute call"
       />
     </Layout>
