@@ -125,7 +125,6 @@ export const OUTCOMES: Outcome[] = [];
 
 export const CONTACT = {
   email: 'info@purpledrop.com',
-  phone: '+1 704 490 1737',
 } as const;
 
 export interface TestimonialSlot {

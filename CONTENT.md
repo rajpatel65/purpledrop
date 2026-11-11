@@ -10,7 +10,7 @@ Edit text here to decide the changes — then they can be applied to the site.
 ### Contact details (used across the site)
 
 - Email: info@purpledrop.com
-- Phone: +1 704 490 1737
+- Book a call: https://cal.com/raj-p-jpxod6/30min
 - Privacy contact: privacy@purpledrop.com
 
 ### Navigation (header)
@@ -244,7 +244,7 @@ The audit and consulting day plus 30 days of monitoring and adjustments. This is
 - Heading: Direct lines, not ticket queues.
 - Sub: During an engagement you talk to the founder — however you prefer.
 - **info@purpledrop.com** — Written answers to straight questions — usually the same day, always within one business day.
-- **+1 704 490 1737** — US business hours. If we're heads-down, we call you back — even if you don't chase us.
+- **cal.com/raj-p-jpxod6/30min** — Thirty minutes, booked directly. Every booking is confirmed personally within one business day.
 - **cal.com/akshaypatel** — Thirty minutes, booked directly. If the calendar looks empty, that's because capacity is deliberately limited.
 
 ### Outcomes
@@ -494,7 +494,7 @@ You get straight answers — not jargon, not theatrics.
 ### Email & Phone
 
 Prefer to write? Email us at **info@purpledrop.com**
-Prefer to talk? Call us at **[+1 704 490 1737](tel:+17044901737)**
+Prefer to pick a time? Book a free 30-minute call at **[cal.com/raj-p-jpxod6/30min](https://cal.com/raj-p-jpxod6/30min)**
 
 ### The form
 

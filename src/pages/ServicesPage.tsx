@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, Shield, SearchCheck, Calculator, Users, Compass, BadgeCheck, Mail, Phone, CalendarDays } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Shield, SearchCheck, Calculator, Users, Compass, BadgeCheck, Mail, CalendarCheck, CalendarDays } from 'lucide-react';
 import { useSeo } from '../hooks/useSeo';
 import { ROUTE_SEO } from '../lib/route-seo';
 import { Layout } from '../components/Layout';
@@ -267,9 +267,9 @@ export function ServicesPage() {
                 accent="violet"
               />
               <FeatureCard
-                icon={Phone}
-                title={CONTACT.phone}
-                body="US business hours. If we're heads-down, we call you back — even if you don't chase us."
+                icon={CalendarCheck}
+                title="Book a time directly"
+                body="Pick a slot on our calendar at cal.com/raj-p-jpxod6/30min. Every booking is confirmed personally."
                 accent="violet"
               />
               <FeatureCard
@@ -316,4 +316,4 @@ export function ServicesPage() {
       />
     </Layout>
   );
-}
+                  }
