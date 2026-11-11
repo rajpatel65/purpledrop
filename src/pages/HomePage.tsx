@@ -275,9 +275,6 @@ export function HomePage() {
               <Link to="/about" className="btn border border-white/40 text-white hover:bg-white/10">
                 Who&apos;s behind this
               </Link>
-              <Link to="/soc2" className="btn border border-white/40 text-white hover:bg-white/10">
-                SOC2 Readiness Assessment
-              </Link>
             </div>
             <p className="mt-8 text-sm leading-relaxed text-violet-200/80">
               Try it yourself right now: open ChatGPT, Claude, or Perplexity and ask
@@ -344,7 +341,7 @@ export function HomePage() {
             </h2>
           </FadeIn>
           <div className="mt-10">
-            <FaqList items={homePageFaqs} />
+            <FaqList items={homePageFaqs.map(item => item.q === 'How do we begin?' ? { ...item, a: 'Start with a free 30-minute call. See the pricing page for current options, then agree scope and price in writing before work starts.' } : item)} />
           </div>
         </div>
       </section>
@@ -381,4 +378,4 @@ export function HomePage() {
       />
     </Layout>
   );
-      }
+}
