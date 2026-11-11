@@ -17,7 +17,7 @@ const LEAD_ENDPOINT = `${(import.meta.env.VITE_SUPABASE_URL || '').replace(/\/$/
 const TRUST = [
   { icon: Clock, label: 'Response within one business day' },
   { icon: ShieldCheck, label: 'Senior strategist reads every enquiry' },
-  { icon: Lock, label: 'Confidential — NDAs on request' },
+  { icon: Lock, label: 'Confidential - NDAs on request' },
 ];
 
 const initialForm = { name: '', email: '', company: '', interest: '', message: '', _honey: '' };
@@ -71,8 +71,8 @@ export function ContactPage() {
               Let's find out what AI says about you.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              A free 30-minute call. No pitch deck, no pressure. You leave with a straight answer about
-              where you stand — whether we ever work together or not.
+              Tell us what you sell and who you want to reach. On a free 30-minute call, we discuss
+              your business, explain the review and help you decide what to do next.
             </p>
           </FadeIn>
 
@@ -101,7 +101,7 @@ export function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-ink">We read it</h3>
                     <p className="mt-1 text-sm leading-relaxed text-ink-soft">
-                      A senior strategist — not a bot — reads what you send and replies within one
+                      A senior strategist - not a bot - reads what you send and replies within one
                       business day.
                     </p>
                   </div>
@@ -109,14 +109,11 @@ export function ContactPage() {
                 <li className="flex gap-4">
                   <span className="font-serif text-2xl font-medium text-violet">2</span>
                   <div>
-                    <h3 className="font-semibold text-ink">We show you the answer</h3>
+                    <h3 className="font-semibold text-ink">We discuss your business</h3>
                     <p className="mt-1 text-sm leading-relaxed text-ink-soft">
-                      We run the questions your buyers actually ask — live, on a shared screen,
-                      across ChatGPT, Gemini, Claude, Perplexity, and Copilot. You watch what they
-                      say about your company and your competitors appear in real time, and you keep
-                      the findings either way. You'll also immediately see whether your website's
-                      public foundations (plugins, SEO, design) are solid — or whether they're letting
-                      gaps show.
+                      Tell us your website, services and location. We discuss the questions buyers
+                      might ask, explain what the review covers and answer your questions.
+                      The detailed checks and findings report are paid work.
                     </p>
                   </div>
                 </li>
@@ -125,8 +122,9 @@ export function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-ink">You decide</h3>
                     <p className="mt-1 text-sm leading-relaxed text-ink-soft">
-                      After the free call, choose an audit ($1,200), the consulting day ($2,500), or the day plus 30 days of follow-through ($4,500).
-                      We agree on the focus first. There is no obligation to continue.
+                      Choose the AI Visibility Review, Review + Planning Day or Planning Day + 30-Day Support.
+                      We agree the scope and price in writing. The day is a meeting with you;
+                      fixes may take longer. There is no obligation to continue.
                     </p>
                   </div>
                 </li>
@@ -197,10 +195,10 @@ export function ContactPage() {
                     </label>
                     <select id="interest" name="interest" value={form.interest} onChange={handleChange} className={inputClass}>
                       <option value="">Select...</option>
-                      <option value="audit">AI-visibility audit - $1,200</option>
-                      <option value="consultingDay">Consulting day - $2,500</option>
-                      <option value="consultingPlus">Day plus 30 days of follow-through - $4,500</option>
-                      <option value="unsure">Not sure yet — tell me where we stand</option>
+                      <option value="audit">AI Visibility Review - $1,200</option>
+                      <option value="consultingDay">Review + Planning Day - $2,500</option>
+                      <option value="consultingPlus">Planning Day + 30-Day Support - $4,500</option>
+                      <option value="unsure">Not sure yet - tell me where we stand</option>
                     </select>
                   </div>
                   <div>
@@ -213,11 +211,11 @@ export function ContactPage() {
                       rows={4}
                       value={form.message}
                       onChange={handleChange}
-                      placeholder="A sentence or two about your situation. Plain English is fine — or skip this and we'll learn it on the call."
+                      placeholder="A sentence or two about your situation. Plain English is fine - or skip this and we'll learn it on the call."
                       className={inputClass}
                     />
                     <p className="mt-2 text-xs text-ink-faint">
-                      Just want the call? Skip this — we'll cover it in thirty minutes.
+                      Just want the call? Skip this - we'll cover it in thirty minutes.
                     </p>
                   </div>
                   <div className="hidden" aria-hidden="true">
@@ -262,4 +260,4 @@ export function ContactPage() {
       </section>
     </Layout>
   );
-}
+          }
