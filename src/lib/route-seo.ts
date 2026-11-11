@@ -38,7 +38,7 @@ export const ROUTE_SEO: Record<string, RouteSeo> = {
   '/results': {
     title: 'Results — purpleDrop',
     description:
-      'What changes when AI starts describing your company accurately: more mentions, more enquiries, and a report you actually read each month.',
+      'How we document AI visibility: dated questions, answers, sources and limitations. No guaranteed rankings or client outcome statistics.',
     path: '/results',
   },
   '/pricing': {
@@ -80,7 +80,7 @@ export const ROUTE_SEO: Record<string, RouteSeo> = {
   '/scorecard': {
     title: 'Free Security Scorecard — purpleDrop',
     description:
-      "Check your website's SSL/TLS, security headers, email authentication, cookie flags, HTTPS enforcement, and DNS config. A senior engineer reviews your domain and emails the scorecard — free.",
+      "Check your website's SSL/TLS, security headers, email authentication, cookie flags, HTTPS enforcement, and DNS config. Verify your email with a code, then view six automated checks on screen. No emailed report.",
     path: '/scorecard',
   },
   '/calculator': {

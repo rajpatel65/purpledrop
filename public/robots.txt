@@ -23,4 +23,4 @@ Allow: /
 User-agent: Meta-ExternalAgent
 Allow: /
 
-Sitemap: https://purpledrop.com/sitemap.xml
+Sitemap: https://purpledrop.pages.dev/sitemap.xml

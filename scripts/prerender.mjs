@@ -19,7 +19,7 @@ import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { resolve, dirname, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-const BASE_URL = 'https://purpledrop.com';
+const BASE_URL = 'https://purpledrop.pages.dev';
 
 function esc(s) {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -53,6 +53,7 @@ function prerenderFile(route, outPath) {
         `    <meta property="og:description" content="${esc(seo.description)}" />\n` +
         `    <meta property="og:type" content="${seo.type === 'article' ? 'article' : 'website'}" />\n` +
         `    <meta property="og:url" content="${BASE_URL}${route}" />\n` +
+        `    <link rel="canonical" href="${BASE_URL}${route}" />\n` +
         '  </head>',
     )
     .replace('<div id="root">\n</div>', '<div id="root"></div>')

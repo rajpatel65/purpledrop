@@ -4,9 +4,7 @@ import { useSeo } from '../hooks/useSeo';
 import { ROUTE_SEO } from '../lib/route-seo';
 import { Layout } from '../components/Layout';
 import { FadeIn } from '../components/FadeIn';
-import { Metrics } from '../components/Metrics';
 import { CtaBand } from '../components/CtaBand';
-import { OUTCOMES } from '../lib/content';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 
 const HONEST = [
@@ -26,35 +24,23 @@ export function ResultsPage() {
           <FadeIn>
             <p className="eyebrow">Results</p>
             <h1 className="mt-5 max-w-3xl font-serif text-5xl font-medium leading-[1.05] tracking-tight text-ink sm:text-6xl">
-              The answer changes. Then the enquiries follow.
+              Evidence before outcome claims.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              We show clients the actual answer AI gives about them — before and after. That's the
-              proof. Here's what that looks like in numbers.
+              A useful review records the question, the AI tool, the date, the answer and its sources.
+              Changes can be compared only when the method is clear. We do not publish client outcome numbers without supporting evidence.
             </p>
           </FadeIn>
         </div>
       </section>
 
       <section className="border-b border-line bg-paper py-20">
-        <div className="container-page">
-          <FadeIn>
-            <img
-              src="/images/results-before-after.svg"
-              alt="Before and after: an AI assistant's answer to a buyer's question names three competitors on day zero — three weeks later, the same question names your company first."
-              className="aspect-[16/9] w-full rounded-2xl border border-line bg-paper object-cover shadow-soft"
-              loading="lazy"
-            />
-          </FadeIn>
-          <div className="mt-10">
-            <p className="mb-8 max-w-2xl text-sm leading-relaxed text-ink-faint">
-              A note on these numbers: each one is the <em>far end</em> of what we've
-              documented on real engagements — the best day we've had, stated plainly.
-              They are not averages and not guarantees. Your readouts will show your
-              own numbers, every month.
-            </p>
-            <Metrics items={OUTCOMES} />
-          </div>
+        <div className="container-page grid gap-8 md:grid-cols-3">
+          {[
+            ['Record the baseline', 'Keep the exact question, tool, date and answer. Separate a brand mention from a recommendation or citation.'],
+            ['Show what changed', 'Compare like-for-like checks and show limitations. Website readiness is not proof of an AI recommendation.'],
+            ['Keep the evidence', 'Use a dated findings report to agree the next work. No specific ranking, traffic or revenue is guaranteed.'],
+          ].map(([title, body]) => <FadeIn key={title}><div className="card h-full p-8"><h2 className="font-serif text-2xl">{title}</h2><p className="mt-4 text-ink-soft">{body}</p></div></FadeIn>)}
         </div>
       </section>
 

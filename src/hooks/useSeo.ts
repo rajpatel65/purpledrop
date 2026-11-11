@@ -7,7 +7,7 @@ export interface SeoProps {
   type?: 'website' | 'article';
 }
 
-const BASE_URL = 'https://purpledrop.com';
+const BASE_URL = 'https://purpledrop.pages.dev';
 
 function upsertMeta(attr: 'name' | 'property', key: string, content: string) {
   let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
@@ -34,9 +34,12 @@ export function useSeo({ title, description, path = '/', type = 'website' }: Seo
     upsertMeta('name', 'twitter:description', description);
     upsertMeta('name', 'twitter:image', BASE_URL + '/og-image.svg');
 
-    const canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-    if (canonical) {
-      canonical.setAttribute('href', BASE_URL + path);
+    let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.rel = 'canonical';
+      document.head.appendChild(canonical);
     }
+    canonical.href = BASE_URL + path;
   }, [title, description, path, type]);
 }

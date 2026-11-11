@@ -42,7 +42,7 @@ export function HomeCalculator() {
             What is this shift costing you?
           </h2>
           <p className="mt-4 text-center text-lg text-ink-soft">
-            35% of organic clicks now go to AI overviews. Enter your numbers — see what&apos;s at stake.
+            Explore a hypothetical scenario. The model assumes a 35% traffic reduction, 30% recapture and 2.1× conversion. These are illustrative assumptions, not measured results or a forecast.
           </p>
         </FadeIn>
 

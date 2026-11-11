@@ -21,7 +21,7 @@ export function CtaBand({
   secondaryLabel,
   secondaryTo = '/services',
   calendarEmbed = false,
-  calendarUrl = 'https://cal.com/akshaypatel',
+  calendarUrl = '/contact',
 }: CtaBandProps) {
   return (
     <section className="relative overflow-hidden bg-violet">

@@ -147,8 +147,8 @@ export function CalculatorPage() {
               Three published assumptions, applied to your inputs.
             </h2>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              No black box. The calculator applies current 2025/2026 AI-search
-              benchmarks — reflecting the ongoing shift of buyers from traditional
+              No black box. The calculator applies illustrative AI-search
+              assumptions — reflecting the ongoing shift of buyers from traditional
               search engines toward AI tools like ChatGPT, Gemini, and Perplexity —
               to your own numbers. In plain English: it estimates what traffic and
               revenue you may be losing to that shift (your risk), and what optimizing
@@ -170,9 +170,9 @@ export function CalculatorPage() {
                   A growing share of B2B buying starts with a question typed into an AI
                   assistant instead of a search engine. The buyer gets a short, confident
                   list and acts on it — no click, no visit, no trace in your analytics.
-                  We apply the cautious 2025/2026 benchmark: <strong>35% of traditional
-                  organic clicks</strong> have been pulled away by AI-generated answers.
-                  Some published studies run higher; we stay conservative.
+                  We use an illustrative assumption: <strong>35% of traditional
+                  organic clicks</strong> are lost in this hypothetical scenario.
+                  This percentage is not a measured result for your business.
                 </p>
               </div>
             </FadeIn>
@@ -205,9 +205,7 @@ export function CalculatorPage() {
                   GEO means making your company the one AI can describe completely and
                   accurately — so you become the recommendation. We model a cautious{' '}
                   <strong>30% of lost traffic recaptured</strong>, converting{' '}
-                  <strong>2.1× better</strong> than ordinary organic (buyers who arrive
-                  on an AI recommendation come pre-qualified). The GEO work itself is
-                  estimated at roughly 40% of what you spend on SEO today.
+                  <strong>2.1× better</strong> than ordinary organic in this hypothetical scenario, not as a proven benchmark. The cost model assumes 40% of your SEO spend. This is not a quote.
                 </p>
               </div>
             </FadeIn>
@@ -280,12 +278,8 @@ export function CalculatorPage() {
                       </div>
                     </div>
                     <p className="mt-4 text-sm leading-relaxed text-red-600/80">
-                      Based on the 2025/2026 benchmark that ~35% of traditional organic
-                      clicks are lost to AI-generated answers — the conservative end of
-                      published B2B studies. This is the shift itself, not a penalty:
-                      your buyers are increasingly asking an AI who to call, and that
-                      answer never mentions a click. It names companies directly, and if
-                      yours isn&apos;t in it, the visit never happens.
+                      This scenario assumes a 35% reduction in organic traffic. It is not
+                      based on a measurement of your website and does not predict lost revenue.
                     </p>
                   </div>
                 </div>
@@ -312,11 +306,9 @@ export function CalculatorPage() {
                       </div>
                     </div>
                     <p className="mt-4 text-sm leading-relaxed text-green-700/80">
-                      GEO-cited traffic converts 2.1× better than organic — the AI has
-                      already done the qualification, so the buyer arrives convinced
-                      rather than browsing. We stay cautious and assume 30% of lost
-                      traffic can be recaptured; in practice, results tend to run higher
-                      when your company is the most clearly describable in your category.
+                      This scenario assumes 30% of lost traffic is recaptured and converts
+                      at 2.1 times the original rate. These inputs are illustrative, not
+                      observed client results or a promise of improvement.
                     </p>
                   </div>
                 </div>
@@ -336,7 +328,7 @@ export function CalculatorPage() {
                       a net swing of <strong>{fmt(calc.netAnnualLoss)}/yr</strong>.
                     </p>
                     <p className="mt-3 text-sm leading-relaxed text-ink-soft">
-                      GEO typically costs ~40% of your existing SEO budget.
+                      The model assumes GEO costs 40% of your SEO budget; this is not a quote.
                       At <strong>{fmt(calc.geoROI)}x ROI</strong>, it&apos;s the highest-leverage
                       investment you can make right now.
                     </p>

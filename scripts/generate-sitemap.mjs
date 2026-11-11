@@ -1,7 +1,7 @@
 import { copyFileSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 
-const BASE = 'https://purpledrop.com';
+const BASE = 'https://purpledrop.pages.dev';
 const TODAY = new Date().toISOString().slice(0, 10);
 
 const STATIC_ROUTES = [
@@ -57,6 +57,7 @@ writeFileSync(out, xml + '\n');
 console.log(`Sitemap written to ${out}`);
 
 const distDir = resolve(process.cwd(), 'dist');
+writeFileSync(resolve(distDir, 'sitemap.xml'), xml + '\n');
 const wellKnownSrc = resolve(process.cwd(), 'public', '.well-known', 'purpledrop.txt');
 const wellKnownDestDir = resolve(distDir, '.well-known');
 mkdirSync(wellKnownDestDir, { recursive: true });

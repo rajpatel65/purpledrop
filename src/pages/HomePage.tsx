@@ -6,10 +6,9 @@ import { ROUTE_SEO } from '../lib/route-seo';
 import { Layout } from '../components/Layout';
 import { FadeIn } from '../components/FadeIn';
 import { CtaBand } from '../components/CtaBand';
-import { Metrics } from '../components/Metrics';
 import { ServiceRow } from '../components/ServiceRow';
 import { ProcessRail } from '../components/ProcessRail';
-import { CHAPTERS, SERVICES, PROCESS, OUTCOMES, CONTACT } from '../lib/content';
+import { CHAPTERS, SERVICES, PROCESS, CONTACT } from '../lib/content';
 import { homePageFaqs } from '../lib/faqs';
 import { FaqList } from '../components/PricingTable';
 import { AiAnswerCard } from '../components/AiAnswerCard';
@@ -37,14 +36,14 @@ const FREE_TOOLS: FreeTool[] = [
   {
     to: '/scorecard',
     label: 'Security Scorecard',
-    description: 'SSL, headers, email authentication, DNS, cookies — six foundations checked by a senior engineer. We email you the findings within one business day.',
+    description: 'Verify your email with a code, then view six automated public checks on screen. Results last up to 10 minutes and clear when you leave or switch tabs. No report is emailed.',
     icon: SearchCheck,
-    highlight: 'Human-reviewed',
+    highlight: 'Instant on-screen checks',
   },
   {
     to: '/calculator',
     label: 'AI Visibility Calculator',
-    description: 'Revenue at risk from SEO loss (35% rate) vs GEO opportunity (2.1x conversion). 3 inputs, instant dollar figure.',
+    description: 'Explore a hypothetical revenue scenario using your inputs and the assumptions shown. This is not a forecast.',
     icon: Calculator,
     highlight: 'Revenue math',
   },
@@ -199,7 +198,7 @@ export function HomePage() {
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-ink-soft">
                 Three self-serve diagnostics that show you exactly where you stand — before you spend a dollar.
-                Each one produces a deliverable you keep.
+                Each tool explains its limits. The scorecard shows temporary on-screen results; the SOC2 self-assessment offers a downloadable gap report.
               </p>
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -258,21 +257,6 @@ export function HomePage() {
 
       {/* CALCULATOR — Challenger moment */}
       <HomeCalculator />
-
-      {/* STATS — best documented days, honestly framed */}
-      <section className="border-t border-line bg-paper py-20">
-        <div className="container-page">
-          <FadeIn>
-            <div className="mb-10 max-w-2xl">
-              <p className="eyebrow">Our record</p>
-              <h2 className="mt-4 font-serif text-3xl font-medium tracking-tight text-ink sm:text-4xl">
-                Our best documented days — not averages, not promises.
-              </h2>
-            </div>
-          </FadeIn>
-          <Metrics items={OUTCOMES} />
-        </div>
-      </section>
 
       {/* SERVICES */}
       <section id="services" className="border-t border-line bg-paper py-24">

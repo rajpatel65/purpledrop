@@ -8,12 +8,9 @@ import { CtaBand } from '../components/CtaBand';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { ServiceCard } from '../components/ServiceCard';
 import { FeatureCard } from '../components/FeatureCard';
-import { TeamCard } from '../components/TeamCard';
-import { OutcomeCard } from '../components/OutcomeCard';
 import { FreeToolCard } from '../components/FreeToolCard';
 import { FAQAccordion } from '../components/FAQAccordion';
 import { TrustBadges } from '../components/TrustBadges';
-import { MetricsBar } from '../components/MetricsBar';
 import { SERVICES, CONTACT } from '../lib/content';
 import { PRICING } from '../lib/pricing';
 
@@ -28,9 +25,9 @@ const FREE_TOOLS = [
   {
     to: '/scorecard',
     label: 'Security Scorecard',
-    description: 'SSL, headers, email authentication, DNS, cookies — six foundations checked by a senior engineer. We email you the findings within one business day.',
+    description: 'Verify your email with a code, then view six automated public checks on screen. Results last up to 10 minutes and clear when you leave or switch tabs. No report is emailed.',
     icon: SearchCheck,
-    highlight: 'Free written verdict',
+    highlight: 'Instant on-screen checks',
   },
   {
     to: '/calculator',
@@ -67,19 +64,6 @@ const SERVICE_CARDS = SERVICES.map((svc, i) => ({
   ctaLabel: CTA_BY_ID[svc.id],
   ctaHref: '/contact',
 }));
-
-const FOUNDER = {
-  name: 'Akshay Patel',
-  title: 'Founder & Principal',
-  bio: 'Every engagement is run personally: the review, the recommendations, the follow-through. You meet the founder — and the founder does the work.',
-  linkedin: 'https://linkedin.com/in/akshaypatel',
-};
-
-// Best documented results — labeled with their basis, never presented as averages or promises.
-const OUTCOMES = [
-  { metric: '63%', label: 'the biggest rise in AI mentions we\'ve measured for one client within 90 days — shown in their readout, not promised here' },
-  { metric: '40%', label: 'the highest share of software spend we\'ve found going to unused or duplicated tools in a single review — most reviews find less' },
-];
 
 const FAQ_ITEMS = [
   {
@@ -151,14 +135,6 @@ export function ServicesPage() {
           </FadeIn>
         </div>
       </section>
-      <MetricsBar
-        metrics={[
-          { value: '3.1×', label: 'our best documented lift in a client\'s AI mentions — far end, not average' },
-          { value: '6 of 10', label: 'clients shortlisted within their first quarter — ones we could make clear enough to describe' },
-          { value: '1 business day', label: 'straight written answer to your enquiry — a standing commitment' },
-          { value: '0', label: 'hourly billing — the price agreed in writing first' },
-        ]}
-      />
 
       {/* SERVICE GRID — 4 cards */}
       <section className="bg-cream/30 py-24 lg:py-32">
@@ -258,36 +234,13 @@ export function ServicesPage() {
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-ink-soft">
                 Three self-serve diagnostics that show you exactly where you stand — before you spend a dollar.
-                Each one produces a deliverable you keep.
+                Each tool explains its limits. The scorecard shows temporary on-screen results; the SOC2 self-assessment offers a downloadable gap report.
               </p>
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {FREE_TOOLS.map((tool) => (
                 <FreeToolCard key={tool.to} tool={tool} />
               ))}
-            </div>
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* TEAM */}
-      <section className="bg-paper py-20">
-        <div className="container-page">
-          <FadeIn>
-            <div className="text-center max-w-3xl mx-auto mb-12">
-              <p className="eyebrow">The Team</p>
-              <h2 className="mt-4 font-serif text-4xl font-medium tracking-tight text-ink sm:text-5xl">
-                You meet the founder.
-              </h2>
-              <p className="mt-4 text-lg leading-relaxed text-ink-soft">
-                No associates. No handoffs. The person on the first call is the person
-                doing the work.
-              </p>
-            </div>
-            <div className="mx-auto max-w-md">
-              {FOUNDER.name && (
-                <TeamCard {...FOUNDER} index={0} />
-              )}
             </div>
           </FadeIn>
         </div>
@@ -303,7 +256,7 @@ export function ServicesPage() {
                 Direct lines, not ticket queues.
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-ink-soft">
-                During an engagement you talk to the founder — however you prefer.
+                During an engagement you talk directly to the person doing the work.
               </p>
             </div>
             <div className="grid gap-6 sm:grid-cols-3 max-w-5xl mx-auto">
@@ -321,33 +274,10 @@ export function ServicesPage() {
               />
               <FeatureCard
                 icon={CalendarDays}
-                title="cal.com/akshaypatel"
-                body="Thirty minutes, booked directly. If the calendar looks empty, that's because capacity is deliberately limited."
+                title="Request a call"
+                body="Use the contact form to arrange a free 30-minute call."
                 accent="gold"
               />
-            </div>
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* OUTCOMES / PROOF */}
-      <section className="bg-paper py-20">
-        <div className="container-page">
-          <FadeIn>
-            <div className="text-center max-w-3xl mx-auto mb-12">
-              <p className="eyebrow">Outcomes</p>
-              <h2 className="mt-4 font-serif text-4xl font-medium tracking-tight text-ink sm:text-5xl">
-                Our best days — labeled honestly.
-              </h2>
-              <p className="mt-4 text-lg leading-relaxed text-ink-soft">
-                Every number below is the far end of what we've documented — not averages,
-                not promises. Your readouts will show your own numbers.
-              </p>
-            </div>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto">
-              {OUTCOMES.map((outcome, i) => (
-                <OutcomeCard key={outcome.metric} {...outcome} index={i} />
-              ))}
             </div>
           </FadeIn>
         </div>
@@ -383,8 +313,6 @@ export function ServicesPage() {
         primaryLabel="Request a free 30-minute call"
         secondaryLabel="Try the free SOC2 gap check"
         secondaryTo="/soc2"
-        calendarEmbed
-        calendarUrl="https://cal.com/akshaypatel"
       />
     </Layout>
   );

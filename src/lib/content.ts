@@ -120,14 +120,8 @@ export interface Outcome {
   label: string;
 }
 
-// Our best documented results — never presented as averages or promises.
-// Every number here is the far end of what we have measured, labeled with its basis.
-export const OUTCOMES: Outcome[] = [
-  { metric: '3.1×', label: 'the largest lift in a client\'s AI mentions we\'ve measured between monthly readouts — our best case, not a guarantee' },
-  { metric: '6 of 10', label: 'of the clients we\'ve worked with were shortlisted within their first quarter — the ones we could make clear enough to describe' },
-  { metric: '1 business day', label: 'a straight written answer to your enquiry — our standing commitment, before the shortlist sets' },
-  { metric: '0', label: 'hourly billing, ever — the price agreed in writing before any work starts' },
-];
+// No client outcome statistics are published without supporting evidence.
+export const OUTCOMES: Outcome[] = [];
 
 export const CONTACT = {
   email: 'info@purpledrop.com',
