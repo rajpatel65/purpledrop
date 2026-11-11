@@ -1,7 +1,7 @@
 import { copyFileSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 
-const BASE = 'https://purpledrop.pages.dev';
+const BASE = 'https://purpledrop.com';
 const TODAY = new Date().toISOString().slice(0, 10);
 
 const STATIC_ROUTES = [
