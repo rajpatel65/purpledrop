@@ -40,7 +40,7 @@ The nine guide URLs are retained, but the unsupported claims about universal AI 
 - All 23 route templates/pages checked at 390px and 1440px: 46 route/width checks, no horizontal overflow or page errors.
 - Homepage paid-tier prices and telephone links absent. Tier names and prices share one source for visible content and structured data.
 - A pre-existing homepage lazy-render hydration error was fixed by loading its animation only after mount. This is not a redesign and does not import either design draft.
-- Forms were not submitted, emails were not sent and paid tools were not exercised. No deployment or merge was performed.
+- Forms were not submitted, emails were not sent and paid tools were not exercised. No production deployment or merge was performed. Cloudflare automatically builds a separate branch preview for this draft; the production site is unchanged.
 
 ## Page-by-page before / after
 
