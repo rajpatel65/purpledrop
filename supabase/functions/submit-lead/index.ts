@@ -159,7 +159,7 @@ serve(async (req) => {
         html: `
           <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 640px; margin: 0 auto; padding: 24px;">
             <h1 style="font-size: 20px; color: #1a1a1a; margin: 0 0 4px;">New lead: ${esc(FORM_LABELS[form])}</h1>
-            <p style="color: #888; font-size: 13px; margin: 0 0 20px;">Submitted ${esc(new Date().toISOString())} via purpledrop.pages.dev &middot; reply goes straight to the sender</p>
+            <p style="color: #888; font-size: 13px; margin: 0 0 20px;">Submitted ${esc(new Date().toISOString())} via purpledrop.com &middot; reply goes straight to the sender</p>
             <table style="border-collapse: collapse; width: 100%; border: 1px solid #e5e0d8;">
               ${rows}
             </table>
