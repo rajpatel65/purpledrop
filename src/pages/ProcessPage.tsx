@@ -18,12 +18,12 @@ const PRINCIPLES = [
   {
     icon: ShieldCheck,
     title: 'Fixed price, in writing',
-    body: 'The number on the page is the number you pay. No hourly billing, no "while we\'re in here" extras.',
+    body: 'Your agreement states the included work and fixed price. Extra work needs a separate quote and your approval before it starts.',
   },
   {
     icon: Users,
     title: 'Senior-only, end to end',
-    body: 'The strategist you meet in Act I is the one doing the work in Act III. We don\'t staff up with juniors to hit a margin.',
+    body: 'The person you meet stays responsible for the work. You know who to contact and who is doing each agreed task.',
   },
 ];
 
@@ -38,13 +38,12 @@ export function ProcessPage() {
           <FadeIn>
             <p className="eyebrow">How we work</p>
             <h1 className="mt-5 max-w-3xl font-serif text-5xl font-medium leading-[1.05] tracking-tight text-ink sm:text-6xl">
-              A story in four acts. You stay in the loop for every one.
+              See the findings. Agree the work. Check the changes.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              Most engagements run the same way, because the way is the point: clear, and you see
-              the work as it goes. We keep you informed at every step — but we don't wait for your
-              approval. Most clients don't know what good looks like until they see it; that's what
-              we're paid to know.
+              Missing from an AI answer can mean missing a chance to win a customer.
+              We help you check what is visible, decide what needs work and track the changes
+              without promising a place in every answer.
             </p>
           </FadeIn>
         </div>
@@ -82,13 +81,12 @@ export function ProcessPage() {
             <div className="mt-14 flex flex-col items-start justify-between gap-6 rounded-2xl border border-violet-tint bg-violet-tint/40 p-8 sm:flex-row sm:items-center">
               <div>
                 <h3 className="font-serif text-2xl font-medium tracking-tight text-ink">
-                  AI-ready companies win the shortlist.
+                  Make it easier for buyers to understand your business.
                 </h3>
                 <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink-soft">
-                  Every day, your buyers ask AI who to call — and that answer becomes their
-                  shortlist. We make sure your name is on it, with the proof AI needs to recommend
-                  you with confidence, and we keep it there as the tools change. You get the
-                  enquiries; we handle the mechanics.
+                  Clear service pages, accurate listings and useful proof give buyers more to work with.
+                  We identify gaps and help you address the agreed priorities. AI tools choose what
+                  to show; we cannot guarantee that your name will appear.
                 </p>
               </div>
               <Link to="/contact" className="btn-primary">
@@ -101,10 +99,10 @@ export function ProcessPage() {
       </section>
 
       <CtaBand
-        title="The first act is thirty minutes."
-        body="No deck. No pressure. You walk away knowing how AI sees your company — whether we work together or not."
-        primaryLabel="Start the first act"
+        title="Start with a free 30-minute call."
+        body="Discuss your business and the questions buyers ask. We will explain the review and help you decide whether it is the right next step."
+        primaryLabel="Request a free 30-minute call"
       />
     </Layout>
   );
-}
+      }
