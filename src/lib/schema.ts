@@ -1,10 +1,10 @@
 export const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  '@id': 'https://purpledrop.pages.dev/#org',
+  '@id': 'https://purpledrop.com/#org',
   name: 'purpleDrop',
-  url: 'https://purpledrop.pages.dev',
-  logo: 'https://purpledrop.pages.dev/favicon.svg',
+  url: 'https://purpledrop.com',
+  logo: 'https://purpledrop.com/favicon.svg',
   description:
     'purpleDrop helps established companies get recommended by AI assistants. We audit what AI says about a company, then optimize so AI describes it accurately.',
   areaServed: ['US', 'CA', 'UK', 'AU'],
@@ -19,11 +19,11 @@ export const organizationSchema = {
 export const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  '@id': 'https://purpledrop.pages.dev/#website',
-  url: 'https://purpledrop.pages.dev',
+  '@id': 'https://purpledrop.com/#website',
+  url: 'https://purpledrop.com',
   name: 'purpleDrop',
   description: 'We help companies get recommended by ChatGPT, Gemini, Claude, Perplexity, Copilot, and more.',
-  publisher: { '@id': 'https://purpledrop.pages.dev/#org' },
+  publisher: { '@id': 'https://purpledrop.com/#org' },
 };
 
 export function serviceSchema() {
@@ -31,7 +31,7 @@ export function serviceSchema() {
     '@context': 'https://schema.org',
     '@type': 'Service',
     serviceType: ['AI Visibility', 'AI Readiness', 'AI Optimization'],
-    provider: { '@id': 'https://purpledrop.pages.dev/#org' },
+    provider: { '@id': 'https://purpledrop.com/#org' },
     areaServed: ['US', 'CA', 'UK', 'AU'],
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
@@ -43,7 +43,7 @@ export function serviceSchema() {
           description: 'Free introductory call with no obligation.',
           price: '0',
           priceCurrency: 'USD',
-          url: 'https://purpledrop.pages.dev/pricing',
+          url: 'https://purpledrop.com/pricing',
         },
         {
           '@type': 'Offer',
@@ -51,7 +51,7 @@ export function serviceSchema() {
           description: 'AI-visibility audit and findings report to keep.',
           price: '500',
           priceCurrency: 'USD',
-          url: 'https://purpledrop.pages.dev/pricing',
+          url: 'https://purpledrop.com/pricing',
         },
         {
           '@type': 'Offer',
@@ -59,7 +59,7 @@ export function serviceSchema() {
           description: 'Audit plus one full day fixing the top issues with you.',
           price: '2000',
           priceCurrency: 'USD',
-          url: 'https://purpledrop.pages.dev/pricing',
+          url: 'https://purpledrop.com/pricing',
         },
         {
           '@type': 'Offer',
@@ -67,7 +67,7 @@ export function serviceSchema() {
           description: 'Audit and consulting day plus 30 days of monitoring and adjustments.',
           price: '3000',
           priceCurrency: 'USD',
-          url: 'https://purpledrop.pages.dev/pricing',
+          url: 'https://purpledrop.com/pricing',
         },
       ],
     },
@@ -99,8 +99,8 @@ export function articleSchema(essay: {
     description: essay.blurb,
     datePublished: essay.date,
     dateModified: essay.date,
-    mainEntityOfPage: `https://purpledrop.pages.dev/resources/${essay.slug}`,
-    author: { '@type': 'Organization', '@id': 'https://purpledrop.pages.dev/#org' },
-    publisher: { '@id': 'https://purpledrop.pages.dev/#org' },
+    mainEntityOfPage: `https://purpledrop.com/resources/${essay.slug}`,
+    author: { '@type': 'Organization', '@id': 'https://purpledrop.com/#org' },
+    publisher: { '@id': 'https://purpledrop.com/#org' },
   };
 }
