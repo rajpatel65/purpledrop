@@ -32,7 +32,8 @@ export async function scorecardFlow(req: Request, body: Record<string,unknown>, 
    if (blocked === true) return reply({error:'Three failed attempts. Wait 15 minutes before trying again.'},429,cors);
    if (!await limit([`bot-ip:${ip}`,'bot-global'],[20,1000],[hour,day])) return reply({error:'Too many requests. Please try again later.'},429,cors);
    const turnstileSecret=Deno.env.get('TURNSTILE_SECRET_KEY');
-   if (turnstileSecret) {
+   if (!turnstileSecret) return reply({error:'Bot protection is unavailable. Please try again later.'},503,cors);
+   {
      if (typeof body.turnstile_token !== 'string' || body.turnstile_token.length > 2048) return reply({error:'Complete the bot check before requesting a code.'},403,cors);
      const check=await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify',{method:'POST',body:new URLSearchParams({secret:turnstileSecret,response:body.turnstile_token}),signal:AbortSignal.timeout(8000)});
      const verdict=await check.json();

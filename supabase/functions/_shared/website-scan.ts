@@ -80,7 +80,7 @@ async function pinnedGet(url: URL, ip: string): Promise<{status:number;headers:H
   try {
     // Deno.connect receives an IP literal, so no second DNS lookup is possible.
     const connecting=Deno.connect({hostname:ip,port:url.protocol==='https:'?443:80});
-    let connectTimer:number|undefined;
+    let connectTimer:ReturnType<typeof setTimeout>|undefined;
     const tcp=await Promise.race([connecting.then(c=>{if(expired){c.close();throw new Error('Connection timed out');}return c;}),new Promise<never>((_,reject)=>{connectTimer=setTimeout(()=>{expired=true;reject(new Error('Connection timed out'));},7000);})]).finally(()=>clearTimeout(connectTimer));
     socket=tcp;
     if(expired)throw new Error('Connection timed out');
@@ -120,7 +120,7 @@ export async function scanWebsite(domain: string): Promise<Report> {
   domain = normalizeDomain(domain);
   const emailDomain = domain.startsWith('www.') ? domain.slice(4) : domain;
   const [httpsResult, httpResult, txt, dmarc, mx, caa] = await Promise.all([
-    publicFetch(`https://${domain}`).then(value => ({ value, error: '' })).catch((error) => { console.error('HTTPS transport unavailable', error?.name, error?.message); return { value: null, error: 'HTTPS request could not be completed with normal certificate validation.' }; }),
+    publicFetch(`https://${domain}`).then(value => ({ value, error: '' })).catch((error) => { console.error('HTTPS transport unavailable', error?.name); return { value: null, error: 'HTTPS request could not be completed with normal certificate validation.' }; }),
     publicFetch(`http://${domain}`).catch(() => null), dns(emailDomain, 'TXT'), dns(`_dmarc.${emailDomain}`, 'TXT'), dns(emailDomain, 'MX'), dns(domain, 'CAA'),
   ]);
   const page = httpsResult.value;
