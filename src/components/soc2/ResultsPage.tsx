@@ -13,20 +13,6 @@ interface ResultsPageProps {
   email: string;
 }
 
-function getScoreColor(pct: number) {
-  if (pct >= 80) return 'text-green-700 bg-green-50';
-  if (pct >= 60) return 'text-yellow-700 bg-yellow-50';
-  if (pct >= 40) return 'text-orange-700 bg-orange-50';
-  return 'text-red-700 bg-red-50';
-}
-
-function getScoreColorStrong(pct: number) {
-  if (pct >= 80) return 'text-green-600';
-  if (pct >= 60) return 'text-yellow-600';
-  if (pct >= 40) return 'text-orange-600';
-  return 'text-red-600';
-}
-
 export function ResultsPage({ sessionId, answers, email }: ResultsPageProps) {
   const [expandedSections, setExpandedSections] = useState<string[]>([]);
   const [downloadFormat, setDownloadFormat] = useState<'json' | 'csv'>('json');
@@ -54,6 +40,7 @@ export function ResultsPage({ sessionId, answers, email }: ResultsPageProps) {
   const downloadReport = () => {
     const report = {
       assessment: 'SOC2 Security Readiness (CC1-CC9)',
+      assurance: 'Self-reported answers only. Completion is not compliance. No independent audit or attestation.',
       email,
       sessionId,
       date: new Date().toISOString(),
@@ -140,25 +127,26 @@ export function ResultsPage({ sessionId, answers, email }: ResultsPageProps) {
         <main className="max-w-6xl mx-auto px-4 py-8">
           <FadeIn className="grid gap-6 md:grid-cols-3">
             <div className="md:col-span-2 space-y-6">
-              <FadeIn delay={100} className="bg-paper rounded-xl border border-line p-6">
+              <FadeIn delay={0.1} className="bg-paper rounded-xl border border-line p-6">
                 <div className="flex items-start justify-between gap-4 mb-6">
                   <div>
-                    <h2 className="text-xl font-semibold text-ink">Assessment Summary</h2>
+                    <h2 className="text-xl font-semibold text-ink">Self-Reported Assessment Summary</h2>
                     <p className="text-ink-soft mt-1">{stats.answered} of {stats.total} questions answered • {stats.completionPct}% complete</p>
                   </div>
-                  <div className={`text-4xl font-bold ${getScoreColorStrong(stats.completionPct)} px-4 py-2 rounded-xl bg-cream`}>
+                  <div className={`text-4xl font-bold text-ink px-4 py-2 rounded-xl bg-cream`}>
                     {stats.completionPct}%
                   </div>
                 </div>
 
+                <p className="mb-5 text-sm leading-relaxed text-ink-soft">Completion means questions answered, not controls passed. Answers have not been independently verified. This is not a SOC 2 audit, attestation or compliance determination.</p>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <div className="p-4 bg-green-50 rounded-lg border border-green-200">
-                    <div className="flex items-center gap-2 text-green-700 mb-1">
+                  <div className="p-4 bg-violet-tint rounded-lg border border-violet/30">
+                    <div className="flex items-center gap-2 text-violet-deep mb-1">
                       <CheckCircle className="w-5 h-5" />
-                      <span className="font-medium">Compliant</span>
+                      <span className="font-medium">Reported Yes</span>
                     </div>
-                    <div className="text-3xl font-bold text-green-600">{stats.yes}</div>
-                    <div className="text-xs text-green-600">Fully implemented</div>
+                    <div className="text-3xl font-bold text-violet">{stats.yes}</div>
+                    <div className="text-xs text-violet-deep">Self-reported, unverified</div>
                   </div>
                   <div className="p-4 bg-red-50 rounded-lg border border-red-200">
                     <div className="flex items-center gap-2 text-red-700 mb-1">
@@ -187,7 +175,7 @@ export function ResultsPage({ sessionId, answers, email }: ResultsPageProps) {
                 </div>
               </FadeIn>
 
-              <FadeIn delay={200} className="bg-paper rounded-xl border border-line overflow-hidden">
+              <FadeIn delay={0.2} className="bg-paper rounded-xl border border-line overflow-hidden">
                 <div className="p-4 border-b border-line">
                   <h3 className="font-semibold text-ink flex items-center gap-2">
                     <BarChart2 className="w-5 h-5 text-violet" />
@@ -207,12 +195,8 @@ export function ResultsPage({ sessionId, answers, email }: ResultsPageProps) {
                           className="w-full flex items-center justify-between gap-4 text-left"
                         >
                           <div className="flex items-center gap-3 flex-1 min-w-0">
-                            <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                              pct >= 80 ? 'bg-green-50 text-green-600' :
-                              pct >= 50 ? 'bg-yellow-50 text-yellow-600' :
-                              'bg-red-50 text-red-600'
-                            }`}>
-                              {pct >= 80 ? <CheckCircle className="w-5 h-5" /> : <AlertCircle className="w-5 h-5" />}
+                            <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-violet-tint text-violet">
+                              <AlertCircle className="w-5 h-5" />
                             </div>
                             <div className="min-w-0">
                               <h4 className="font-medium text-ink truncate">{section.title}</h4>
@@ -220,7 +204,7 @@ export function ResultsPage({ sessionId, answers, email }: ResultsPageProps) {
                             </div>
                           </div>
                           <div className="flex items-center gap-4 text-sm text-ink-soft">
-                            <span className={`font-medium ${getScoreColor(pct)} bg-cream px-2 py-0.5 rounded`}>{pct}%</span>
+                            <span className="font-medium text-ink bg-cream px-2 py-0.5 rounded">{pct}% reported Yes</span>
                             <HelpCircle className={`w-5 h-5 ${isExpanded ? 'rotate-180' : ''} transition-transform`} />
                           </div>
                         </button>
@@ -268,7 +252,7 @@ export function ResultsPage({ sessionId, answers, email }: ResultsPageProps) {
             </div>
 
             <aside className="space-y-6">
-              <FadeIn delay={300} className="bg-paper rounded-xl border border-line p-6 sticky top-24">
+              <FadeIn delay={0.3} className="bg-paper rounded-xl border border-line p-6 sticky top-24">
                 <h3 className="font-semibold text-ink mb-4 flex items-center gap-2">
                   <Shield className="w-5 h-5 text-violet" />
                   Next Steps
