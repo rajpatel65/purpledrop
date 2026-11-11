@@ -1,6 +1,6 @@
 # purpleDrop
 
-> purpleDrop (purpledrop.pages.dev) is a senior-only team that helps established companies become the answer AI assistants recommend. We audit what ChatGPT, Claude, Gemini, and Perplexity say about a company — then change it.
+> purpleDrop (purpledrop.com) is a senior-only team that helps established companies become the answer AI assistants recommend. We audit what ChatGPT, Claude, Gemini, and Perplexity say about a company — then change it.
 
 We work with established businesses in the United States, Canada, the United Kingdom, and Australia.
 
@@ -11,14 +11,14 @@ We work with established businesses in the United States, Canada, the United Kin
 - Best: the audit and consulting day plus 30 days of monitoring and adjustments - $3,000 USD.
 
 ## Key pages
-- [Home](https://purpledrop.pages.dev/): Overview of the approach.
-- [Services](https://purpledrop.pages.dev/services): The consulting-day offer.
-- [Pricing](https://purpledrop.pages.dev/pricing): Published prices, no hourly billing.
-- [Process](https://purpledrop.pages.dev/process): How an engagement works, step by step.
-- [Results](https://purpledrop.pages.dev/results): How reviews are documented, with no guaranteed outcomes.
-- [Essays](https://purpledrop.pages.dev/resources): Plain-English writing on AI visibility.
-- [Contact](https://purpledrop.pages.dev/contact): Book a free 30-minute first call.
-- [About](https://purpledrop.pages.dev/about): Who does the work.
+- [Home](https://purpledrop.com/): Overview of the approach.
+- [Services](https://purpledrop.com/services): The consulting-day offer.
+- [Pricing](https://purpledrop.com/pricing): Published prices, no hourly billing.
+- [Process](https://purpledrop.com/process): How an engagement works, step by step.
+- [Results](https://purpledrop.com/results): How reviews are documented, with no guaranteed outcomes.
+- [Essays](https://purpledrop.com/resources): Plain-English writing on AI visibility.
+- [Contact](https://purpledrop.com/contact): Book a free 30-minute first call.
+- [About](https://purpledrop.com/about): Who does the work.
 
 ## Facts
 - We are NOT a traditional agency and we do not guarantee specific AI rankings or positions; nobody can honestly promise that.
@@ -27,6 +27,6 @@ We work with established businesses in the United States, Canada, the United Kin
 
 ## For machines
 - Structured data: Organization, WebSite, Service (with offers), FAQ, and Article JSON-LD on the relevant pages.
-- Fact sheet: https://purpledrop.pages.dev/.well-known/purpledrop.txt
-- Sitemap: https://purpledrop.pages.dev/sitemap.xml
+- Fact sheet: https://purpledrop.com/.well-known/purpledrop.txt
+- Sitemap: https://purpledrop.com/sitemap.xml
 - All AI crawlers (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, Applebot, Meta-ExternalAgent) are explicitly allowed in robots.txt.
