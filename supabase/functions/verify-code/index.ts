@@ -44,7 +44,7 @@ serve(async (req) => {
   try {
     let body: any;
     try { const raw = await req.text(); if (raw.length > 4096) return new Response('Request too large', {status:413,headers:corsHeaders}); body = JSON.parse(raw); } catch { return new Response(JSON.stringify({ error: 'Invalid JSON' }), { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }); }
-    if (body.purpose === 'scorecard') {
+    if (body.purpose === 'scorecard' || body.purpose === 'contact') {
       if (req.method !== 'POST') return new Response('Method not allowed', { status: 405, headers: corsHeaders });
       return await scorecardFlow(req, body, corsHeaders, 'verify');
     }
@@ -161,3 +161,4 @@ serve(async (req) => {
     });
   }
 });
+

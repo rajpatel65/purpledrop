@@ -50,7 +50,7 @@ serve(async (req) => {
     } catch {
       return new Response(JSON.stringify({ error: 'Invalid JSON' }), { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
     }
-    if (body.purpose === 'scorecard') {
+    if (body.purpose === 'scorecard' || body.purpose === 'contact') {
       if (req.method !== 'POST') return new Response('Method not allowed', { status: 405, headers: corsHeaders });
       return await scorecardFlow(req, body, corsHeaders, 'request');
     }
@@ -177,3 +177,4 @@ serve(async (req) => {
     });
   }
 });
+

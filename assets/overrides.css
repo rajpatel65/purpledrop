@@ -1,0 +1,12 @@
+/* purpleDrop launch fixes */
+.reveal-fade-up{opacity:1 !important;transform:none !important}
+#proof{display:none !important}
+a[href^="tel:"]{display:none !important}
+a[href="/soc2"]{display:none !important}
+html,body{overflow-x:clip}
+#pd-mobile-menu a{display:block;padding:10px 0;font-size:15px;color:inherit;text-decoration:none}
+a[href="/scorecard"]{display:none !important}
+a[href="/checker"]{display:none !important}
+a[href="/calculator"]{display:none !important}
+#checker{display:none !important}
+.reveal-scale,.reveal-slide-left,.reveal-slide-right{opacity:1 !important;transform:none !important}
