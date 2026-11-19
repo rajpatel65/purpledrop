@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://purpledrop.com/</loc><lastmod>2026-11-18</lastmod></url>
-  <url><loc>https://purpledrop.com/services</loc><lastmod>2026-11-18</lastmod></url>
-  <url><loc>https://purpledrop.com/process</loc><lastmod>2026-11-18</lastmod></url>
-  <url><loc>https://purpledrop.com/results</loc><lastmod>2026-11-18</lastmod></url>
-  <url><loc>https://purpledrop.com/pricing</loc><lastmod>2026-11-18</lastmod></url>
-  <url><loc>https://purpledrop.com/about</loc><lastmod>2026-11-18</lastmod></url>
-  <url><loc>https://purpledrop.com/contact</loc><lastmod>2026-11-18</lastmod></url>
-  <url><loc>https://purpledrop.com/resources</loc><lastmod>2026-11-18</lastmod></url>
-  <url><loc>https://purpledrop.com/resources/the-three-seconds-that-decide-your-site</loc><lastmod>2026-11-18</lastmod></url>
-  <url><loc>https://purpledrop.com/resources/what-a-small-business-website-actually-costs</loc><lastmod>2026-11-18</lastmod></url>
-  <url><loc>https://purpledrop.com/resources/slow-sites-lose-work</loc><lastmod>2026-11-18</lastmod></url>
-  <url><loc>https://purpledrop.com/resources/the-next-step-is-the-whole-point</loc><lastmod>2026-11-18</lastmod></url>
-  <url><loc>https://purpledrop.com/resources/redesign-or-refresh-how-to-decide</loc><lastmod>2026-11-18</lastmod></url>
-  <url><loc>https://purpledrop.com/resources/write-the-page-before-you-design-it</loc><lastmod>2026-11-18</lastmod></url>
-  <url><loc>https://purpledrop.com/privacy</loc><lastmod>2026-11-18</lastmod></url>
-  <url><loc>https://purpledrop.com/terms</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://purpledrop.com/</loc><lastmod>2026-11-19</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://purpledrop.com/ai-check/</loc><lastmod>2026-11-19</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://purpledrop.com/services/</loc><lastmod>2026-11-19</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://purpledrop.com/pricing/</loc><lastmod>2026-11-19</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://purpledrop.com/process/</loc><lastmod>2026-11-19</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://purpledrop.com/about/</loc><lastmod>2026-11-19</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://purpledrop.com/contact/</loc><lastmod>2026-11-19</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://purpledrop.com/privacy/</loc><lastmod>2026-11-19</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://purpledrop.com/terms/</loc><lastmod>2026-11-19</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>

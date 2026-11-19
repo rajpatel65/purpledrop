@@ -1,32 +1,20 @@
 # purpleDrop
 
-> purpleDrop (purpledrop.com) is a senior-only team that designs and builds fast, clear websites for small and mid-sized businesses. Fixed price, agreed in writing before work starts. Yours to keep.
+> purpleDrop checks what AI says about your company today, then revives your
+> website so the answer names you. For business owners whose website has gone
+> quiet: a free 30-minute AI-readiness check first, then one of three things —
+> the Fix on the site you have, the Revive, or a full Rebuild. All quoted in
+> writing, fixed price. You own the domain, the files, and the hosting choice.
+> No monthly fees. Founder-led. Contact: info@purpledrop.com.
 
-We work with established businesses in the United States, Canada, the United Kingdom, and Australia.
+## Pages
 
-## Services
-- The Starter. A focused 3-5 page site: home, services, about, contact.
-- The Business Site. A 5-10 page site with a content system you can update yourself.
-- The Redesign. A straight assessment of what is wrong, then a rebuild and migration.
-- The Care Plan. Hosting, updates, backups, and a monthly report.
-
-Every engagement is a fixed price, agreed in writing before work starts. No hourly billing.
-
-## Key pages
-- [Home](https://purpledrop.com/): Overview of the approach.
-- [Services](https://purpledrop.com/services): The services in detail.
-- [Process](https://purpledrop.com/process): How an engagement works, step by step.
-- [Results](https://purpledrop.com/results): How we report what we measure.
-- [Essays](https://purpledrop.com/resources): Plain-English writing on websites and AI visibility.
-- [Contact](https://purpledrop.com/contact): Book a free 30-minute first call.
-- [About](https://purpledrop.com/about): Who does the work.
-
-## Facts
-- Small, senior-only team - the people you meet do the work.
-- We are NOT a traditional agency and we do not guarantee specific AI rankings or positions; nobody can honestly promise that.
-- If a company is already well described by AI, we say so on the first call rather than selling unnecessary work.
-- Pricing is fixed and quoted in writing before work starts.
-
-## For machines
-- Structured data: Organization, WebSite, FAQ, and Article JSON-LD on the relevant pages.
-- Sitemap: https://purpledrop.com/sitemap.xml
+- [Home](https://purpledrop.com/): your buyers ask AI who to hire; you're not in the answer. Seven provoking questions, the check, the three options, why comparing is confusing, how it works, FAQ.
+- [The free AI-readiness check](https://purpledrop.com/ai-check/): what happens on the 30-minute call, what you keep either way.
+- [Services](https://purpledrop.com/services/): the Fix (#fix), the Revive up to 25 pages (#update), the Rebuild 25+ pages (#redesign), ownership &amp; handover (#ownership). No monthly fees; you own the domain, the files, and the hosting choice.
+- [Pricing](https://purpledrop.com/pricing/): how quoting works, fixed price in writing, what costs extra.
+- [How it works](https://purpledrop.com/process/): the six steps from first call to launch and handover.
+- [About](https://purpledrop.com/about/): founder-led, who does the work, why the AI angle.
+- [Book a call](https://purpledrop.com/contact/): the booking form — name, email, company, what you want to discuss, preferred time. Email-code verification keeps fake requests out.
+- [Privacy](https://purpledrop.com/privacy/)
+- [Terms](https://purpledrop.com/terms/)

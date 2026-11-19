@@ -1,4 +1,16 @@
-/* purpleDrop contact: email-verified call request */
+/* purpleDrop contact: email-verified call request.
+   Wiring verified from the previous build (Nov 2026):
+   - API: https://ftiqytuovgpxmsafjtjv.supabase.co/functions/v1
+   - Turnstile sitekey: 0x4AAAAAAFv21rsn0rhJ-KJF
+   - POST /send-verification {purpose:'contact', email, website:'', turnstile_token}
+       -> {success, challenge_id}
+   - POST /verify-code {purpose:'contact', challenge_id, code}
+       -> {success, verification_token}
+   - POST /submit-lead {name, email, business, website:'', goal,
+       preferred_time, honeypot, challenge_id, verification_token}
+       -> {success}; leads are delivered to info@purpledrop.com.
+   Delivery to that inbox is still untested end-to-end — see BUILD-NOTES.md.
+*/
 (function () {
   var API = 'https://ftiqytuovgpxmsafjtjv.supabase.co/functions/v1';
   var SITEKEY = '0x4AAAAAAFv21rsn0rhJ-KJF';
@@ -130,7 +142,7 @@
         status2.textContent = 'Code accepted. Sending your request…';
         var interest = document.getElementById('interest');
         var interestLabel = interest && interest.selectedIndex >= 0 ? interest.options[interest.selectedIndex].text : '';
-        var goal = (interestLabel && interestLabel !== 'Select...' ? '[' + interestLabel + '] ' : '') + val('message');
+        var goal = (interestLabel && interestLabel !== 'Select…' ? '[' + interestLabel + '] ' : '') + val('message');
         return post('/submit-lead', {
           name: val('name'),
           email: val('email').toLowerCase(),
