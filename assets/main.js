@@ -5,8 +5,10 @@
    ground deepens around the "why this is confusing" section and comes back.
 
    Failsafes (content must never be stuck invisible):
-   - Nothing is hidden until this script runs (html.sc-on). If this script
-     never loads, an inline head timer adds .reveal-done after 6s.
+   - Nothing is hidden until this script runs (html.sc-on). A 6s backstop
+     timer in this script forces revealed content visible if the observer
+     or watchdog ever fail to. (Previously an inline head timer; moved
+     here so the CSP needs no 'unsafe-inline' in script-src.)
    - If IntersectionObserver is missing, everything reveals at once.
    - A watchdog forces visible any .reveal that has sat in view for over 1s
      without revealing. There is NO blanket force-visible timeout: the old
@@ -17,7 +19,11 @@
 (function () {
   'use strict';
   var docEl = document.documentElement;
-  if (window.__pdMotionTimer) { clearTimeout(window.__pdMotionTimer); }
+  /* Moved here from the inline head script (CSP: no 'unsafe-inline' in
+     script-src). Adds .js, then a 6s backstop forcing revealed content
+     visible if the observer or watchdog ever fail to. */
+  docEl.classList.add('js');
+  window.__pdMotionTimer = setTimeout(function () { docEl.classList.add('reveal-done'); }, 6000);
   docEl.classList.remove('reveal-done');
   docEl.classList.add('sc-on');
 
