@@ -1,3 +1,5 @@
+# Backend source must never be served as site content.
+/supabase/* /404.html 404
 # Old build URLs that no longer exist -> the closest live page.
 /results / 301
 /results/* / 301
