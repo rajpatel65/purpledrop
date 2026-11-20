@@ -188,7 +188,7 @@
             io.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.12, rootMargin: '0px 0px -12% 0px' });
+      }, { threshold: 0, rootMargin: '0px 0px 25% 0px' });
       reveals.forEach(function (el) { io.observe(el); });
 
       var seen = new Map();
@@ -200,7 +200,7 @@
           var inView = r.top < window.innerHeight * 0.92 && r.bottom > 0;
           if (!inView) { seen.delete(el); return; }
           if (!seen.has(el)) { seen.set(el, now); return; }
-          if (now - seen.get(el) > 1000) { revealEl(el); seen.delete(el); }
+          if (now - seen.get(el) > 400) { revealEl(el); seen.delete(el); }
         });
       }, 500);
     }
@@ -212,8 +212,8 @@
     var storyEl = document.querySelector('.story');
     var stages = Array.prototype.slice.call(document.querySelectorAll('.stage[data-stage]'));
     var whyEl = document.getElementById('why-confusing');
-    var PAPER = [245, 243, 236];
-    var DEEP = [237, 227, 206];
+    var PAPER = [255, 255, 255];
+    var DEEP = [246, 243, 252];
     var lastGround = '';
     var targetP = 0;
     var currentP = 0;
