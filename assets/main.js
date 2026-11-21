@@ -63,7 +63,93 @@
     var y = document.getElementById('pd-year');
     if (y) y.textContent = new Date().getFullYear();
 
-    /* ---------- storyboard self-check + prompt copy ---------- */
+    /* ---------- sticky call bar: wait until the hero buttons have scrolled away ----------
+     Only on pages that have hero buttons. Without JS, or if anything fails, the bar stays visible. */
+  try {
+    var heroCtas = document.querySelector('.hero-ctas');
+    if (heroCtas && 'IntersectionObserver' in window && document.querySelector('.mobile-cta')) {
+      docEl.classList.add('cta-wait');
+      new IntersectionObserver(function (entries) {
+        var e = entries[0];
+        var gone = !e.isIntersecting && e.boundingClientRect.top < 0;
+        docEl.classList.toggle('cta-show', gone);
+      }, { threshold: 0 }).observe(heroCtas);
+    }
+  } catch (err2) { docEl.classList.remove('cta-wait'); }
+
+  /* ---------- trailing drop cursor: purple drops follow the pointer ----------
+     Decorative only. Fixed canvas, pointer-events none, native cursor untouched.
+     Not started on touch, reduced motion, high contrast or forced colors. */
+  try {
+    var mq = function (q) { return window.matchMedia && window.matchMedia(q).matches; };
+    var trailOk = window.matchMedia && mq('(hover: hover) and (pointer: fine)') &&
+      !mq('(prefers-reduced-motion: reduce)') && !mq('(forced-colors: active)') && !mq('(prefers-contrast: more)');
+    if (trailOk) {
+      var cv = document.createElement('canvas');
+      cv.className = 'pd-trail';
+      cv.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(cv);
+      var cx = cv.getContext('2d');
+      var dpr = Math.min(window.devicePixelRatio || 1, 2), W = 0, H = 0;
+      var fit = function () {
+        W = window.innerWidth; H = window.innerHeight;
+        cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+        cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      };
+      fit(); window.addEventListener('resize', fit);
+      var N = 12, pts = [], tx = -100, ty = -100, seen = false, running = false;
+      for (var i = 0; i < N; i++) pts.push({ x: -100, y: -100 });
+      var drop = function (x, y, r, a, ang) {
+        cx.save(); cx.translate(x, y); cx.rotate(ang);
+        cx.globalAlpha = a; cx.fillStyle = '#6D28D9';
+        cx.beginPath();
+        cx.moveTo(0, -r * 1.7);
+        cx.bezierCurveTo(r * 1.1, -r * .35, r * 1.1, r, 0, r);
+        cx.bezierCurveTo(-r * 1.1, r, -r * 1.1, -r * .35, 0, -r * 1.7);
+        cx.fill(); cx.restore();
+      };
+      var tick = function () {
+        cx.clearRect(0, 0, W, H);
+        var moving = false, px = tx, py = ty;
+        for (var k = 0; k < N; k++) {
+          var p = pts[k], ease = .34 - k * .02;
+          var dx = px - p.x, dy = py - p.y;
+          p.x += dx * ease; p.y += dy * ease;
+          if (Math.abs(dx) > .4 || Math.abs(dy) > .4) moving = true;
+          var t = 1 - k / N, ang = Math.atan2(dy, dx) + Math.PI / 2;
+          drop(p.x, p.y, 2.5 + 5.5 * t, .08 + .6 * t * t, isFinite(ang) ? ang : 0);
+          px = p.x; py = p.y;
+        }
+        if (moving && !document.hidden) { requestAnimationFrame(tick); }
+        else { running = false; if (!moving) cx.clearRect(0, 0, W, H); }
+      };
+      window.addEventListener('pointermove', function (e) {
+        if (e.pointerType && e.pointerType !== 'mouse' && e.pointerType !== 'pen') return;
+        tx = e.clientX; ty = e.clientY;
+        if (!seen) { seen = true; for (var q = 0; q < N; q++) { pts[q].x = tx; pts[q].y = ty; } }
+        if (!running) { running = true; requestAnimationFrame(tick); }
+      }, { passive: true });
+      document.addEventListener('visibilitychange', function () {
+        if (!document.hidden && seen && !running) { running = true; requestAnimationFrame(tick); }
+      });
+      document.addEventListener('mouseleave', function () { seen = false; cx.clearRect(0, 0, W, H); });
+    }
+  } catch (err4) {}
+
+  /* ---------- folds: open the one a link points into ---------- */
+  try {
+    var openForHash = function () {
+      var id = (location.hash || '').slice(1);
+      if (!id) return;
+      var t = document.getElementById(id);
+      var d = t && t.closest ? t.closest('details') : null;
+      if (d && !d.open) { d.open = true; setTimeout(function () { t.scrollIntoView(); }, 50); }
+    };
+    openForHash();
+    window.addEventListener('hashchange', openForHash);
+  } catch (err3) {}
+
+  /* ---------- storyboard self-check + prompt copy ---------- */
     bindChooserAndCopy();
 
     if (reduced) {

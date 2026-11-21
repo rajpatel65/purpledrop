@@ -3,7 +3,7 @@
 > purpleDrop checks what AI says about your company today, then revives your
 > website so the answer names you. For business owners whose website has gone
 > quiet: a free 30-minute AI-readiness check first, then one of three things —
-> the Fix on the site you have, the Revive, or a full Rebuild. All quoted in
+> the Fix, the Revive, or a full Rebuild. All quoted in
 > writing, fixed price. You own the domain, the files, and the hosting choice.
 > No monthly fees. Founder-led. Contact: info@purpledrop.com.
 
@@ -11,9 +11,9 @@
 
 - [Home](https://purpledrop.com/): your buyers ask AI who to hire; you're not in the answer. Seven provoking questions, the check, the three options, why comparing is confusing, how it works, FAQ.
 - [The free AI-readiness check](https://purpledrop.com/ai-check/): what happens on the 30-minute call, what you keep either way.
-- [Services](https://purpledrop.com/services/): the Fix (#fix), the Revive up to 25 pages (#update), the Rebuild 25+ pages (#redesign), ownership & handover (#ownership). No monthly fees; you own the domain, the files, and the hosting choice.
-- [Pricing](https://purpledrop.com/pricing/): how quoting works, fixed price in writing, what costs extra.
-- [How it works](https://purpledrop.com/process/): the six steps from first call to launch and handover.
+- [Services](https://purpledrop.com/services/): who the Fix (#fix), the Revive (#update) and the Rebuild (#redesign) are for, and ownership (#ownership). No monthly fees; you own the domain, the files, and the hosting choice.
+- [Pricing](https://purpledrop.com/pricing/): fixed price in writing, no hourly billing.
+- [How it works](https://purpledrop.com/process/): the owner's questions and the points where you decide.
 - [About](https://purpledrop.com/about/): founder-led, who does the work, why the AI angle.
 - [Book a call](https://purpledrop.com/contact/): the booking form — name, email, company, what you want to discuss, preferred time. Email-code verification keeps fake requests out.
 - [Privacy](https://purpledrop.com/privacy/)
