@@ -305,16 +305,26 @@ main > section.hero { background: #fff !important; }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { .site-header { background: rgba(255,255,255,.97); } }
 .mobile-menu { background: rgba(255,255,255,.78); -webkit-backdrop-filter: blur(20px) saturate(1.9); backdrop-filter: blur(20px) saturate(1.9); border-top: 1px solid rgba(109,40,217,.12); }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { .mobile-menu { background: #fff; } }
-/* desktop: active link gets violet text, a tinted pill and a bar under it */
-.main-nav a { position: relative; padding: .45rem .85rem; border-radius: 999px; transition: color .2s ease, background-color .2s ease; }
-.main-nav a:hover { background: rgba(109,40,217,.07); color: var(--violet-deep); }
-.main-nav a[aria-current="page"] { color: var(--violet-deep); font-weight: 700; background: rgba(109,40,217,.10); }
-.main-nav a[aria-current="page"]::after { content: ""; position: absolute; left: 22%; right: 22%; bottom: -.62rem; height: 3px; border-radius: 3px 3px 0 0; background: linear-gradient(90deg, #6D28D9, #F97316); }
+/* ===== v9.6: full-height rectangle nav. One sliding box; a white copy of the labels is clipped inside it, so text is always readable mid-slide ===== */
+@media (min-width: 900px) {
+  .main-nav { align-self: stretch; align-items: stretch; gap: 0; position: relative; }
+  .main-nav a { position: relative; z-index: 1; display: flex; align-items: center; padding: 0 1.2rem; border-radius: 0; font-size: .95rem; font-weight: 500; letter-spacing: .005em; color: #1A1626; }
+  .main-nav a[aria-current="page"] { font-weight: 700; }
+  .main-nav:not(.has-slider) a:hover, .main-nav:not(.has-slider) a[aria-current="page"] { background: #3B1590; color: #fff; box-shadow: inset 0 -3px 0 #F97316; }
+  .main-nav .nav-slider { position: absolute; z-index: 2; top: 0; bottom: 0; left: 0; width: 0; overflow: hidden; background: #3B1590; opacity: 0; pointer-events: none; will-change: transform, width;
+    transition: transform .26s cubic-bezier(.22,1,.36,1), width .26s cubic-bezier(.22,1,.36,1), opacity .16s ease; }
+  .main-nav .nav-slider::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: #F97316; }
+  .main-nav.has-slider .nav-slider.on { opacity: 1; }
+  .main-nav .nav-ghost { position: absolute; top: 0; bottom: 0; left: 0; display: flex; align-items: stretch; will-change: transform;
+    transition: transform .26s cubic-bezier(.22,1,.36,1); }
+  .main-nav .nav-ghost span { display: flex; align-items: center; padding: 0 1.2rem; font-size: .95rem; font-weight: 500; letter-spacing: .005em; color: #fff; white-space: nowrap; }
+  .main-nav .nav-ghost span.cur { font-weight: 700; }
+}
 /* contact page: the header button is the current page */
 .header-cta .btn[aria-current="page"] { box-shadow: 0 0 0 3px #fff, 0 0 0 5px #6D28D9; }
 /* phone menu: current page gets a violet bar, tint and a dot */
 .mobile-menu a { position: relative; }
-.mobile-menu a[aria-current="page"], #pd-mobile-menu a[aria-current="page"] { color: var(--violet-deep); font-weight: 700; background: rgba(109,40,217,.08); box-shadow: inset 4px 0 0 #6D28D9; padding-left: 1rem; }
-.mobile-menu a[aria-current="page"]::after { content: ""; position: absolute; right: 1rem; top: 50%; width: 8px; height: 8px; margin-top: -4px; border-radius: 50%; background: #F97316; }
-@media (forced-colors: active) { .main-nav a[aria-current="page"] { outline: 2px solid CanvasText; } .main-nav a[aria-current="page"]::after { display: none; } }
-@media (prefers-reduced-motion: reduce) { .main-nav a { transition: none; } }
+.mobile-menu a[aria-current="page"], #pd-mobile-menu a[aria-current="page"], .mobile-menu a:active { color: #fff; font-weight: 700; background: #3B1590; box-shadow: inset 0 -4px 0 #F97316; }
+.mobile-menu a[aria-current="page"]::after { content: none; }
+@media (forced-colors: active) { .main-nav a[aria-current="page"] { outline: 2px solid CanvasText; } .main-nav .nav-slider { display: none; } }
+@media (prefers-reduced-motion: reduce) { .main-nav .nav-slider, .main-nav .nav-ghost { transition: none !important; } }

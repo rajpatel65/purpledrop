@@ -466,3 +466,42 @@
     }
   }
 })();
+
+/* v9.6 nav: one rectangle + underline that follows the pointer and rests on the current page.
+   A white copy of the labels sits inside the rectangle (clipped by it) so text stays readable while it moves. */
+(function () {
+  var nav = document.querySelector('.main-nav');
+  if (!nav) return;
+  var links = Array.prototype.slice.call(nav.querySelectorAll('a'));
+  var cur = nav.querySelector('a[aria-current="page"]');
+  var s = document.createElement('span'); s.className = 'nav-slider'; s.setAttribute('aria-hidden', 'true');
+  var g = document.createElement('span'); g.className = 'nav-ghost';
+  links.forEach(function (a) { var c = document.createElement('span'); c.textContent = a.textContent; if (a === cur) c.className = 'cur'; g.appendChild(c); });
+  s.appendChild(g); nav.insertBefore(s, nav.firstChild); nav.classList.add('has-slider');
+  var timer = 0;
+  function place(a, instant) {
+    var x = a.offsetLeft;
+    if (instant) { s.style.transition = 'none'; g.style.transition = 'none'; }
+    s.style.width = a.offsetWidth + 'px';
+    s.style.transform = 'translate3d(' + x + 'px,0,0)';
+    g.style.transform = 'translate3d(' + (-x) + 'px,0,0)';
+    if (instant) { void s.offsetWidth; s.style.transition = ''; g.style.transition = ''; }
+  }
+  function go(a) {
+    clearTimeout(timer);
+    if (!a) { s.classList.remove('on'); return; }
+    if (nav.offsetWidth === 0) return;
+    var wasOn = s.classList.contains('on');
+    place(a, !wasOn);
+    s.classList.add('on');
+  }
+  links.forEach(function (a) {
+    a.addEventListener('mouseenter', function () { go(a); });
+    a.addEventListener('focus', function () { go(a); });
+  });
+  nav.addEventListener('mouseleave', function () { go(cur); });
+  nav.addEventListener('focusout', function (e) { if (!nav.contains(e.relatedTarget)) go(cur); });
+  window.addEventListener('resize', function () { if (cur) place(cur, true); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (cur) place(cur, true); });
+  go(cur);
+})();
