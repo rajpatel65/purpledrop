@@ -57,6 +57,12 @@
   function serverMsg(data, fallback) {
     return (data && typeof data.error === 'string' && data.error) ? data.error : fallback;
   }
+  /* optional phone: 7 to 15 digits, with spaces, dots, dashes, brackets, a leading + and an extension (x123) allowed */
+  function phoneOk(v) {
+    if (!/^[+0-9()\s.\-]+(\s*(x|ext\.?)\s*[0-9]{1,6})?$/i.test(v)) return false;
+    var d = v.replace(/(x|ext\.?)\s*[0-9]{1,6}$/i, '').replace(/[^0-9]/g, '');
+    return d.length >= 7 && d.length <= 15;
+  }
   function val(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
 
   var cooldownTimer = null;
@@ -85,6 +91,8 @@
     var name = val('name'), email = val('email').toLowerCase();
     if (!name) { status1.textContent = 'Please add your name.'; return; }
     if (!EMAIL_RE.test(email)) { status1.textContent = 'Please add a valid email address.'; return; }
+    var phone = val('phone');
+    if (phone && !phoneOk(phone)) { status1.textContent = 'That phone number does not look right. Leave it blank, or check the digits.'; return; }
     var token = (window.turnstile && widgetId !== null) ? window.turnstile.getResponse(widgetId) : '';
     if (!token) { status1.textContent = 'Please complete the bot check, then send again.'; return; }
     sending = true;
@@ -143,6 +151,9 @@
         var interest = document.getElementById('interest');
         var interestLabel = interest && interest.selectedIndex >= 0 ? interest.options[interest.selectedIndex].text : '';
         var goal = (interestLabel && interestLabel !== 'Select…' ? '[' + interestLabel + '] ' : '') + val('message');
+        var phoneVal = val('phone');
+        if (phoneVal && !phoneOk(phoneVal)) { sending = false; submitBtn.disabled = false; status2.textContent = ''; return null; }
+        if (phoneVal) goal = (goal ? goal + '\n\n' : '') + 'Phone: ' + phoneVal;
         return post('/submit-lead', {
           name: val('name'),
           email: val('email').toLowerCase(),
