@@ -97,7 +97,7 @@
         cx.setTransform(dpr, 0, 0, dpr, 0, 0);
       };
       fit(); window.addEventListener('resize', fit);
-      var N = 12, pts = [], tx = -100, ty = -100, seen = false, running = false;
+      var N = 12, pts = [], tx = -100, ty = -100, trailSeen = false, running = false;
       for (var i = 0; i < N; i++) pts.push({ x: -100, y: -100 });
       var drop = function (x, y, r, a, ang) {
         cx.save(); cx.translate(x, y); cx.rotate(ang);
@@ -126,13 +126,13 @@
       window.addEventListener('pointermove', function (e) {
         if (e.pointerType && e.pointerType !== 'mouse' && e.pointerType !== 'pen') return;
         tx = e.clientX; ty = e.clientY;
-        if (!seen) { seen = true; for (var q = 0; q < N; q++) { pts[q].x = tx; pts[q].y = ty; } }
+        if (!trailSeen) { trailSeen = true; for (var q = 0; q < N; q++) { pts[q].x = tx; pts[q].y = ty; } }
         if (!running) { running = true; requestAnimationFrame(tick); }
       }, { passive: true });
       document.addEventListener('visibilitychange', function () {
-        if (!document.hidden && seen && !running) { running = true; requestAnimationFrame(tick); }
+        if (!document.hidden && trailSeen && !running) { running = true; requestAnimationFrame(tick); }
       });
-      document.addEventListener('mouseleave', function () { seen = false; cx.clearRect(0, 0, W, H); });
+      document.addEventListener('mouseleave', function () { trailSeen = false; cx.clearRect(0, 0, W, H); });
     }
   } catch (err4) {}
 
@@ -277,16 +277,16 @@
       }, { threshold: 0, rootMargin: '0px 0px 25% 0px' });
       reveals.forEach(function (el) { io.observe(el); });
 
-      var seen = new Map();
+      var revealSeen = new Map();
       setInterval(function () {
         var now = Date.now();
         reveals.forEach(function (el) {
-          if (el.classList.contains('in')) { seen.delete(el); return; }
+          if (el.classList.contains('in')) { revealSeen.delete(el); return; }
           var r = el.getBoundingClientRect();
           var inView = r.top < window.innerHeight * 0.92 && r.bottom > 0;
-          if (!inView) { seen.delete(el); return; }
-          if (!seen.has(el)) { seen.set(el, now); return; }
-          if (now - seen.get(el) > 400) { revealEl(el); seen.delete(el); }
+          if (!inView) { revealSeen.delete(el); return; }
+          if (!revealSeen.has(el)) { revealSeen.set(el, now); return; }
+          if (now - revealSeen.get(el) > 400) { revealEl(el); revealSeen.delete(el); }
         });
       }, 500);
     }
